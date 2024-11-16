@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/16 15:33:46 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:54:27 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int main(char argc, char **argv)
 {
-	if(arg_check(argv) == FALSE)
+	t_map map_info;
+	t_map *map_info_ptr;
+	
+	map_info_ptr = &map_info;
+	ft_bzero(map_info_ptr, sizeof(t_map));
+	if(map_check(argc, argv, map_info_ptr) == FALSE)
 		return (0);
 
 }
