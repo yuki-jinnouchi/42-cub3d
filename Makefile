@@ -13,8 +13,9 @@ OUTPUT_DIR := 	.
 NAME := 		$(OUTPUT_DIR)/cub3d
 
 # Other directories
-SOURCES_DIR :=	scrs
+SOURCES_DIR :=	srcs
 INCLUDES_DIR :=	incl
+INCLUDES_DIR += libs/libft
 OBJECTS_DIR :=	objs
 
 # Files
@@ -24,7 +25,7 @@ OBJECTS :=		$(patsubst $(SOURCES_DIR)/%.c, $(OBJECTS_DIR)/%.o,$(SOURCES))
 
 #libraries
 LIBFT_DIR :=			libs/libft
-LIBFT_INCLUDES_DIR :=	$(LIBFT_DIR)/incl
+LIBFT_INCLUDES_DIR :=	$(LIBFT_DIR)
 LIBFT :=				$(LIBFT_DIR)/libft.a
 
 OS := $(shell uname)
@@ -52,8 +53,8 @@ LIBX_LINUX_URL := 			https://github.com/42Paris/minilibx-linux.git
 # Compiler and options
 CC := 		cc
 W3_FLAGS := -Wall -Wextra -Werror
-UI_FLAGS :=	-I $(INCLUDES_DIR) -I $(LIBFT_INCLUDES_DIR) -I $(LIBMLX_INCLUDES_DIR) -D$(OS)
-UL_FLAGS := -L $(LIBFT_DIR) -L $(LIBMLX_DIR)
+UI_FLAGS :=	-I$(INCLUDES_DIR) -I$(LIBFT_INCLUDES_DIR) -I$(LIBMLX_INCLUDES_DIR) -D$(OS)
+UL_FLAGS := -L$(LIBFT_DIR) -L$(LIBMLX_DIR)
 LL_FLAGS := $(LIBMLX_LL_FLAGS)
 
 # Phony targets
