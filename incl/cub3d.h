@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/16 17:25:11 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:57:42 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,16 @@
 # include <sys/time.h> // gettimeofday
 # include "libft.h" // libft
 # include "mlx.h" // mlx
+
+typedef struct s_map {
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	int		width;
+	int		height;
+	char	**structure;
+}			t_map;
 
 #endif
