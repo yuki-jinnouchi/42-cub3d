@@ -1,0 +1,11 @@
+NO ./sprite/North.png
+SO ./sprite/South.png
+WE ./sprite/West.png
+EA ./sprite/East.png
+F 50,30,0
+C 220,220,220
+111111
+100101
+101001
+1100N1
+111111
