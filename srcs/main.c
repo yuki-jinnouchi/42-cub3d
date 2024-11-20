@@ -19,7 +19,8 @@ int	main(char argc, char **argv)
 
 	map_info_ptr = &map_info;
 	ft_bzero(map_info_ptr, sizeof(t_map));
-	if (map_check(argc, argv, map_info_ptr) == FALSE)
-	if(map_parse(argv) == FALSE)
+	if (arg_check(argc, argv) == FALSE)
+		return (0);
+	if(parse(argv, map_info_ptr) == FALSE)
 		return (0);
 }

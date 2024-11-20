@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/19 22:57:42 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:45:47 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 # define SUCCESS 0
 # define FAILURE -1
+
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+# define F 4
+# define C 5
+
 
 # ifdef __linux__
 #  include "keymap_linux.h"
@@ -48,6 +56,7 @@ typedef struct s_map {
 	char	*we;
 	char	*ea;
 	char	*f;
+	char	*c;
 	int		width;
 	int		height;
 	char	**structure;

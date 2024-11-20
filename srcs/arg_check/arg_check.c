@@ -6,11 +6,11 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:43:06 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/17 21:03:50 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:59:26 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int	arg_check(int argc, char **argv)
 {
