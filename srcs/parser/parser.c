@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 22:08:05 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/20 22:29:00 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	open_file(char *file, int *fd)
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
 	{
-		printf("Error\nInvalid file name\n");
+		ft_putstr_fd("Error\nInvalid file name\n", 2);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -33,7 +33,10 @@ int	count_values(int type)
 	while (types[i])
 	{
 		if (types[i] > 1)
+		{
+			ft_putstr_fd("Error\nDublicated types\n", 2);
 			return (FALSE);
+		}
 		i++;
 	}
 	return (TRUE);
@@ -79,6 +82,8 @@ int	type_identifier(char *line, int len, t_map *map_info, int *count_info)
 	if (ft_strncmp(line, "C ", 2) == 0 && len > 2)
 		if (set_path_color_info(C, map_info, (line + 2), count_info) == FALSE)
 			return (FALSE);
+	if(ft_strncmp(line, "\n\0", 2) != 0)
+		return (t_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
 	return (TRUE);
 }
 
@@ -100,10 +105,11 @@ int	parser(char *file, t_map *map_info)
 		len = ft_strlen(line);
 		if (type_identifier(line, len, map_info, &count_info) == FALSE)
 			return (free(line), FALSE);
+		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	free (line);
 	if (count_info != 6)
-		return (FALSE);
+		return (ft_putstr_fd("Error\nInvalid types count\n", 2), FALSE);
 	return (TRUE);
 }
