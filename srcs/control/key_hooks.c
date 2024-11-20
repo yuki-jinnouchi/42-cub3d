@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:34:19 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/20 05:09:38 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:17:27 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	key_hook(int keycode, t_vars *vars)
 		move_player(vars, 0);
 	if (keycode == KEY_S || keycode == KEY_DOWN)
 		move_player(vars, PI);
-	if (keycode == KEY_D || keycode == KEY_RIGHT)
+	if (keycode == KEY_D)
+		move_player(vars, (PI * 3) / 2);
+	if (keycode == KEY_A)
 		move_player(vars, PI / 2);
-	if (keycode == KEY_A || keycode == KEY_LEFT)
-		move_player(vars, PI * (3 / 2));
 	if (keycode == KEY_RIGHT)
 		rotate_player(vars, -1);
 	if (keycode == KEY_LEFT)

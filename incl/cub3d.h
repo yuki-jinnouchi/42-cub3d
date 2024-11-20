@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 04:57:16 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:33:53 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define FRAME_RATE 30
 # define MOVE_SPEED 5
 # define MOVE_DISTANCE 5
-# define ROTATE_SPEED 5
+# define ROTATE_SPEED 0.1
 
 # define PI 3.141592654
 
