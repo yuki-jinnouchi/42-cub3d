@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 05:03:47 by yjinnouc         ###   ########.fr       */
+/*   Created: 2024/11/20 02:40:45 by yjinnouc          #+#    #+#             */
+/*   Updated: 2024/11/20 04:19:04 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int player_init(t_vars *vars)
 {
-	t_vars	*vars;
+	t_player *player;
 
-	if(arg_check(argc, argv) == FALSE)
-	{
-		printf("Error\n");
+	player = (t_player *) malloc(sizeof(t_player));
+	if (player == NULL)
 		return (FAILURE);
-	}
-	vars = vars_init(argv);
-	if (vars == NULL)
-	{
-		printf("Error\n");
-		return (FAILURE);
-	}
-	exec_game(vars);
+	vars->player = player;
+	player->pos.x = 4.5;
+	player->pos.y = 4.5;
+	player->dir = 0;
+	player->vel.x = 0;
+	player->vel.y = 0;
+	player->move_num = 0;
 	return (SUCCESS);
 }

@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 05:03:47 by yjinnouc         ###   ########.fr       */
+/*   Created: 2024/11/20 04:51:21 by yjinnouc          #+#    #+#             */
+/*   Updated: 2024/11/20 05:06:38 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+void    draw_wall(t_vars *vars)
 {
-	t_vars	*vars;
+    int x;
+    int y;
+    int i;
+    int j;
 
-	if(arg_check(argc, argv) == FALSE)
-	{
-		printf("Error\n");
-		return (FAILURE);
-	}
-	vars = vars_init(argv);
-	if (vars == NULL)
-	{
-		printf("Error\n");
-		return (FAILURE);
-	}
-	exec_game(vars);
-	return (SUCCESS);
+    x = vars->player->pos.x;
+    y = vars->player->pos.y;
+    i = 0;
+    while (i < 10)
+    {
+        j = 0;
+        while (j < 10)
+        {
+            my_mlx_pixel_put(vars->image, x + i, y + j, 0x00000000);
+            j++;
+        }
+        i++;
+    }
+    // return (SUCCESS);
 }

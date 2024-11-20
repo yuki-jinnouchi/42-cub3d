@@ -9,41 +9,44 @@
 # VAR += val: Append val to existing value (or set if var didn't exist).
 
 # Program name and output directory
+NAME = 		$(OUTPUT_DIR)/cub3d
 OUTPUT_DIR := 	.
-NAME := 		$(OUTPUT_DIR)/cub3d
 
 # Other directories
-SOURCES_DIR :=	srcs
-INCLUDES_DIR :=	incl
-INCLUDES_DIR += libs/libft
-OBJECTS_DIR :=	objs
+INCLUDES_DIR =		incl
+SOURCES_ROOT_DIR =	srcs
+SOURCES_DIR =		$(SOURCES_ROOT_DIR)
+SOURCES_DIR +=		$(shell find $(SOURCES_ROOT_DIR) -mindepth 1 -type d)
+OBJECTS_ROOT_DIR =	objs
+OBJECTS_DIR :=		$(patsubst $(SOURCES_ROOT_DIR)%,$(OBJECTS_ROOT_DIR)%,$(SOURCES_DIR))
 
 # Files
-HEADERS :=		$(wildcard $(INCLUDES_DIR)/*.h)
-SOURCES :=		$(wildcard $(SOURCES_DIR)/*.c)
-OBJECTS :=		$(patsubst $(SOURCES_DIR)/%.c, $(OBJECTS_DIR)/%.o,$(SOURCES))
+HEADERS =		$(wildcard $(INCLUDES_DIR)/*.h)
+# SOURCES +=		$(wildcard $(SOURCES_ROOT_DIR)/*.c)
+SOURCES =		$(shell find $(SOURCES_ROOT_DIR) -name "*.c")
+OBJECTS =		$(patsubst $(SOURCES_ROOT_DIR)/%.c,$(OBJECTS_ROOT_DIR)/%.o,$(SOURCES))
 
 #libraries
-LIBFT_DIR :=			libs/libft
-LIBFT_INCLUDES_DIR :=	$(LIBFT_DIR)
-LIBFT :=				$(LIBFT_DIR)/libft.a
+LIBFT_DIR =				libs/libft
+LIBFT_INCLUDES_DIR =	$(LIBFT_DIR)/incl
+LIBFT =					$(LIBFT_DIR)/libft.a
 
-OS := $(shell uname)
+OS = $(shell uname)
 ifeq ($(OS), Darwin)
 	OS :=					__APPLE__
-	LIBMLX_DIR := 			libs/minilibx_opengl_20191021
-	LIBMLX_INCLUDES_DIR :=	$(LIBMLX_DIR)
-	LIBMLX :=				$(LIBMLX_DIR)/libmlx.a
-	LIBMLX_LL_FLAGS := 		-lft -lmlx -framework OpenGL -framework AppKit
+	LIBMLX_DIR = 			libs/minilibx_opengl_20191021
+	LIBMLX_INCLUDES_DIR =	$(LIBMLX_DIR)
+	LIBMLX =				$(LIBMLX_DIR)/libmlx.a
+	LIBMLX_LL_FLAGS = 		-lft -lmlx -framework OpenGL -framework AppKit
 endif
 ifeq ($(OS), Linux)
-	OS :=					__linux__
-	LIBMLX_DIR := 			libs/minilibx-linux
-	LIBMLX_INCLUDES_DIR :=	$(LIBMLX_DIR)
-	LIBMLX :=				$(LIBMLX_DIR)/libmlx_Linux.a
-	LIBMLX_LL_FLAGS :=		-lft -lmlx_Linux -lXext -lX11 -lm -lz
+	OS =					__linux__
+	LIBMLX_DIR = 			libs/minilibx-linux
+	LIBMLX_INCLUDES_DIR =	$(LIBMLX_DIR)
+	LIBMLX =				$(LIBMLX_DIR)/libmlx_Linux.a
+	LIBMLX_LL_FLAGS =		-lft -lmlx_Linux -lXext -lX11 -lm -lz
 endif
-LIBX_LINUX_URL := 			https://github.com/42Paris/minilibx-linux.git
+LIBX_LINUX_URL = 			https://github.com/42Paris/minilibx-linux.git
 
 # BONUS_SOURCES = \
 # 	$(wildcard $(BONUS_DIR)/*.c)
@@ -51,11 +54,12 @@ LIBX_LINUX_URL := 			https://github.com/42Paris/minilibx-linux.git
 # BONUS_OBJECTS += 	$(OBJECTS)
 
 # Compiler and options
-CC := 		cc
-W3_FLAGS := -Wall -Wextra -Werror
-UI_FLAGS :=	-I$(INCLUDES_DIR) -I$(LIBFT_INCLUDES_DIR) -I$(LIBMLX_INCLUDES_DIR) -D$(OS)
-UL_FLAGS := -L$(LIBFT_DIR) -L$(LIBMLX_DIR)
-LL_FLAGS := $(LIBMLX_LL_FLAGS)
+CC = 		cc
+W3_FLAGS =	-Wall -Wextra -Werror
+UI_FLAGS =	-I$(INCLUDES_DIR) -I$(LIBFT_INCLUDES_DIR) -I$(LIBMLX_INCLUDES_DIR) -D$(OS)
+UL_FLAGS =	-L$(LIBFT_DIR) -L$(LIBMLX_DIR)
+LL_FLAGS =	$(LIBMLX_LL_FLAGS)
+VG_FLAGS =	-g -fsanitize=address -fsanitize=undefined
 
 # Phony targets
 .PHONY: all clean fclean re
@@ -67,7 +71,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS) | libft libmlx
 	@echo "--------------------------------"
 	@echo "preparing done.\n"
-	$(CC) $(UI_FLAGS) $(UL_FLAGS) $^ -o $@ $(LL_FLAGS) -fsanitize=address -fsanitize=undefined
+	$(CC) $(UI_FLAGS) $(UL_FLAGS) $^ -o $@ $(LL_FLAGS) $(VG_FLAGS)
 	@echo "--------------------------------"
 	@echo "make $(NAME) done.\n"
 	chmod 777 $(NAME)
@@ -75,15 +79,15 @@ $(NAME): $(OBJECTS) | libft libmlx
 	@echo "change permission of $(NAME) done.\n"
 
 # Compile Targets
-$(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c | $(OBJECTS_DIR)
-	$(CC) $(W3_FLAGS) $(UI_FLAGS) -c $< -o $@ -fsanitize=address -fsanitize=undefined
+$(OBJECTS_ROOT_DIR)/%.o: $(SOURCES_ROOT_DIR)/%.c | $(OBJECTS_DIR)
+	$(CC) $(W3_FLAGS) $(UI_FLAGS) -c $< -o $@ $(VG_FLAGS)
 $(OBJECTS_DIR):
-	mkdir $(OBJECTS_DIR)
+	mkdir -p $(OBJECTS_DIR)
 
 # Clean Targets
 clean:
 	rm -f $(OBJECTS)
-	rm -d $(OBJECTS_DIR)
+	rm -rf $(OBJECTS_DIR)
 	make -C $(LIBFT_DIR) clean
 	make -C $(LIBMLX_DIR) clean
 fclean: clean
@@ -121,3 +125,26 @@ ac: all clean
 rec: re clean
 ar:
 	ar rcs $(OUTPUT_DIR)/$(NAME) $(OBJECTS)
+test:
+	@echo "OUTPUT_DIR:          $(OUTPUT_DIR)"
+	@echo "NAME:                $(NAME)"
+	@echo "-----------------------------"
+	@echo "INCLUDES_DIR:        $(INCLUDES_DIR)"
+	@echo "SOURCES_ROOT_DIR:    $(SOURCES_ROOT_DIR)"
+	@echo "SOURCES_DIR:\n	$(SOURCES_DIR)"
+	@echo "OBJECTS_ROOT_DIR:    $(OBJECTS_ROOT_DIR)"
+	@echo "OBJECTS_DIR:\n	$(OBJECTS_DIR)"
+	@echo "-----------------------------"
+	@echo "HEADERS:             $(HEADERS)"
+	@echo "SOURCES:\n	$(SOURCES)"
+	@echo "OBJECTS:\n	$(OBJECTS)"
+	@echo "-----------------------------"
+	@echo "OS:                  $(OS)"
+	@echo "LIBMLX_DIR:          $(LIBMLX_DIR)"
+	@echo "LIBMLX:              $(LIBMLX)"
+	@echo "LIBMLX_INCLUDES_DIR: $(LIBMLX_INCLUDES_DIR)"
+	@echo "LIBMLX_LL_FLAGS:     $(LIBMLX_LL_FLAGS)"
+	@echo "LIBFT_DIR:           $(LIBFT_DIR)"
+	@echo "LIBFT:               $(LIBFT)"
+	@echo "LIBFT_INCLUDES_DIR:  $(LIBFT_INCLUDES_DIR)"
+	@echo "LIBX_LINUX_URL:      $(LIBX_LINUX_URL)"

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 05:03:47 by yjinnouc         ###   ########.fr       */
+/*   Created: 2024/11/20 03:12:59 by yjinnouc          #+#    #+#             */
+/*   Updated: 2024/11/20 03:14:08 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+void free_array(char **array)
 {
-	t_vars	*vars;
+    int i;
 
-	if(arg_check(argc, argv) == FALSE)
-	{
-		printf("Error\n");
-		return (FAILURE);
-	}
-	vars = vars_init(argv);
-	if (vars == NULL)
-	{
-		printf("Error\n");
-		return (FAILURE);
-	}
-	exec_game(vars);
-	return (SUCCESS);
+    if (!array)
+        return ;
+    i = 0;
+    while (array[i])
+    {
+        free(array[i]);
+        i++;
+    }
+    free(array);
+    return ;
 }
