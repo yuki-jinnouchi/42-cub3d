@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 17:33:53 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/23 08:26:48 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,16 @@
 # define WINDOW_WIDTH 16
 # define WINDOW_HEIGHT 9
 
-# define VIEWING_ANGLE 60
+# define FOV 95
 # define FRAME_RATE 30
-# define MOVE_SPEED 5
-# define MOVE_DISTANCE 5
-# define ROTATE_SPEED 0.1
+# define MOVE_SPEED 0.01
+# define MOVE_DISTANCE 0.2
+# define ROTATE_SPEED 5
+
+# define NORTH 1
+# define EAST 2
+# define SOUTH 3
+# define WEST 4
 
 # define PI 3.141592654
 
@@ -44,6 +49,9 @@
 # define SUCCESS 0
 # define FAILURE -1
 
+# define ABS(x) ((x) < 0 ? -(x) : (x))
+# define SIGN(x) ((x) < 0 ? -1 : 1)
+
 # ifdef __linux__
 #  include "keymap_linux.h"
 # elif __APPLE__
@@ -52,11 +60,24 @@
 #  error "Unsupported operating system"
 # endif
 
-typedef struct s_vector
+typedef struct s_vec
 {
 	double	x;
 	double	y;
-}	t_vector;
+}	t_vec;
+
+typedef struct s_plane
+{
+	t_vec	vec_x;
+	t_vec	vec_y;
+}	t_plane;
+
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
 
 typedef struct s_image
 {
@@ -98,10 +119,13 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-	t_vector    pos;
-	double      dir;
-	t_vector    vel;
-	double      move_num;
+	t_vec   pos;
+	double  dir;
+	t_vec	dir_vec;
+	double 	fov_rad;
+	t_vec	plane;
+	t_vec   vel;
+	double  move_num;
 }	t_player;
 
 typedef struct s_vars
@@ -134,6 +158,9 @@ int		exit_game(t_vars *vars);
 
 void    draw_background(t_vars *vars);
 void    draw_wall(t_vars *vars);
+void    draw_wall_line(double length, int x_window, int color, t_vars *vars);
+void    draw_wall_wrapper(t_vars *vars);
+void    draw_screen(t_vars *vars);
 
 void    my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int     load_image(t_image *image, char *filepath, t_vars *vars);
@@ -146,6 +173,25 @@ void	move_player(t_vars *vars, double dir);
 
 double  deg_to_rad(double deg);
 double  add_rad(double rad1, double rad2);
+t_vec	dir_to_vec(double dir);
+
+//ray_calc
+t_vec	get_next_pos_flat(t_vec pos, t_vec ray, double slope_y);
+t_vec	get_next_pos_steep(t_vec pos, t_vec ray, double slope_x);
+
+int		check_cross_line(double current, double last);
+int		check_wall_num(t_vec current_pos, t_vec ray, char **structure);
+
+t_vec	calc_ray_flat(t_vec *ray, t_player *player, t_vars *vars);
+t_vec	calc_ray_steep(t_vec *ray, t_player *player, t_vars *vars);
+
+double	calc_player_distance(t_vec wall_pos, t_vec player_pos);
+t_vec	calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars);
+t_vec	calc_ray(t_player *player, int window_width, int i);
+
+int		update_plane(t_player *player);
+int		write_line(int color, int x, t_vars *vars);
+int		draw_plane(t_vars *vars);
 
 //util
 void	free_array(char **array);

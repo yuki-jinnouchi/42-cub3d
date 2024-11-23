@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 23:45:42 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/19 13:39:17 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/23 05:55:08 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_map	*map_init(t_vars *vars)
     map->structure[3] = ft_strdup("1100N1");
     map->structure[4] = ft_strdup("111111");
     map->structure[5] = NULL;
-	map->width = 5;
+	map->width = 6;
 	map->height = 5;
     // map_read_file(map, vars);
     // map_convert(map, vars);
