@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/20 21:45:47 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/24 02:13:52 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 # define EA 3
 # define F 4
 # define C 5
+
+//color
+# define R 0
+# define G 1
+# define B 2
 
 
 # ifdef __linux__
@@ -57,9 +62,17 @@ typedef struct s_map {
 	char	*ea;
 	char	*f;
 	char	*c;
+	t_color	*f_detail;
+	t_color	*c_detail;
 	int		width;
 	int		height;
 	char	**structure;
 }			t_map;
+
+typedef	struct s_color {
+	int r;
+	int g;
+	int b;
+}	t_color;
 
 #endif

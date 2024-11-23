@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_img_path.c                                   :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 00:22:41 by hakobori         ###   ########.fr       */
+/*   Created: 2024/11/23 23:41:40 by hakobori          #+#    #+#             */
+/*   Updated: 2024/11/23 23:45:02 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int check_img_path_exist(char *img_path)
+void	free_2d_array(char **head)
 {
-    void *mlx;
-    void *img;
-    int width;
-    int height;
-    
-    mlx = mlx_init();
-    if (!mlx)
-        return (FALSE);
-    width = 42;
-    height = 42;
-    img = mlx_xpm_file_to_image(mlx, img_path, &width, &height);
-    if (!img)
-        return (mlx_destroy_display(mlx), FALSE);
-    return (mlx_destroy_display(mlx), TRUE);
+	int	i;
+
+	i = 0;
+	while (head[i])
+		free(head[i++]);
+	free(head);
+}
+
+void free_map_info(t_map *map_info)
+{
+	free(map_info->no);
+	free(map_info->so);
+	free(map_info->we);
+	free(map_info->ea);
+	free(map_info->f);
+	free(map_info->c);
+	free_2d_array(map_info->structure);
+}
+
+void free_map_info_line(t_map *map_info, char *line)
+{
+    free_map_info(map_info);
+    free(line);
 }
