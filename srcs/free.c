@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:41:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/23 23:45:02 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:44:14 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	free_2d_array(char **head)
 	free(head);
 }
 
+void	free_color(t_color *color)
+{
+	free(color);
+}
+
 void free_map_info(t_map *map_info)
 {
 	free(map_info->no);
@@ -30,6 +35,8 @@ void free_map_info(t_map *map_info)
 	free(map_info->ea);
 	free(map_info->f);
 	free(map_info->c);
+	free_color(map_info->f_detail);
+	free_color(map_info->c_detail);
 	free_2d_array(map_info->structure);
 }
 

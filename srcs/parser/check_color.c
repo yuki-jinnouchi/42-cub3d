@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 02:15:14 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:33:49 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,24 @@
 
 int set_int_color(int type, char *color, t_color *color_detail)
 {
-    
+    long    tmp;
+    int i;
+
+    i = 0;
+    while (color[i])
+        i++;
+    if (i > 3)
+        return (FALSE);
+    tmp = ft_atoi(color);
+    if (tmp < 0 || tmp > 255)
+        return (FALSE);
+    if (type == R)
+        color_detail->r = tmp;
+    if (type == G)
+        color_detail->g = tmp;
+    if (type == B)
+    color_detail->b = tmp;
+    return (TRUE);
 }
 
 int set_color_detail(char **split_color_info,t_color *color_detail)
@@ -43,6 +60,7 @@ int set_color_detail(char **split_color_info,t_color *color_detail)
         return (free_2d_array(split_color_info), FALSE);
     if(set_int_color(B, split_color_info[2], color_detail) == FALSE)
         return (free_2d_array(split_color_info), FALSE);
+    return (free_2d_array(split_color_info), TRUE);
 }
 
 int check_color_valid(char *color_info, t_map *map_info, int type)
@@ -66,11 +84,3 @@ int check_color_valid(char *color_info, t_map *map_info, int type)
         return (free(color_detail), FALSE);
     return (TRUE);
 }
-
-ft_split
-
-_ft_trim
-
-dup
-
-atoi

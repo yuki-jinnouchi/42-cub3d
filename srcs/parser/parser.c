@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 00:26:00 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:28:11 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,56 +42,6 @@ int	count_values(int type)
 	return (TRUE);
 }
 
-int	set_path_color_info(int type, t_map *map_info, char *line, int *count_info)
-{
-	char *trimed_line;
-
-	if (count_values(type) == FALSE)
-		return (FALSE);
-	trimed_line = ft_strtrim(line, " ");
-	if (trimed_line[0] == '\0')
-		return (FALSE);
-	if (type == NO)
-		map_info->no = ft_strndup(trimed_line);
-	else if (type == SO)
-		map_info->so = ft_strndup(trimed_line);
-	else if (type == WE)
-		map_info->we = ft_strndup(trimed_line);
-	else if (type == EA)
-		map_info->ea = ft_strndup(trimed_line);
-	else if (type == F)
-		map_info->f = ft_strndup(trimed_line);
-	else if (type == C)
-		map_info->c = ft_strndup(trimed_line);
-	*count_info += 1;
-	return (TRUE);
-}
-
-int	type_identifier(char *line, int len, t_map *map_info, int *count_info)
-{
-	if (ft_strncmp(line, "NO", 2) == 0 && len > 2)
-		if (set_path_color_info(NO, map_info, (line + 3), count_info) == FALSE)
-			return (FALSE);
-	if (ft_strncmp(line, "SO", 2) == 0 && len > 2)
-		if (set_path_color_info(SO, map_info, (line + 3), count_info) == FALSE)
-			return (FALSE);
-	if (ft_strncmp(line, "WE", 2) == 0 && len > 2)
-		if (set_path_color_info(WE, map_info, (line + 3), count_info) == FALSE)
-			return (FALSE);
-	if (ft_strncmp(line, "EA", 2) == 0 && len > 1)
-		if (set_path_color_info(EA, map_info, (line + 3), count_info) == FALSE)
-			return (FALSE);
-	if (ft_strncmp(line, "F", 1) == 0 && len > 1)
-		if (set_path_color_info(F, map_info, (line + 2), count_info) == FALSE)
-			return (FALSE);
-	if (ft_strncmp(line, "C", 1) == 0 && len > 1)
-		if (set_path_color_info(C, map_info, (line + 2), count_info) == FALSE)
-			return (FALSE);
-	if(ft_strncmp(line, "\n", 1) != 0)
-		return (t_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
-	return (TRUE);
-}
-
 int	parser(char *file, t_map *map_info)
 {
 	int		fd;
@@ -105,6 +55,9 @@ int	parser(char *file, t_map *map_info)
 	if (open_file(file, &fd) == FALSE)
 		return (FALSE);
 	line = get_next_line(fd);
+	if (line == NULL)
+		return (FALSE);
+	//textures and colors
 	while (count_info <= 6 || line != NULL)
 	{
 		len = ft_strlen(line);
@@ -115,8 +68,18 @@ int	parser(char *file, t_map *map_info)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free (line);
 	if (count_info != 6)
-		return (print_error_msg_free(map_info, "Invalid types count\n"), FALSE);
+		return (print_error_msg_free(map_info, line, "Invalid types count\n"), FALSE);
+	//map
+	//skip "\n"
+	if (skip_newline(line, fd, map_info) == FALSE)
+		return (FALSE);
+	//check map
+	while(line != NULL)
+	{
+		
+		free (line);
+		line = get_next_line(fd);
+	}
 	return (TRUE);
 }
