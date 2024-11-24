@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:29:33 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/23 08:30:49 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/24 04:41:42 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,14 @@ t_vec get_next_pos_flat(t_vec pos, t_vec ray, double slope_y)
 {
     t_vec    next_pos;
 
-    if (fmod(pos.x, 1.0) != 0.0)
+    next_pos.x = jump_next_pos(pos.x, ray.x);
+    next_pos.y = pos.y + slope_y * (next_pos.x - pos.x);
+    if (check_cross_line(next_pos.y, pos.y) == TRUE)
     {
-        if (ray.x > 0)
-        {
-            next_pos.x = ceil(pos.x);
-            next_pos.y = pos.y + slope_y * (ceil(pos.x) - pos.x);
-        }
-        else
-        {
-            next_pos.x = floor(pos.x);
-            next_pos.y = pos.y + slope_y * (floor(pos.x) - pos.x);
-        }
-    }
-    else
-    {
-        next_pos.x = pos.x + (double) SIGN(ray.x);
-        next_pos.y = pos.y + slope_y * (double) SIGN(ray.x);
+        // printf("back\n");
+        next_pos.y = jump_next_pos(pos.y, ray.y);
+        if (slope_y != 0)
+            next_pos.x = pos.x + (next_pos.y - pos.y) / slope_y;
     }
     return (next_pos);
 }
@@ -41,43 +32,16 @@ t_vec get_next_pos_steep(t_vec pos, t_vec ray, double slope_x)
 {
     t_vec    next_pos;
 
-    if (fmod(pos.y, 1.0) != 0.0)
+    next_pos.y = jump_next_pos(pos.y, ray.y);
+    next_pos.x = pos.x + slope_x * (next_pos.y - pos.y);
+    if (check_cross_line(next_pos.x, pos.x) == TRUE)
     {
-        if (ray.y > 0)
-        {
-            next_pos.y = ceil(pos.y);
-            next_pos.x = pos.x + (slope_x * (ceil(pos.y) - pos.y));
-        }
-        else
-        {
-            next_pos.y = floor(pos.y);
-            next_pos.x = pos.x + (slope_x * (floor(pos.y) - pos.y));
-        }
-    }
-    else
-    {
-        next_pos.y = pos.y + (double) SIGN(ray.y);
-        next_pos.x = pos.x + slope_x * (double) SIGN(ray.y);
+        // printf("back\n");
+        next_pos.x = jump_next_pos(pos.x, ray.x);
+        if (slope_x != 0)
+            next_pos.y = pos.y + (next_pos.x - pos.x) / slope_x;
     }
     return (next_pos);
-}
-
-int check_cross_line(double current, double last)
-{
-    if (fmod(current, 1.0) != 0.0 && fmod(last, 1.0) != 0.0)
-    {
-        if (floor(last) != floor(current))
-            return (TRUE);
-        else
-            return (FALSE);
-    }
-    else
-    {
-        if (fmod(current, 1.0) == 0.0 && current != last )
-            return (TRUE);
-        else
-            return (FALSE);
-    }
 }
 
 int check_wall_num(t_vec pos, t_vec ray, char **structure)
@@ -114,31 +78,16 @@ t_vec calc_ray_flat(t_vec *ray, t_player *player, t_vars *vars)
     current_pos = player->pos;
     while(TRUE)
     {
-        current_pos = get_next_pos_flat(last_pos, *ray, slope_y);
-        // printf("calc_ray_steep current_pos.x: %f, current_pos.y: %f\n", current_pos.x, current_pos.y);
-        // printf("calc_ray_steep last_pos.x: %f, last_pos.y: %f\n", last_pos.x, last_pos.y);
-        // printf("check_cross_line(current_pos.x, last_pos.x): %i\n", check_cross_line(current_pos.x, last_pos.x));
-        // printf("check_cross_line(current_pos.y, last_pos.y): %i\n", check_cross_line(current_pos.y, last_pos.y));
-        if (check_cross_line(current_pos.x, last_pos.x) == TRUE) // if ray cross left line
-            {
-                wall_direction = check_wall_num( \
-                    current_pos, *ray, vars->map->structure);
-                if (wall_direction != 0) // if ray hits left wall
-                {
-                    // printf("calc_ray_flat_x current_pos.x: %f, current_pos.y: %f, wall_direction: %i\n", current_pos.x, current_pos.y, wall_direction);
-                    return (current_pos); // flag = TRUE; and save vector and wall name;
-                }
-            }
-        if (check_cross_line(current_pos.y, last_pos.y) == TRUE) //if ray cross top line
-            {
-                wall_direction = check_wall_num( \
-                    current_pos, *ray, vars->map->structure);
-                if (wall_direction != 0) // if ray hits top wall
-                {
-                    // printf("calc_ray_flat_y current_pos.x: %f, current_pos.y: %f, wall_direction: %i\n", current_pos.x, current_pos.y, wall_direction);
-                    return (current_pos); // flag = TRUE; and save vector and wall name;
-                }
-            }
+        // current_pos = get_next_pos_flat(last_pos, *ray, slope_y);
+        // printf("calc_ray_flat last_pos.x: %f, last_pos.y: %f ", last_pos.x, last_pos.y);
+        // printf("calc_ray_flat current_pos.x: %f, current_pos.y: %f\n", current_pos.x, current_pos.y);
+        wall_direction = check_wall_num( \
+            current_pos, *ray, vars->map->structure);
+        if (wall_direction != 0) // if ray hits top wall
+        {
+            // printf("wall_direction: %i\n\n", wall_direction);
+            return (current_pos); // flag = TRUE; and save vector and wall name;
+        }
         last_pos = current_pos;
         current_pos = get_next_pos_flat(last_pos, *ray, slope_y);
     }
@@ -156,32 +105,19 @@ t_vec calc_ray_steep(t_vec *ray, t_player *player, t_vars *vars)
     current_pos = player->pos;
     while(TRUE)
     {
-        current_pos = get_next_pos_steep(last_pos, *ray, slope_x);
-        // printf("calc_ray_steep current_pos.x: %f, current_pos.y: %f\n", current_pos.x, current_pos.y);
+        // current_pos = get_next_pos_steep(last_pos, *ray, slope_x);
         // printf("calc_ray_steep last_pos.x: %f, last_pos.y: %f\n", last_pos.x, last_pos.y);
-        // printf("check_cross_line(current_pos.x, last_pos.x): %i\n", check_cross_line(current_pos.x, last_pos.x));
-        // printf("check_cross_line(current_pos.y, last_pos.y): %i\n", check_cross_line(current_pos.y, last_pos.y));
-        if (check_cross_line(current_pos.x, last_pos.x) == TRUE) //if ray cross left line
-            {
-                wall_direction = check_wall_num( \
-                    current_pos, *ray, vars->map->structure);
-                // printf("calc_ray_steep_x current_pos.x: %f, current_pos.y: %f, wall_direction: %i\n", current_pos.x, current_pos.y, wall_direction);
-                if (wall_direction != 0) // if ray hits left wall
-                {
-                    return (current_pos); // flag = TRUE; and save vector and wall name;
-                }
-            }
-        if (check_cross_line(current_pos.y, last_pos.y) == TRUE) // if ray cross top line
-            {
-                wall_direction = check_wall_num( \
-                    current_pos, *ray, vars->map->structure);
-                // printf("calc_ray_steep_y current_pos.x: %f, current_pos.y: %f, wall_direction: %i\n", current_pos.x, current_pos.y, wall_direction);
-                if (wall_direction != 0) // if ray hits top wall
-                {
-                    return (current_pos); // flag = TRUE; and save vector and wall name;
-                }
-            }
+        // printf("calc_ray_steep current_pos.x: %f, current_pos.y: %f\n", current_pos.x, current_pos.y);
+        wall_direction = check_wall_num( \
+            current_pos, *ray, vars->map->structure);
+        // printf("calc_ray_steep_x current_pos.x: %f, current_pos.y: %f, wall_direction: %i\n", current_pos.x, current_pos.y, wall_direction);
+        if (wall_direction != 0) // if ray hits left wall
+        {
+            // printf("wall_direction: %i\n\n", wall_direction);
+            return (current_pos); // flag = TRUE; and save vector and wall name;
+        }
         last_pos = current_pos;
+        current_pos = get_next_pos_steep(last_pos, *ray, slope_x);
     }
 }
 
@@ -194,10 +130,21 @@ double  calc_player_distance(t_vec wall_pos, t_vec player_pos)
     return (distance);
 }
 
+double calc_plane_distance(t_vec wall_pos, t_player *player)
+{
+    double distance;
+
+    distance = calc_player_distance(wall_pos, player->pos) * \
+               cos(atan2(wall_pos.y - player->pos.y, wall_pos.x - player->pos.x) - \
+               atan2(player->dir_vec.y, player->dir_vec.x));
+    return (distance);
+}
+
 t_vec calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars)
 {
     t_vec    wall_pos;
 
+    // printf("calc_wall_pos ray.x: %f, ray.y: %f\n", ray->x, ray->y);
     if (ABS(ray->x) >= ABS(ray->y))
         wall_pos = calc_ray_flat(ray, player, vars);
     else

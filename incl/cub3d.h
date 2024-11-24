@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/23 08:26:48 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/24 04:45:28 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@
 # define WINDOW_WIDTH 16
 # define WINDOW_HEIGHT 9
 
-# define FOV 95
+# define FOV 66
 # define FRAME_RATE 30
-# define MOVE_SPEED 0.01
-# define MOVE_DISTANCE 0.2
-# define ROTATE_SPEED 5
+# define MOVE_SPEED 0.05
+# define MOVE_DISTANCE 1
+# define ROTATE_SPEED 10
 
 # define NORTH 1
 # define EAST 2
@@ -186,12 +186,15 @@ t_vec	calc_ray_flat(t_vec *ray, t_player *player, t_vars *vars);
 t_vec	calc_ray_steep(t_vec *ray, t_player *player, t_vars *vars);
 
 double	calc_player_distance(t_vec wall_pos, t_vec player_pos);
+double	calc_plane_distance(t_vec wall_pos, t_player *player);
 t_vec	calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars);
 t_vec	calc_ray(t_player *player, int window_width, int i);
 
 int		update_plane(t_player *player);
 int		write_line(int color, int x, t_vars *vars);
 int		draw_plane(t_vars *vars);
+
+double	jump_next_pos(double pos, double ray);
 
 //util
 void	free_array(char **array);
