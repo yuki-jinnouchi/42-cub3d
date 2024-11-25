@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 02:13:52 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:42:27 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_map {
 	char	*ea;
 	char	*f;
 	char	*c;
+	char	p;
 	t_color	*f_detail;
 	t_color	*c_detail;
 	int		width;

@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:46:29 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 16:45:19 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:45:26 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,11 @@ void    print_error_msg(char *error_msg)
 {
     ft_putstr_fd("Error\n", 2);
     ft_putstr_fd(error_msg,2);
+}
 
+void    print_error_msg_free_map_info(t_map *map_info, char *error_msg)
+{
+    ft_putstr_fd("Error\n", 2);
+    ft_putstr_fd(error_msg,2);
+    free_map_info(map_info);
 }

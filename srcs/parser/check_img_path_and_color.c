@@ -6,11 +6,30 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 17:28:03 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/25 22:36:00 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	count_values(int type)
+{
+	static int	types[6];
+	int			i;
+
+	i = 0;
+	types[type]++;
+	while (types[i])
+	{
+		if (types[i] > 1)
+		{
+			ft_putstr_fd("Error\nDublicated types\n", 2);
+			return (FALSE);
+		}
+		i++;
+	}
+	return (TRUE);
+}
 
 int check_img_path_and_color(t_map *map_info)
 {

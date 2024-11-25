@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 17:28:11 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:34:23 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,12 @@ int	open_file(char *file, int *fd)
 	return (TRUE);
 }
 
-int	count_values(int type)
+int set_textures_and_colors(char *line, int fd, t_map *map_info)
 {
-	static int	types[6];
-	int			i;
-
-	i = 0;
-	types[type]++;
-	while (types[i])
-	{
-		if (types[i] > 1)
-		{
-			ft_putstr_fd("Error\nDublicated types\n", 2);
-			return (FALSE);
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
-int	parser(char *file, t_map *map_info)
-{
-	int		fd;
-	char	*line;
 	int		count_info;
 	int		len;
-
-	fd = 0;
-	line = NULL;
+	
 	count_info = 0;
-	if (open_file(file, &fd) == FALSE)
-		return (FALSE);
-	line = get_next_line(fd);
-	if (line == NULL)
-		return (FALSE);
-	//textures and colors
 	while (count_info <= 6 || line != NULL)
 	{
 		len = ft_strlen(line);
@@ -70,16 +41,30 @@ int	parser(char *file, t_map *map_info)
 	}
 	if (count_info != 6)
 		return (print_error_msg_free(map_info, line, "Invalid types count\n"), FALSE);
-	//map
-	//skip "\n"
+	return (TRUE);
+}
+
+int	parser(char *file, t_map *map_info)
+{
+	int		fd;
+	char	*line;
+
+	fd = 0;
+	line = NULL;
+	if (open_file(file, &fd) == FALSE)
+		return (FALSE);
+	line = get_next_line(fd);
+	if (line == NULL)
+		return (FALSE);
+	if (set_textures_and_colors(line, fd, map_info) == FALSE)
+		return (FALSE);
 	if (skip_newline(line, fd, map_info) == FALSE)
 		return (FALSE);
-	//check map
-	while(line != NULL)
-	{
-		
-		free (line);
-		line = get_next_line(fd);
-	}
+	if (get_map(map_info, fd, line) == FALSE)
+		return (FALSE);
+	if (check_map(map_info) == FALSE)
+		return (FALSE);
+	if (skip_newline(line, fd, map_info) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }
