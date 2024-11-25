@@ -1,7 +1,7 @@
-NO ./sprite/North.png
-SO ./sprite/South.png
-WE ./sprite/West.png
-EA ./sprite/East.png
+NO ./texture/North.png
+SO ./texture/South.png
+WE ./texture/West.png
+EA ./texture/East.png
 F 50,30,0
 C 220,220,220
 1111111111111111111111111
