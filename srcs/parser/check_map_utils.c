@@ -6,13 +6,13 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 20:35:14 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:55:13 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int skip_newline(char *line, int fd, t_map *map_info)
+int skip_newline(char *line, int fd, t_input *map_info)
 {
 	while(line != NULL && ft_strncmp(line,"\n", 1) == 0)
 	{

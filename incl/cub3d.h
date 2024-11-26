@@ -106,7 +106,13 @@ typedef struct s_image
 // 	char    *c_line;
 // }	t_input;
 
-typedef struct s_map {
+typedef	struct s_color {
+	int r;
+	int g;
+	int b;
+}	t_color;
+
+typedef struct s_input {
 	char	*no;
 	char	*so;
 	char	*we;
@@ -114,18 +120,14 @@ typedef struct s_map {
 	char	*f;
 	char	*c;
 	char	p;
+	//t_position *position; //処理必要
 	t_color	*f_detail;
 	t_color	*c_detail;
 	int		width;
 	int		height;
 	char	**structure;
-}			t_map;
+}			t_input;
 
-typedef	struct s_color {
-	int r;
-	int g;
-	int b;
-}	t_color;
 
 typedef struct s_map {
 	int		width;
@@ -238,41 +240,42 @@ void	free_array(char **array);
 int		arg_check(int argc, char **argv);
 
 //error
-void    print_error_msg_free(t_map *map_info, char *line, char *error_msg);
+void    print_error_msg_free(t_input *map_info, char *line, char *error_msg);
 void    print_error_msg(char *error_msg);
-void    print_error_msg_free_map_info(t_map *map_info, char *error_msg);
+void    print_error_msg_free_map_info(t_input *map_info, char *error_msg);
 
 //free
 void	free_2d_array(char **head);
 void	free_color(t_color *color);
-void	free_map_info(t_map *map_info);
-void	free_map_info_line(t_map *map_info, char *line);
+void	free_map_info(t_input *map_info);
+void	free_map_info_line(t_input *map_info, char *line);
+size_t	ft_strlen_null_gard(const char *s);
 
 //check_color
 int	set_int_color(int type, char *color, t_color *color_detail);
 int	set_color_detail(char **split_color_info,t_color *color_detail);
-int check_color_valid(char *color_info, t_map *map_info, int type);
+int check_color_valid(char *color_info, t_input *map_info, int type);
 
 //check_img_path_and_color
 int	count_values(int type);
-int check_img_path_and_color(t_map *map_info);
-int	set_path_color_info(int type, t_map *map_info, char *line, int *count_info);
-int	type_identifier(char *line, int len, t_map *map_info, int *count_info);
+int check_img_path_and_color(t_input *map_info);
+int	set_path_color_info(int type, t_input *map_info, char *line, int *count_info);
+int	type_identifier(char *line, int len, t_input *map_info, int *count_info);
 
 //check_img_path
 int check_img_path_exist(char *img_path);
 
 //check_map_utils
-int skip_newline(char *line, int fd, t_map *map_info);
+int skip_newline(char *line, int fd, t_input *map_info);
 
 //check_map
-int get_map(t_map *map_info, int fd, char *line);
-int find_player(t_map *map_info, int *player, int i, int j);
-int check_map(t_map *map_info);
+int get_map(t_input *map_info, int fd, char *line);
+int find_player(t_input *map_info, int *player, int i, int j);
+int check_map(t_input *map_info);
 
 //parser
-int	parser(char *file, t_map *map_info);
-int set_textures_and_colors(char *line, int fd, t_map *map_info);
+int	parser(char *file, t_input *map_info);
+int set_textures_and_colors(char *line, int fd, t_input *map_info);
 int	open_file(char *file, int *fd);
 
 #endif

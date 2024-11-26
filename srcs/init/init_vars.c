@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:16:41 by yjinnouc          #+#    #+#             */
 /*   Updated: 2024/11/29 11:16:42 by yjinnouc         ###   ########.fr       */
@@ -36,6 +36,17 @@ int image_init(t_vars *vars)
 	return (SUCCESS);
 }
 
+int	set_vars(t_vars	*vars, t_input *map_info)
+{
+	vars->texture->n.addr = map_info->no;
+	vars->texture->s.addr = map_info->so;
+	vars->texture->e.addr = map_info->ea;
+	vars->texture->w.addr = map_info->we;
+	vars->map->height = map_info->height;
+	vars->map->width = map_info->width;
+	vars->map->structure = map_info->structure;
+}
+
 t_vars *vars_init(char **argv)
 {
 	t_vars	*vars;
@@ -56,5 +67,7 @@ t_vars *vars_init(char **argv)
 		return (NULL);
 	if (player_init(vars) == FAILURE)
 		return (NULL);
+	// if (set_vars(vars, map_info) == FAILURE)
+	// 	return (NULL);
     return (vars);
 }
