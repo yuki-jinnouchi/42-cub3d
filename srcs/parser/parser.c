@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/25 23:34:23 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/26 21:07:10 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	open_file(char *file, int *fd)
 	return (TRUE);
 }
 
-int set_textures_and_colors(char *line, int fd, t_map *map_info)
+int set_textures_and_colors(char *line, int fd, t_input *map_info)
 {
 	int		count_info;
 	int		len;
@@ -31,7 +31,7 @@ int set_textures_and_colors(char *line, int fd, t_map *map_info)
 	count_info = 0;
 	while (count_info <= 6 || line != NULL)
 	{
-		len = ft_strlen(line);
+		len = ft_strlen_null_gard(line);
 		if (count_info != 6 && type_identifier(line, len, map_info, &count_info) == FALSE)
 			return (free_map_info_line(map_info, line), FALSE);
 		if (check_img_path_and_color(map_info) == FALSE)
@@ -44,7 +44,7 @@ int set_textures_and_colors(char *line, int fd, t_map *map_info)
 	return (TRUE);
 }
 
-int	parser(char *file, t_map *map_info)
+int	parser(char *file, t_input *map_info)
 {
 	int		fd;
 	char	*line;

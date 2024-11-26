@@ -6,13 +6,13 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 19:42:35 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/26 21:07:58 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int get_map(t_map *map_info, int fd, char *line)
+int get_map(t_input *map_info, int fd, char *line)
 {
 	int	map_line_count;
 	char **map_tmp_pre;
@@ -40,7 +40,7 @@ int get_map(t_map *map_info, int fd, char *line)
     return (TRUE);
 }
 
-int find_player(t_map *map_info, int *player, int i, int j)
+int find_player(t_input *map_info, int *player, int i, int j)
 {
     if (ft_strchr("NSEW", map_info->structure[i][j]))
     {
@@ -52,7 +52,7 @@ int find_player(t_map *map_info, int *player, int i, int j)
     return (TRUE);
 }
 
-int check_map(t_map *map_info)
+int check_map(t_input *map_info)
 {
     int i;
     int j;
@@ -68,18 +68,20 @@ int check_map(t_map *map_info)
     while(map_info->structure[++i])
     {
         j = -1;
-        len = map_info->structure[i];
+        len = ft_strlen_null_gard(map_info->structure[i]);
         if (i > 0)
-            up_len = ft_strlen(map_info->structure[i - 1]);
+            up_len = ft_strlen_null_gard(map_info->structure[i - 1]);
         if (i < map_info->height)
-            down_len = ft_strlen(map_info->structure[i + 1]);
+            down_len = ft_strlen_null_gard(map_info->structure[i + 1]);
         while(map_info->structure[i][++j])
         {
             if (find_player(map_info, &player, i, j) == FALSE)
                 return (print_error_msg_free_map_info(map_info, "Too many player\n"), FALSE);
             if (i == 0 || i == map_info->height - 1)
+            {
                 if (!ft_strchr(" 1\n", map_info->structure[i][j]))
                     return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);//上下端
+            }
             else if (j == 0 || j == len - 2)
             {
                 if (!ft_strchr(" 1", map_info->structure[i][j]))
