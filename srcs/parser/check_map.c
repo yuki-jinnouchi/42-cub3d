@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 00:19:32 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:42:35 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int get_map(t_map *map_info, int fd, char *line)
 
 int find_player(t_map *map_info, int *player, int i, int j)
 {
-    if (ft_strrchr("NSEW", map_info->structure[i][j]))
+    if (ft_strchr("NSEW", map_info->structure[i][j]))
     {
         map_info->p = map_info->structure[i][j];
         (*player)++;
@@ -78,25 +78,32 @@ int check_map(t_map *map_info)
             if (find_player(map_info, &player, i, j) == FALSE)
                 return (print_error_msg_free_map_info(map_info, "Too many player\n"), FALSE);
             if (i == 0 || i == map_info->height - 1)
-                if (!ft_strrchr(" 1\n", map_info->structure[i][j]))
-                    return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);
+                if (!ft_strchr(" 1\n", map_info->structure[i][j]))
+                    return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);//上下端
+            else if (j == 0 || j == len - 2)
+            {
+                if (!ft_strchr(" 1", map_info->structure[i][j]))
+                    return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE); //左右端
+            }
             else
             {
-                if (!ft_strrchr(" 01NSEW\n", map_info->structure[i][j]))
+                if (!ft_strchr(" 01NSEW\n", map_info->structure[i][j]))
                     return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);
                 if (map_info->structure[i][j] == ' ')
                 {
-                    if (j < len - 1 && !ft_strrchr(" 1\n", map_info->structure[i][j + 1])) //右
+                    if (j < len - 1 && !ft_strchr(" 1\n", map_info->structure[i][j + 1])) //右
                         return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);
-                    if (j > 0 && !ft_strrchr(" 1\n", map_info->structure[i][j - 1])) //左
+                    if (j > 0 && !ft_strchr(" 1\n", map_info->structure[i][j - 1])) //左
                         return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);
-                    if (i > 0 && j < up_len && !ft_strrchr(" 1\n", map_info->structure[i - 1][j]))//上
+                    if (i > 0 && j < up_len && !ft_strchr(" 1\n", map_info->structure[i - 1][j]))//上
                         return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);
-                    if (i < map_info->height - 1 && j < down_len && !ft_strrchr(" 1\n", map_info->structure[i + 1][j]))//下
+                    if (i < map_info->height - 1 && j < down_len && !ft_strchr(" 1\n", map_info->structure[i + 1][j]))//下
                         return (print_error_msg_free_map_info(map_info, "Invalid map\n"), FALSE);
                 }
             }
         }
     }
+    if (player == 0)
+        return (FALSE);
     return (TRUE);
 }
