@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 20:28:12 by hakobori         ###   ########.fr       */
+/*   Created: 2024/11/16 15:43:06 by hakobori          #+#    #+#             */
+/*   Updated: 2024/11/20 22:20:54 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int	arg_check(int argc, char **argv)
 {
-	t_vars	*vars;
-	t_map	map_info;
-	t_map	*map_info_ptr;
+	int	arg_len;
 
-	map_info_ptr = &map_info;
-	ft_bzero(map_info_ptr, sizeof(t_map));
-	if(arg_check(argc, argv) == FALSE)
-		return (FAILURE);
-	if(parse(argv, map_info_ptr) == FALSE)
-		return (FAILURE);
-	// vars = vars_init(argv);
-	// if (vars == NULL)
-	// {
-	// 	printf("Error\n");
-	// 	return (FAILURE);
-	// }
-	//exec_game(vars);
-	return (SUCCESS);
+	arg_len = ft_strlen(argv[1]);
+	if (argc != 2)
+	{
+		ft_putstr_fd("Error\nInvalid number of arguments\n", 2);
+		return (FALSE);
+	}
+	if (arg_len < 5)
+	{
+		ft_putstr_fd("Error\nInvalid file extension\n", 2);
+		return (FALSE);
+	}
+	if (ft_strncmp(argv[1] + arg_len - 4, ".cub", 4) != 0)
+	{
+		pft_putstr_fd("Error\nInvalid file extension\n", 2);
+		return (FALSE);
+	}
+	return (TRUE);
 }

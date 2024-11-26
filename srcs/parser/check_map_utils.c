@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 20:28:12 by hakobori         ###   ########.fr       */
+/*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
+/*   Updated: 2024/11/26 20:35:14 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int skip_newline(char *line, int fd, t_map *map_info)
 {
-	t_vars	*vars;
-	t_map	map_info;
-	t_map	*map_info_ptr;
-
-	map_info_ptr = &map_info;
-	ft_bzero(map_info_ptr, sizeof(t_map));
-	if(arg_check(argc, argv) == FALSE)
-		return (FAILURE);
-	if(parse(argv, map_info_ptr) == FALSE)
-		return (FAILURE);
-	// vars = vars_init(argv);
-	// if (vars == NULL)
-	// {
-	// 	printf("Error\n");
-	// 	return (FAILURE);
-	// }
-	//exec_game(vars);
-	return (SUCCESS);
+	while(line != NULL && ft_strncmp(line,"\n", 1) == 0)
+	{
+		free (line);
+		line = get_next_line(fd);
+		if (line == NULL)
+			return (print_error_msg_free(map_info, line, "Invalid map\n"),FALSE);
+	}
+    return (TRUE);
 }
