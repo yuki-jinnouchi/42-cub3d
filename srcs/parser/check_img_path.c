@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_img_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 20:28:12 by hakobori         ###   ########.fr       */
+/*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
+/*   Updated: 2024/11/24 00:22:41 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int check_img_path_exist(char *img_path)
 {
-	t_vars	*vars;
-	t_map	map_info;
-	t_map	*map_info_ptr;
-
-	map_info_ptr = &map_info;
-	ft_bzero(map_info_ptr, sizeof(t_map));
-	if(arg_check(argc, argv) == FALSE)
-		return (FAILURE);
-	if(parse(argv, map_info_ptr) == FALSE)
-		return (FAILURE);
-	// vars = vars_init(argv);
-	// if (vars == NULL)
-	// {
-	// 	printf("Error\n");
-	// 	return (FAILURE);
-	// }
-	//exec_game(vars);
-	return (SUCCESS);
+    void *mlx;
+    void *img;
+    int width;
+    int height;
+    
+    mlx = mlx_init();
+    if (!mlx)
+        return (FALSE);
+    width = 42;
+    height = 42;
+    img = mlx_xpm_file_to_image(mlx, img_path, &width, &height);
+    if (!img)
+        return (mlx_destroy_display(mlx), FALSE);
+    return (mlx_destroy_display(mlx), TRUE);
 }

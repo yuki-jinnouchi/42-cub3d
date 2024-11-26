@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
 /*   Updated: 2024/11/29 13:10:16 by yjinnouc         ###   ########.fr       */
@@ -47,6 +47,18 @@
 # define SUCCESS 0
 # define FAILURE -1
 
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+# define F 4
+# define C 5
+
+//color
+# define R 0
+# define G 1
+# define B 2
+
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 # define SIGN(x) ((x) < 0 ? -1 : 1)
 
@@ -66,12 +78,12 @@ typedef struct s_vec
 
 typedef struct timeval t_timeval;
 
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
+// typedef struct s_color
+// {
+// 	int	r;
+// 	int	g;
+// 	int	b;
+// }	t_color;
 
 typedef struct s_image
 {
@@ -84,15 +96,36 @@ typedef struct s_image
 	int		height;
 }	t_image;
 
-typedef struct s_input
-{
-	char	*no_line;
-	char	*so_line;
-	char	*we_line;
-	char	*ea_line;
-	char	*f_line;
-	char    *c_line;
-}	t_input;
+// typedef struct s_input
+// {
+// 	char	*no_line;
+// 	char	*so_line;
+// 	char	*we_line;
+// 	char	*ea_line;
+// 	char	*f_line;
+// 	char    *c_line;
+// }	t_input;
+
+typedef struct s_map {
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
+	char	p;
+	t_color	*f_detail;
+	t_color	*c_detail;
+	int		width;
+	int		height;
+	char	**structure;
+}			t_map;
+
+typedef	struct s_color {
+	int r;
+	int g;
+	int b;
+}	t_color;
 
 typedef struct s_map {
 	int		width;
@@ -144,9 +177,9 @@ typedef struct s_vars
 }	t_vars;
 
 //init
+int     map_read_file(t_map *map, t_vars *vars);
+int     map_convert(t_map *map, t_vars *vars);
 int		arg_check(int argc, char **argv);
-// int     map_read_file(t_map *map, t_vars *vars);
-// int     map_convert(t_map *map, t_vars *vars);
 t_map	*map_init(t_vars *vars);
 int     texture_init(t_vars *vars);
 int     player_init(t_vars *vars);
@@ -201,5 +234,45 @@ double	jump_next_pos(double pos, double ray);
 //util
 void	free_array(char **array);
 
+//arg_check
+int		arg_check(int argc, char **argv);
+
+//error
+void    print_error_msg_free(t_map *map_info, char *line, char *error_msg);
+void    print_error_msg(char *error_msg);
+void    print_error_msg_free_map_info(t_map *map_info, char *error_msg);
+
+//free
+void	free_2d_array(char **head);
+void	free_color(t_color *color);
+void	free_map_info(t_map *map_info);
+void	free_map_info_line(t_map *map_info, char *line);
+
+//check_color
+int	set_int_color(int type, char *color, t_color *color_detail);
+int	set_color_detail(char **split_color_info,t_color *color_detail);
+int check_color_valid(char *color_info, t_map *map_info, int type);
+
+//check_img_path_and_color
+int	count_values(int type);
+int check_img_path_and_color(t_map *map_info);
+int	set_path_color_info(int type, t_map *map_info, char *line, int *count_info);
+int	type_identifier(char *line, int len, t_map *map_info, int *count_info);
+
+//check_img_path
+int check_img_path_exist(char *img_path);
+
+//check_map_utils
+int skip_newline(char *line, int fd, t_map *map_info);
+
+//check_map
+int get_map(t_map *map_info, int fd, char *line);
+int find_player(t_map *map_info, int *player, int i, int j);
+int check_map(t_map *map_info);
+
+//parser
+int	parser(char *file, t_map *map_info);
+int set_textures_and_colors(char *line, int fd, t_map *map_info);
+int	open_file(char *file, int *fd);
 
 #endif
