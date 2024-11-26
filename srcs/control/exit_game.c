@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 08:13:53 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/20 03:23:36 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/26 06:24:26 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int free_texture(t_texture *texture, t_vars *vars)
         mlx_destroy_image(vars->mlx, texture->w.img);
     if (texture->e.img)
         mlx_destroy_image(vars->mlx, texture->e.img);
+    free(texture);
     return (SUCCESS);
 }
 
