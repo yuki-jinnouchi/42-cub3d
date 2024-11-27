@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 21:07:58 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 00:13:11 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@ int get_map(t_input *map_info, int fd, char *line)
 	char **map_tmp_pre;
 	int i;
 	
+    map_tmp_pre = NULL;
 	map_line_count = 0;
 	map_info->structure = NULL;
 	while(line != NULL)
 	{
+		// free(map_tmp_pre);
 		map_tmp_pre = map_info->structure;
 		map_line_count++;
-		map_info->structure = ft_calloc(sizeof(char *), map_line_count);
+		map_info->structure = ft_calloc(sizeof(char *), map_line_count + 1);
         if (!map_info->structure)
-            return (print_error_msg_free(map_info, line, "map malloc error\n"), FALSE);
+            return (free(map_tmp_pre),print_error_msg_free(map_info, line, "map malloc error\n"), FALSE);
 		i = -1;
-		while(map_tmp_pre && map_tmp_pre[++i])
+		while(map_tmp_pre && ++i < map_line_count)
 			map_info->structure[i] = map_tmp_pre[i];
 		map_info->structure[++i] = line;
-		free(map_tmp_pre);
-		free (line);
+		// free (line);
 		line = get_next_line(fd);
 	}
     map_info->height = map_line_count;
@@ -44,11 +45,18 @@ int find_player(t_input *map_info, int *player, int i, int j)
 {
     if (ft_strchr("NSEW", map_info->structure[i][j]))
     {
+        //debug
+        printf("pass\n");
         map_info->p = map_info->structure[i][j];
+        map_info->position.x = (double)j +0.5;
+        map_info->position.y = (double)i +0.5;
         (*player)++;
     }
     if (*player > 1)
+    {
+        printf("player = %d\n",*player);
         return (FALSE);
+    }
     return (TRUE);
 }
 
@@ -65,13 +73,14 @@ int check_map(t_input *map_info)
     i = -1;
     up_len = 0;
     down_len = 0;
+    player = 0;
     while(map_info->structure[++i])
     {
         j = -1;
         len = ft_strlen_null_gard(map_info->structure[i]);
         if (i > 0)
             up_len = ft_strlen_null_gard(map_info->structure[i - 1]);
-        if (i < map_info->height)
+        if (i < map_info->height - 1)
             down_len = ft_strlen_null_gard(map_info->structure[i + 1]);
         while(map_info->structure[i][++j])
         {
