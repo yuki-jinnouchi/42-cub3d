@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 21:42:22 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/26 22:37:29 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 		return (FAILURE);
 	if(parser(argv[1], map_info_ptr) == FALSE)
 		return (FAILURE);
-	vars = vars_init(argv);
+	vars = vars_init(argv, map_info_ptr);
 	if (vars == NULL)
 	{
 		printf("Error\n");

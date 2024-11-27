@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:35:09 by yjinnouc          #+#    #+#             */
 /*   Updated: 2024/11/29 10:51:30 by yjinnouc         ###   ########.fr       */
@@ -28,28 +28,23 @@ int load_texture(t_image *image, char *filepath, t_vars *vars)
 int texture_init(t_vars *vars)
 {
 	t_texture *texture;
+    t_color *color;
 
     texture = malloc(sizeof(t_texture));
     if (texture == NULL)
         return (FAILURE);
     vars->texture = texture;
-    // if (load_texture(&texture->n, "./texture/North.xpm", vars) == FAILURE)
-    //     return (FAILURE);
-    // if (load_texture(&texture->s, "./texture/South.xpm", vars) == FAILURE)
-    //     return (FAILURE);
-    // if (load_texture(&texture->w, "./texture/West.xpm", vars) == FAILURE)
-    //     return (FAILURE);
-    // if (load_texture(&texture->e, "./texture/East.xpm", vars) == FAILURE)
-    //     return (FAILURE);
-    if (load_texture(&texture->n, "./texture/ws_01.xpm", vars) == FAILURE)
+    if (load_texture(&texture->n, vars->input->no, vars) == FAILURE)
         return (FAILURE);
-    if (load_texture(&texture->s, "./texture/ws_03.xpm", vars) == FAILURE)
+    if (load_texture(&texture->s, vars->input->so, vars) == FAILURE)
         return (FAILURE);
-    if (load_texture(&texture->w, "./texture/ws_02.xpm", vars) == FAILURE)
+    if (load_texture(&texture->w, vars->input->we, vars) == FAILURE)
         return (FAILURE);
-    if (load_texture(&texture->e, "./texture/ws_04.xpm", vars) == FAILURE)
+    if (load_texture(&texture->e, vars->input->ea, vars) == FAILURE)
         return (FAILURE);
-    texture->floor_argb = to_uint_rgb(50, 30, 0);
-    texture->ceil_argb = to_uint_rgb(160, 240, 240);
+    color = vars->input->f_detail;
+    texture->floor_argb = rgb_to_16argb(color->r, color->g, color->b);
+    color = vars->input->c_detail;
+    texture->ceil_argb = rgb_to_16argb(color->r, color->g, color->b);
 	return (SUCCESS);
 }

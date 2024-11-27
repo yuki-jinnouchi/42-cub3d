@@ -78,13 +78,6 @@ typedef struct s_vec
 
 typedef struct timeval t_timeval;
 
-// typedef struct s_color
-// {
-// 	int	r;
-// 	int	g;
-// 	int	b;
-// }	t_color;
-
 typedef struct s_image
 {
 	void	*img;
@@ -95,16 +88,6 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
-
-// typedef struct s_input
-// {
-// 	char	*no_line;
-// 	char	*so_line;
-// 	char	*we_line;
-// 	char	*ea_line;
-// 	char	*f_line;
-// 	char    *c_line;
-// }	t_input;
 
 typedef	struct s_color {
 	int r;
@@ -120,7 +103,7 @@ typedef struct s_input {
 	char	*f;
 	char	*c;
 	char	p;
-	//t_position *position; //処理必要
+	t_vec	position;
 	t_color	*f_detail;
 	t_color	*c_detail;
 	int		width;
@@ -167,7 +150,7 @@ typedef struct s_player
 typedef struct s_vars
 {
 	char        *filename;
-	// t_input     *input;
+	t_input     *input;
 	void	    *mlx;
 	int 	   	window_width;
 	int 	   	window_height;
@@ -185,7 +168,7 @@ int		arg_check(int argc, char **argv);
 t_map	*map_init(t_vars *vars);
 int     texture_init(t_vars *vars);
 int     player_init(t_vars *vars);
-t_vars	*vars_init(char **argv);
+t_vars	*vars_init(char **argv, t_input	*map_info);
 
 //mlx
 void	exec_game(t_vars *vars);
@@ -245,11 +228,11 @@ void    print_error_msg(char *error_msg);
 void    print_error_msg_free_map_info(t_input *map_info, char *error_msg);
 
 //free
-void	free_2d_array(char **head);
 void	free_color(t_color *color);
 void	free_map_info(t_input *map_info);
 void	free_map_info_line(t_input *map_info, char *line);
 size_t	ft_strlen_null_gard(const char *s);
+void free_map_info_after_init(t_input *map_info);
 
 //check_color
 int	set_int_color(int type, char *color, t_color *color_detail);
@@ -263,7 +246,7 @@ int	set_path_color_info(int type, t_input *map_info, char *line, int *count_info
 int	type_identifier(char *line, int len, t_input *map_info, int *count_info);
 
 //check_img_path
-int check_img_path_exist(char *img_path);
+int check_img_path_exist(char *img_path, void *mlx);
 
 //check_map_utils
 int skip_newline(char *line, int fd, t_input *map_info);

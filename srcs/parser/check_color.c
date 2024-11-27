@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/26 20:59:21 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/27 22:08:59 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ int set_color_detail(char **split_color_info,t_color *color_detail)
         i++;
     }
     if (i != 3)
-        return (free_2d_array(split_color_info), FALSE);
+        return (free_array(split_color_info), FALSE);
     if(set_int_color(R, split_color_info[0], color_detail) == FALSE)
-        return (free_2d_array(split_color_info), FALSE);
+        return (free_array(split_color_info), FALSE);
     if(set_int_color(G, split_color_info[1], color_detail) == FALSE)
-        return (free_2d_array(split_color_info), FALSE);
+        return (free_array(split_color_info), FALSE);
     if(set_int_color(B, split_color_info[2], color_detail) == FALSE)
-        return (free_2d_array(split_color_info), FALSE);
-    return (free_2d_array(split_color_info), TRUE);
+        return (free_array(split_color_info), FALSE);
+    return (free_array(split_color_info), TRUE);
 }
 
 int check_color_valid(char *color_info, t_input *map_info, int type)
