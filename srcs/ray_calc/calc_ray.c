@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:29:33 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/24 04:41:42 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/28 02:43:56 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,6 @@ t_vec get_next_pos_steep(t_vec pos, t_vec ray, double slope_x)
             next_pos.y = pos.y + (next_pos.x - pos.x) / slope_x;
     }
     return (next_pos);
-}
-
-int check_wall_num(t_vec pos, t_vec ray, char **structure)
-{
-    // printf("check_wall_num ");
-    // printf(" ray.x: %f, ray.y: %f", ray.x, ray.y);
-    // printf(" pos.x: %f, int pos.x %i", pos.x, (int) pos.x);
-    // printf(" pos.y: %f, int pos.y %i", pos.y, (int) pos.y);
-    // printf("\n");
-    if (ray.y < 0 && fmod(pos.y, 1.0) == 0.0 &&\
-        structure[(int) pos.y - 1][(int) pos.x] == '1')
-        return (NORTH);
-    if (ray.y >= 0 && fmod(pos.y, 1.0) == 0.0 && \
-        structure[(int) pos.y][(int) pos.x] == '1')
-        return (SOUTH);
-    if (ray.x < 0 && fmod(pos.x, 1.0) == 0.0 && \
-        structure[(int) pos.y][(int) pos.x - 1] == '1')
-        return (WEST);
-    if (ray.x >= 0 && fmod(pos.x, 1.0) == 0.0 && \
-        structure[(int) pos.y][(int) pos.x] == '1')
-        return (EAST);
-    return (FALSE);
 }
 
 t_vec calc_ray_flat(t_vec *ray, t_player *player, t_vars *vars)
@@ -119,37 +97,6 @@ t_vec calc_ray_steep(t_vec *ray, t_player *player, t_vars *vars)
         last_pos = current_pos;
         current_pos = get_next_pos_steep(last_pos, *ray, slope_x);
     }
-}
-
-double  calc_player_distance(t_vec wall_pos, t_vec player_pos)
-{
-    double  distance;
-
-    distance = sqrt(pow(wall_pos.x - player_pos.x, 2) + \
-        pow(wall_pos.y - player_pos.y, 2));
-    return (distance);
-}
-
-double calc_plane_distance(t_vec wall_pos, t_player *player)
-{
-    double distance;
-
-    distance = calc_player_distance(wall_pos, player->pos) * \
-               cos(atan2(wall_pos.y - player->pos.y, wall_pos.x - player->pos.x) - \
-               atan2(player->dir_vec.y, player->dir_vec.x));
-    return (distance);
-}
-
-t_vec calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars)
-{
-    t_vec    wall_pos;
-
-    // printf("calc_wall_pos ray.x: %f, ray.y: %f\n", ray->x, ray->y);
-    if (ABS(ray->x) >= ABS(ray->y))
-        wall_pos = calc_ray_flat(ray, player, vars);
-    else
-        wall_pos = calc_ray_steep(ray, player, vars);
-    return (wall_pos);
 }
 
 t_vec calc_ray(t_player *player, int window_width, int i)
