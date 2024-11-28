@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/27 22:08:59 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:05:18 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int set_int_color(int type, char *color, t_color *color_detail)
 int set_color_detail(char **split_color_info,t_color *color_detail)
 {
     int i;
-    char *trimed;
-    char *duped;
     char *tmp;
 
     i = 0;
@@ -46,9 +44,7 @@ int set_color_detail(char **split_color_info,t_color *color_detail)
     while(split_color_info[i])
     {
         tmp = split_color_info[i];
-        trimed = ft_strtrim(tmp," ");
-        duped = ft_strdup(trimed);
-        split_color_info[i] = duped;
+        split_color_info[i] = ft_strtrim(tmp," ");
         free (tmp);
         i++;
     }

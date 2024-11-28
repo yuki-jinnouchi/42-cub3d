@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/27 22:28:02 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:00:54 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int check_img_path_exist(char *img_path, void *mlx)
     img = NULL;
     //debug
     img = mlx_xpm_file_to_image(mlx, img_path, &width, &height);
-    printf("img_path = [%s]\n",img_path);
+    // printf("img_path = [%s]\n",img_path);
     if (!img)
         return (mlx_destroy_display(mlx),free(mlx), FALSE);
     return (mlx_destroy_image(mlx, img), TRUE);

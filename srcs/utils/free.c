@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:41:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 00:09:32 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:07:46 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ void free_2d_array(char **head)
 	int	i;
 
 	i = 0;
-	if (!head || !*head)
-		return ;
 	while(head[i])
 	{
 		free(head[i]);
 		i++;
 	}
+	free (head);
 }
 
 void	free_color(t_color *color)
