@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:35:09 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 10:51:30 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:45:33 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int load_texture(t_image *image, char *filepath, t_vars *vars)
 int texture_init(t_vars *vars)
 {
 	t_texture *texture;
-    t_color *color;
+    t_color color;
 
     texture = malloc(sizeof(t_texture));
     if (texture == NULL)
@@ -43,8 +43,8 @@ int texture_init(t_vars *vars)
     if (load_texture(&texture->e, vars->input->ea, vars) == FAILURE)
         return (FAILURE);
     color = vars->input->f_detail;
-    texture->floor_argb = rgb_to_16argb(color->r, color->g, color->b);
+    texture->floor_argb = rgb_to_16argb(color.r, color.g, color.b);
     color = vars->input->c_detail;
-    texture->ceil_argb = rgb_to_16argb(color->r, color->g, color->b);
+    texture->ceil_argb = rgb_to_16argb(color.r, color.g, color.b);
 	return (SUCCESS);
 }
