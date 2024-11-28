@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 00:13:11 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:58:05 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,32 @@ int get_map(t_input *map_info, int fd, char *line)
     map_tmp_pre = NULL;
 	map_line_count = 0;
 	map_info->structure = NULL;
+	line = get_next_line(fd);
 	while(line != NULL)
 	{
-		// free(map_tmp_pre);
+		free(map_tmp_pre);
 		map_tmp_pre = map_info->structure;
 		map_line_count++;
 		map_info->structure = ft_calloc(sizeof(char *), map_line_count + 1);
         if (!map_info->structure)
             return (free(map_tmp_pre),print_error_msg_free(map_info, line, "map malloc error\n"), FALSE);
-		i = -1;
-		while(map_tmp_pre && ++i < map_line_count)
+		i = 0;
+		while(map_tmp_pre && i < map_line_count - 1)
+        {
+
 			map_info->structure[i] = map_tmp_pre[i];
-		map_info->structure[++i] = line;
-		// free (line);
-		line = get_next_line(fd);
+            i++;
+        }
+        //printf("i = %d\n", i);
+        //printf("i = %d, s = %s\n", i, line);
+        map_info->structure[i] = line;
+	printf("%d:\n", map_line_count);
+	    for(int j = 0; j < map_line_count; j++)
+        	printf("j = %d, s = %s\n", j, map_info->structure[j]);
+	    line = get_next_line(fd);
+    	// free (line);
 	}
+    printf("i = %d, s = %s\n", i, line);
     map_info->height = map_line_count;
 	close(fd);
     return (TRUE);
@@ -77,11 +88,11 @@ int check_map(t_input *map_info)
     while(map_info->structure[++i])
     {
         j = -1;
-        len = ft_strlen_null_gard(map_info->structure[i]);
+        len = ft_strlen(map_info->structure[i]);
         if (i > 0)
-            up_len = ft_strlen_null_gard(map_info->structure[i - 1]);
+            up_len = ft_strlen(map_info->structure[i - 1]);
         if (i < map_info->height - 1)
-            down_len = ft_strlen_null_gard(map_info->structure[i + 1]);
+            down_len = ft_strlen(map_info->structure[i + 1]);
         while(map_info->structure[i][++j])
         {
             if (find_player(map_info, &player, i, j) == FALSE)

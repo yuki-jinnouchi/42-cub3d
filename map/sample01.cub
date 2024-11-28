@@ -1,7 +1,7 @@
-NO ./texture/North.png
-SO ./texture/South.png
-WE ./texture/West.png
-EA ./texture/East.png
+NO /home/hakobori/Desktop/42cursus/yj_tmp/texture/North.xpm
+SO /home/hakobori/Desktop/42cursus/yj_tmp/texture/South.xpm
+WE /home/hakobori/Desktop/42cursus/yj_tmp/texture/West.xpm
+EA /home/hakobori/Desktop/42cursus/yj_tmp/texture/East.xpm
 F 50,30,0
 C 220,220,220
 111111

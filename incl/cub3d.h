@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/29 13:10:16 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/28 00:04:13 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@
 # define MOVE_DISTANCE 1
 # define ROTATE_SPEED 10
 
+# define PI 3.141592654
+
 # define NORTH 1
 # define EAST 2
 # define SOUTH 3
-	# define WEST 4
-
-# define PI 3.141592654
-
+# define WEST 4
 # define TRUE 1
 # define FALSE 0
 
