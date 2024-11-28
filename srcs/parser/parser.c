@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 20:33:06 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:52:12 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int set_textures_and_colors(char *line, int fd, t_input *map_info)
 	int		len;
 	
 	count_info = 0;
-	len = ft_strlen_null_gard(line);
+	len = ft_strlen(line);
 	while (line != NULL)
 	{
 		if (count_info != 6 && type_identifier(line, len, map_info, &count_info) == FALSE)
@@ -38,8 +38,6 @@ int set_textures_and_colors(char *line, int fd, t_input *map_info)
 		if (count_info == 6)
 			break;
 		line = get_next_line(fd);
-		//debug
-		//printf("line[%s]\n", line);
 	}
 	if (check_img_path_and_color(map_info) == FALSE)
 		return (free_map_info_line(map_info, line), FALSE);
@@ -62,13 +60,13 @@ int	parser(char *file, t_input *map_info)
 		return (FALSE);
 	if (set_textures_and_colors(line, fd, map_info) == FALSE)
 		return (FALSE);
-	if (skip_newline(line, fd, map_info) == FALSE)
+	if (skip_newline(&line, fd, map_info) == FALSE)
 		return (FALSE);
 	if (get_map(map_info, fd, line) == FALSE)
 		return (FALSE);
 	if (check_map(map_info) == FALSE)
 		return (FALSE);
-	if (skip_newline(line, fd, map_info) == FALSE)
+	if (skip_newline(&line, fd, map_info) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 21:05:18 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:39:54 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,24 @@ int set_color_detail(char **split_color_info,t_color *color_detail)
 
 int check_color_valid(char *color_info, t_input *map_info, int type)
 {
-    t_color *color_detail;
     char **split_color_info;
 
-    color_detail = ft_calloc(sizeof(t_color), 1);
-    if (!color_detail)
-        return (FALSE);
     split_color_info = ft_split(color_info, ',');
     if (!split_color_info)
-        return (free (color_detail), FALSE);
-    if (set_color_detail(split_color_info, color_detail) == FALSE)
-        return (free(color_detail), FALSE);
+        return (FALSE);
+    // if (set_color_detail(split_color_info, &color_detail) == FALSE)
+    //     return (FALSE);
     if (type == F)
-        map_info->f_detail = color_detail;
+    {
+         if (set_color_detail(split_color_info, &map_info->f_detail) == FALSE)
+            return (FALSE);
+    }
     else if (type == C)
-        map_info->c_detail = color_detail;
+    {
+         if (set_color_detail(split_color_info, &map_info->c_detail) == FALSE)
+            return (FALSE);
+    }
     else
-        return (free(color_detail), FALSE);
+        return (FALSE);
     return (TRUE);
 }

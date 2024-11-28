@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 21:09:20 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:36:41 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ typedef struct s_input {
 	char	*ea;
 	char	*f;
 	char	*c;
-	char	p;
+	char	dir;
 	t_vec	position;
-	t_color	*f_detail;
-	t_color	*c_detail;
+	t_color	f_detail;
+	t_color	c_detail;
 	int		width;
 	int		height;
 	char	**structure;
@@ -246,7 +246,7 @@ int	type_identifier(char *line, int len, t_input *map_info, int *count_info);
 int check_img_path_exist(char *img_path, void *mlx);
 
 //check_map_utils
-int skip_newline(char *line, int fd, t_input *map_info);
+int skip_newline(char **line, int fd, t_input *map_info);
 
 //check_map
 int get_map(t_input *map_info, int fd, char *line);
