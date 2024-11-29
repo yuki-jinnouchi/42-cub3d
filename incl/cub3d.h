@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/24 04:45:28 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:02:06 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "mlx.h" // mlx
 
 # define WINDOW_TITLE "cub3d"
-# define TILE_SIZE 32
 # define BASE_SIZE 64
 # define WINDOW_WIDTH 16
 # define WINDOW_HEIGHT 9
@@ -66,12 +65,6 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
-typedef struct s_plane
-{
-	t_vec	vec_x;
-	t_vec	vec_y;
-}	t_plane;
-
 typedef struct s_color
 {
 	int	r;
@@ -108,7 +101,6 @@ typedef struct s_map {
 
 typedef struct s_texture
 {
-	int 	   	tile_size;
 	t_image 	n;
 	t_image 	s;
 	t_image 	w;

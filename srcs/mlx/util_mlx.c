@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 07:08:27 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/19 13:01:12 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:01:52 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int load_image(t_image *image, char *filepath, t_vars *vars)
     // if (image == NULL)
     //     return (FAILURE);
     image->img = mlx_xpm_file_to_image(vars->mlx, filepath, \
-        &vars->texture->tile_size, &vars->texture->tile_size);
+        &image->width, &image->height);
     if (image->img == NULL)
         return (FAILURE);
     image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, \

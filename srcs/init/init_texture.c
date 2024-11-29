@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_init.c                                     :+:      :+:    :+:   */
+/*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:35:09 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/25 07:00:09 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:01:18 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int texture_init(t_vars *vars)
     if (texture == NULL)
         return (FAILURE);
     vars->texture = texture;
-    texture->tile_size = TILE_SIZE;
     load_image(&texture->n, "./texture/NO.xpm", vars);
     load_image(&texture->s, "./texture/SO.xpm", vars);
     load_image(&texture->w, "./texture/WE.xpm", vars);
