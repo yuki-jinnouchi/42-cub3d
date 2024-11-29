@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 08:22:47 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/23 08:23:15 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:07:41 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void    draw_screen(t_vars *vars)
 {
     draw_background(vars);
-    draw_wall_wrapper(vars);
+    draw_wall(vars);
     mlx_put_image_to_window(vars->mlx, vars->window, vars->image->img, 0, 0);
 }

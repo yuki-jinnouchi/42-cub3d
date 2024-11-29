@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/29 08:13:01 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:10:16 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # include "libft.h" // libft
 # include "mlx.h" // mlx
 
-# define WINDOW_TITLE "cub3d"
+# define WINDOW_TITLE "cub3D"
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
-
 # define FOV 66
+
 # define FRAME_RATE 30
 # define MOVE_SPEED 0.05
 # define MOVE_DISTANCE 1
@@ -37,7 +37,7 @@
 # define NORTH 1
 # define EAST 2
 # define SOUTH 3
-# define WEST 4
+	# define WEST 4
 
 # define PI 3.141592654
 
@@ -100,6 +100,14 @@ typedef struct s_map {
 	char	**structure;
 }	t_map;
 
+typedef struct s_wall
+{
+	t_vec	pos;
+	int 	direction;
+	double	distance;
+	double 	length;
+}	t_wall;
+
 typedef struct s_texture
 {
 	t_image 	n;
@@ -137,8 +145,8 @@ typedef struct s_vars
 
 //init
 int		arg_check(int argc, char **argv);
-int     map_read_file(t_map *map, t_vars *vars);
-int     map_convert(t_map *map, t_vars *vars);
+// int     map_read_file(t_map *map, t_vars *vars);
+// int     map_convert(t_map *map, t_vars *vars);
 t_map	*map_init(t_vars *vars);
 int     texture_init(t_vars *vars);
 int     player_init(t_vars *vars);
@@ -156,9 +164,10 @@ void    draw_wall_wrapper(t_vars *vars);
 void    draw_screen(t_vars *vars);
 
 void    my_mlx_pixel_put(t_image *image, int x, int y, int color);
-int     load_image(t_image *image, char *filepath, t_vars *vars);
+int     load_texture(t_image *image, char *filepath, t_vars *vars);
 
-int     rgb_to_16argb(int r, int g, int b);
+unsigned int	to_uint_rgb(int r, int g, int b);
+unsigned int    get_image_color_by_ratio(t_image image, double x_ratio, double y_ratio);
 
 //control
 void    rotate_player(t_vars *vars, double dir);
@@ -175,12 +184,12 @@ t_vec	get_next_pos_steep(t_vec pos, t_vec ray, double slope_x);
 int		check_cross_line(double current, double last);
 int		check_wall_num(t_vec current_pos, t_vec ray, char **structure);
 
-t_vec	calc_ray_flat(t_vec *ray, t_player *player, t_vars *vars);
-t_vec	calc_ray_steep(t_vec *ray, t_player *player, t_vars *vars);
+t_wall	calc_wall_flat(t_vec *ray, t_player *player, t_vars *vars);
+t_wall	calc_wall_steep(t_vec *ray, t_player *player, t_vars *vars);
 
 double	calc_player_distance(t_vec wall_pos, t_vec player_pos);
 double	calc_plane_distance(t_vec wall_pos, t_player *player);
-t_vec	calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars);
+t_wall	calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars);
 t_vec	calc_ray(t_player *player, int window_width, int i);
 
 int		update_plane(t_player *player);

@@ -6,42 +6,11 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:55:14 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/25 11:03:52 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:18:11 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int write_line(int color, int x, t_vars *vars)
-// {
-//     int wall_height;
-//     int y;
-
-//     wall_height = vars->window_height / 2;
-//     y = (vars->window_height / 2) - (wall_height / 2);
-//     while(y < (vars->window_height / 2) + (wall_height / 2))
-//     {
-//         my_mlx_pixel_put(vars->image, x, y, color);
-//         y++;
-//     }
-//     return (SUCCESS);
-// }
-
-// int draw_plane(t_vars *vars)
-// {
-//     // t_player *player;
-//     int x;
-//     // int y;
-
-//     // player = vars->player;
-//     x = 0;
-//     while(x < vars->window_width)
-//     {
-//         write_line(0x000000FF, x, vars);
-//         x++;
-//     }
-//     return (SUCCESS);
-// }
 
 int update_plane(t_player *player)
 {

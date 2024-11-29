@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_move.c                                      :+:      :+:    :+:   */
+/*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 08:16:28 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/23 09:00:16 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:06:38 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void move_player(t_vars *vars, double dir)
 
     player = vars->player;
     player->move_num = FRAME_RATE/10;
-    // player->vel.x = (MOVE_DISTANCE * cos(player->dir)) / player->move_num;
-    // player->vel.y = (MOVE_DISTANCE * sin(player->dir)) / player->move_num;
     while(player->move_num > 0)
     {
         screen_dir = add_rad(player->dir, dir - PI / 2);

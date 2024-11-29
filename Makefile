@@ -9,7 +9,7 @@
 # VAR += val: Append val to existing value (or set if var didn't exist).
 
 # Program name and output directory
-NAME = 		$(OUTPUT_DIR)/cub3d
+NAME = 		$(OUTPUT_DIR)/cub3D
 OUTPUT_DIR := 	.
 
 # Other directories

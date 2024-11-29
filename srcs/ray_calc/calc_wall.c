@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 02:42:37 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/28 02:43:31 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:58:49 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 int check_wall_num(t_vec pos, t_vec ray, char **structure)
 {
-    // printf("check_wall_num ");
-    // printf(" ray.x: %f, ray.y: %f", ray.x, ray.y);
-    // printf(" pos.x: %f, int pos.x %i", pos.x, (int) pos.x);
-    // printf(" pos.y: %f, int pos.y %i", pos.y, (int) pos.y);
-    // printf("\n");
     if (ray.y < 0 && fmod(pos.y, 1.0) == 0.0 &&\
         structure[(int) pos.y - 1][(int) pos.x] == '1')
         return (NORTH);
@@ -34,14 +29,61 @@ int check_wall_num(t_vec pos, t_vec ray, char **structure)
     return (FALSE);
 }
 
-t_vec calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars)
+t_wall calc_wall_flat(t_vec *ray, t_player *player, t_vars *vars)
 {
-    t_vec    wall_pos;
+    t_wall  wall;
+    double  slope_y;
+    t_vec   last_pos;
+    t_vec   current_pos;
 
-    // printf("calc_wall_pos ray.x: %f, ray.y: %f\n", ray->x, ray->y);
+    slope_y = ray->y / ray->x;
+    last_pos = player->pos;
+    current_pos = player->pos;
+    while(TRUE)
+    {
+        wall.direction = check_wall_num( \
+            current_pos, *ray, vars->map->structure);
+        if (wall.direction != 0) // if ray hits top wall
+        {
+            wall.pos = current_pos;
+            return (wall); // flag = TRUE; and save vector and wall name;
+        }
+        last_pos = current_pos;
+        current_pos = get_next_pos_flat(last_pos, *ray, slope_y);
+    }
+}
+
+t_wall calc_wall_steep(t_vec *ray, t_player *player, t_vars *vars)
+{
+    t_wall  wall;
+    double  slope_x;
+    t_vec   last_pos;
+    t_vec   current_pos;
+
+    slope_x = ray->x / ray->y;
+    last_pos = player->pos;
+    current_pos = player->pos;
+    while(TRUE)
+    {
+        wall.direction = check_wall_num( \
+            current_pos, *ray, vars->map->structure);
+        if (wall.direction != 0) // if ray hits left wall
+        {
+            wall.pos = current_pos;
+            return (wall); // flag = TRUE; and save vector and wall name;
+        }
+        last_pos = current_pos;
+        current_pos = get_next_pos_steep(last_pos, *ray, slope_x);
+    }
+}
+
+t_wall calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars)
+{
+    t_wall    wall;
+
     if (ABS(ray->x) >= ABS(ray->y))
-        wall_pos = calc_ray_flat(ray, player, vars);
+        wall = calc_wall_flat(ray, player, vars);
     else
-        wall_pos = calc_ray_steep(ray, player, vars);
-    return (wall_pos);
+        wall = calc_wall_steep(ray, player, vars);
+    return (wall);
 }

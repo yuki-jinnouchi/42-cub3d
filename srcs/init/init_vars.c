@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:16:41 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 08:11:31 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:16:42 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int image_init(t_vars *vars)
 {
 	t_image *image;
 
-	vars->image = (t_image *) malloc(sizeof(t_image));
+	vars->image = 	(t_image *) malloc(sizeof(t_image));
 	if (vars->image == NULL)
 		return (FAILURE);
 	image = vars->image;

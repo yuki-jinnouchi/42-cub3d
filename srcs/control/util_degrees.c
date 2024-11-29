@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 04:27:18 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/23 08:50:38 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:48:58 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,6 @@ double deg_to_rad(double deg)
 {
     return (PI * (deg / 180));
 }
-
-// double    add_deg_to_rad(double deg, double rad)
-// {
-//     double new_rad;
-
-//     new_rad = deg_to_rad(deg);
-//     rad += new_rad;
-//     return (round_rad(rad));
-// }
-
-// double   round_deg(double deg)
-// {
-//     if (deg < 0)
-//         deg += 360;
-//     if (deg >= 360)
-//         deg -= 360;
-//     return (deg);
-// }
 
 double  round_rad(double rad)
 {
