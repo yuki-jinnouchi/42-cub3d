@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/29 08:02:06 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:04:36 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_vec
 	double	x;
 	double	y;
 }	t_vec;
+
+typedef struct timeval t_timeval;
 
 typedef struct s_color
 {
