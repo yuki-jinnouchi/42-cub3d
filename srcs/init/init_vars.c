@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars_init.c                                        :+:      :+:    :+:   */
+/*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:16:41 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/20 02:47:46 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:11:31 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int window_init(t_vars *vars)
 {
-	vars->window_width = WINDOW_WIDTH * BASE_SIZE;
-	vars->window_height = WINDOW_HEIGHT * BASE_SIZE;
+	vars->window_width = WINDOW_WIDTH;
+	vars->window_height = WINDOW_HEIGHT;
 	vars->window = mlx_new_window(vars->mlx, vars->window_width, \
 		vars->window_height, WINDOW_TITLE);
 	return (SUCCESS);

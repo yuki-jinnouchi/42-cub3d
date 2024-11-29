@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/29 08:04:36 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:13:01 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 # include "mlx.h" // mlx
 
 # define WINDOW_TITLE "cub3d"
-# define BASE_SIZE 64
-# define WINDOW_WIDTH 16
-# define WINDOW_HEIGHT 9
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define FOV 66
 # define FRAME_RATE 30
