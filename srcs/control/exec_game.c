@@ -14,8 +14,8 @@
 
 void	exec_game(t_vars *vars)
 {
-    draw_screen(vars);
-    mlx_hook(vars->window, 2, 1L << 0, key_hook, vars);
-    mlx_hook(vars->window, 17, 1L << 17, exit_game, vars);
-    mlx_loop(vars->mlx);
+	draw_screen(vars);
+	mlx_hook(vars->window, 2, 1L << 0, key_hook, vars);
+	mlx_hook(vars->window, 17, 1L << 17, exit_game, vars);
+	mlx_loop(vars->mlx);
 }

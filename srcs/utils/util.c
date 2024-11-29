@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-void free_array(char **array)
+void	free_array(char **array)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (array[i])
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
-    return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return ;
 }

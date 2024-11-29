@@ -12,33 +12,34 @@
 
 #include "cub3d.h"
 
-double deg_to_rad(double deg)
+double	deg_to_rad(double deg)
 {
-    return (PI * (deg / 180));
+	return (PI * (deg / 180));
 }
 
-double  round_rad(double rad)
+double	round_rad(double rad)
 {
-    while (rad < 0)
-        rad += 2 * PI;
-    while (rad >= 2 * PI)
-        rad -= 2 * PI;
-    return (rad);
-}
-double add_rad(double rad1, double rad2)
-{
-    double new_rad;
-
-    new_rad = rad1 + rad2;
-    new_rad = round_rad(new_rad);
-    return (new_rad);
+	while (rad < 0)
+		rad += 2 * PI;
+	while (rad >= 2 * PI)
+		rad -= 2 * PI;
+	return (rad);
 }
 
-t_vec dir_to_vec(double dir)
+double	add_rad(double rad1, double rad2)
 {
-    t_vec   new_vec;
+	double	new_rad;
 
-    new_vec.x = cos(dir - (PI / 2));
-    new_vec.y = sin(dir - (PI / 2));
-    return (new_vec);
+	new_rad = rad1 + rad2;
+	new_rad = round_rad(new_rad);
+	return (new_rad);
+}
+
+t_vec	dir_to_vec(double dir)
+{
+	t_vec	new_vec;
+
+	new_vec.x = cos(dir - (PI / 2));
+	new_vec.y = sin(dir - (PI / 2));
+	return (new_vec);
 }

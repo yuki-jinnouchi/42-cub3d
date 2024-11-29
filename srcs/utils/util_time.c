@@ -13,14 +13,13 @@
 #include "cub3d.h"
 
 // screen time diff is over 1/FRAME_RATE sec
-int is_screen_renew(t_timeval current, t_timeval last)
+int	is_screen_renew(t_timeval current, t_timeval last)
 {
-    int diff;
+	int	diff;
 
-    diff = (current.tv_sec - last.tv_sec) * 1000000 + \
-        (current.tv_usec - last.tv_usec);
-
-    if (diff > (1000000 / FRAME_RATE))
-        return (TRUE);
-    return (FALSE);
+	diff = (current.tv_sec - last.tv_sec) * 1000000 + \
+		(current.tv_usec - last.tv_usec);
+	if (diff > (1000000 / FRAME_RATE))
+		return (TRUE);
+	return (FALSE);
 }

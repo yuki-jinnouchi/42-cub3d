@@ -58,8 +58,8 @@
 # define G 1
 # define B 2
 
-# define ABS(x) ((x) < 0 ? -(x) : (x))
-# define SIGN(x) ((x) < 0 ? -1 : 1)
+// # define ABS(x) ((x) < 0 ? -(x) : (x))
+// # define SIGN(x) ((x) < 0 ? -1 : 1)
 
 # ifdef __linux__
 #  include "keymap_linux.h"
@@ -75,7 +75,7 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
-typedef struct timeval t_timeval;
+typedef struct timeval	t_timeval;
 
 typedef struct s_image
 {
@@ -88,10 +88,10 @@ typedef struct s_image
 	int		height;
 }	t_image;
 
-typedef	struct s_color {
-	int r;
-	int g;
-	int b;
+typedef struct s_color {
+	int	r;
+	int	g;
+	int	b;
 }	t_color;
 
 typedef struct s_input {
@@ -110,7 +110,6 @@ typedef struct s_input {
 	char	**structure;
 }			t_input;
 
-
 typedef struct s_map {
 	int		width;
 	int		height;
@@ -120,53 +119,53 @@ typedef struct s_map {
 typedef struct s_wall
 {
 	t_vec	pos;
-	int 	direction;
+	int		direction;
 	double	distance;
-	double 	length;
+	double	length;
 }	t_wall;
 
 typedef struct s_texture
 {
-	t_image 	n;
-	t_image 	s;
-	t_image 	w;
-	t_image 	e;
-	int 	   	floor_argb;
-	int 	   	ceil_argb;
+	t_image	n;
+	t_image	s;
+	t_image	w;
+	t_image	e;
+	int		floor_argb;
+	int		ceil_argb;
 }	t_texture;
 
 typedef struct s_player
 {
-	t_vec   pos;
-	double  dir;
+	t_vec	pos;
+	double	dir;
 	t_vec	dir_vec;
-	double 	fov_rad;
+	double	fov_rad;
 	t_vec	plane;
-	t_vec   vel;
-	double  move_num;
+	t_vec	vel;
+	double	move_num;
 }	t_player;
 
 typedef struct s_vars
 {
-	char        *filename;
-	t_input     *input;
-	void	    *mlx;
-	int 	   	window_width;
-	int 	   	window_height;
-	void	    *window;
-	t_image     *image;
-	t_map	    *map;
-	t_texture   *texture;
-	t_player    *player;
+	char		*filename;
+	t_input		*input;
+	void		*mlx;
+	int			window_width;
+	int			window_height;
+	void		*window;
+	t_image		*image;
+	t_map		*map;
+	t_texture	*texture;
+	t_player	*player;
 }	t_vars;
 
 //init
-int     map_read_file(t_map *map, t_vars *vars);
-int     map_convert(t_map *map, t_vars *vars);
+int		map_read_file(t_map *map, t_vars *vars);
+int		map_convert(t_map *map, t_vars *vars);
 int		arg_check(int argc, char **argv);
 t_map	*map_init(t_vars *vars);
-int     texture_init(t_vars *vars);
-int     player_init(t_vars *vars);
+int		texture_init(t_vars *vars);
+int		player_init(t_vars *vars);
 t_vars	*vars_init(char **argv, t_input	*map_info);
 
 //mlx
@@ -174,24 +173,25 @@ void	exec_game(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int		exit_game(t_vars *vars);
 
-void    draw_background(t_vars *vars);
-void    draw_wall(t_vars *vars);
-void    draw_wall_line(double length, int x_window, int color, t_vars *vars);
-void    draw_wall_wrapper(t_vars *vars);
-void    draw_screen(t_vars *vars);
+void	draw_background(t_vars *vars);
+void	draw_wall(t_vars *vars);
+void	draw_wall_line(double length, int x_window, int color, t_vars *vars);
+void	draw_wall_wrapper(t_vars *vars);
+void	draw_screen(t_vars *vars);
 
-void    my_mlx_pixel_put(t_image *image, int x, int y, int color);
-int     load_texture(t_image *image, char *filepath, t_vars *vars);
+void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+int		load_texture(t_image *image, char *filepath, t_vars *vars);
 
 unsigned int	to_uint_rgb(int r, int g, int b);
-unsigned int    get_image_color_by_ratio(t_image image, double x_ratio, double y_ratio);
+unsigned int	get_image_color_by_ratio( \
+	t_image image, double x_ratio, double y_ratio);
 
 //control
-void    rotate_player(t_vars *vars, double dir);
+void	rotate_player(t_vars *vars, double dir);
 void	move_player(t_vars *vars, double dir);
 
-double  deg_to_rad(double deg);
-double  add_rad(double rad1, double rad2);
+double	deg_to_rad(double deg);
+double	add_rad(double rad1, double rad2);
 t_vec	dir_to_vec(double dir);
 
 //ray_calc
@@ -222,42 +222,44 @@ void	free_array(char **array);
 int		arg_check(int argc, char **argv);
 
 //error
-void    print_error_msg_free(t_input *map_info, char *line, char *error_msg);
-void    print_error_msg(char *error_msg);
-void    print_error_msg_free_map_info(t_input *map_info, char *error_msg);
+void	print_error_msg_free(t_input *map_info, char *line, char *error_msg);
+void	print_error_msg(char *error_msg);
+void	print_error_msg_free_map_info(t_input *map_info, char *error_msg);
 
 //free
 void	free_color(t_color *color);
 void	free_map_info(t_input *map_info);
 void	free_map_info_line(t_input *map_info, char *line);
 size_t	ft_strlen_null_gard(const char *s);
-void free_map_info_after_init(t_input *map_info);
+void	free_map_info_after_init(t_input *map_info);
 
 //check_color
-int	set_int_color(int type, char *color, t_color *color_detail);
-int	set_color_detail(char **split_color_info,t_color *color_detail);
-int check_color_valid(char *color_info, t_input *map_info, int type);
+int		set_int_color(int type, char *color, t_color *color_detail);
+int		set_color_detail(char **split_color_info, t_color *color_detail);
+int		check_color_valid(char *color_info, t_input *map_info, int type);
 
 //check_img_path_and_color
-int	count_values(int type);
-int check_img_path_and_color(t_input *map_info);
-int	set_path_color_info(int type, t_input *map_info, char *line, int *count_info);
-int	type_identifier(char *line, int len, t_input *map_info, int *count_info);
+int		count_values(int type);
+int		check_img_path_and_color(t_input *map_info);
+int		set_path_color_info( \
+	int type, t_input *map_info, char *line, int *count_info);
+int		type_identifier( \
+	char *line, int len, t_input *map_info, int *count_info);
 
 //check_img_path
-int check_img_path_exist(char *img_path, void *mlx);
+int		check_img_path_exist(char *img_path, void *mlx);
 
 //check_map_utils
-int skip_newline(char **line, int fd, t_input *map_info);
+int		skip_newline(char **line, int fd, t_input *map_info);
 
 //check_map
-int get_map(t_input *map_info, int fd, char *line);
-int find_player(t_input *map_info, int *player, int i, int j);
-int check_map(t_input *map_info);
+int		get_map(t_input *map_info, int fd, char *line);
+int		find_player(t_input *map_info, int *player, int i, int j);
+int		check_map(t_input *map_info);
 
 //parser
-int	parser(char *file, t_input *map_info);
-int set_textures_and_colors(char *line, int fd, t_input *map_info);
-int	open_file(char *file, int *fd);
+int		parser(char *file, t_input *map_info);
+int		set_textures_and_colors(char *line, int fd, t_input *map_info);
+int		open_file(char *file, int *fd);
 
 #endif

@@ -12,50 +12,50 @@
 
 #include "cub3d.h"
 
-int update_plane(t_player *player)
+int	update_plane(t_player *player)
 {
-    player->plane.x = tan(player->fov_rad / 2) * cos(player->dir);
-    player->plane.y = tan(player->fov_rad / 2) * sin(player->dir);
-    return (SUCCESS);
+	player->plane.x = tan(player->fov_rad / 2) * cos(player->dir);
+	player->plane.y = tan(player->fov_rad / 2) * sin(player->dir);
+	return (SUCCESS);
 }
 
-int check_cross_line(double current, double last)
+int	check_cross_line(double current, double last)
 {
-    if (fmod(current, 1.0) == 0.0)
-    {
-        if (fmod(last, 1.0) == 0.0)
-        {
-            if (floor(last) != floor(current))
-                return (TRUE);
-            else
-                return (FALSE);
-        }
-        else
-            return (TRUE);
-    }
-    else
-    {
-        if (fmod(last, 1.0) != 0.0 && floor(last) != floor(current)) // ayashii
-            return (TRUE);
-        else
-            return (FALSE);
-    }
+	if (fmod(current, 1.0) == 0.0)
+	{
+		if (fmod(last, 1.0) == 0.0)
+		{
+			if (floor(last) != floor(current))
+				return (TRUE);
+			else
+				return (FALSE);
+		}
+		else
+			return (TRUE);
+	}
+	else
+	{
+		if (fmod(last, 1.0) != 0.0 && floor(last) != floor(current)) // ayashii
+			return (TRUE);
+		else
+			return (FALSE);
+	}
 }
 
-double jump_next_pos(double pos, double ray)
+double	jump_next_pos(double pos, double ray)
 {
-    if (fmod(pos, 1.0) == 0.0)
-    {
-        if (ray > 0)
-            return (pos + 1.0);
-        else
-            return (pos - 1.0);
-    }
-    else
-    {
-        if (ray > 0)
-            return (ceil(pos));
-        else
-            return (floor(pos));
-    }
+	if (fmod(pos, 1.0) == 0.0)
+	{
+		if (ray > 0)
+			return (pos + 1.0);
+		else
+			return (pos - 1.0);
+	}
+	else
+	{
+		if (ray > 0)
+			return (ceil(pos));
+		else
+			return (floor(pos));
+	}
 }

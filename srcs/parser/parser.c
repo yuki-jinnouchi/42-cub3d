@@ -23,11 +23,11 @@ int	open_file(char *file, int *fd)
 	return (TRUE);
 }
 
-int set_textures_and_colors(char *line, int fd, t_input *map_info)
+int	set_textures_and_colors(char *line, int fd, t_input *map_info)
 {
 	int		count_info;
 	int		len;
-	
+
 	count_info = 0;
 	len = ft_strlen(line);
 	while (line != NULL)
@@ -36,7 +36,7 @@ int set_textures_and_colors(char *line, int fd, t_input *map_info)
 			return (free_map_info_line(map_info, line), FALSE);
 		free(line);
 		if (count_info == 6)
-			break;
+			break ;
 		line = get_next_line(fd);
 	}
 	if (check_img_path_and_color(map_info) == FALSE)

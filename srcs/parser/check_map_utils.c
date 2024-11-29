@@ -12,15 +12,15 @@
 
 #include "cub3d.h"
 
-int skip_newline(char **line, int fd, t_input *map_info)
+int	skip_newline(char **line, int fd, t_input *map_info)
 {
 	*line = get_next_line(fd);
-	while(*line != NULL && ft_strncmp(*line,"\n", 1) == 0)
+	while (*line != NULL && ft_strncmp(*line, "\n", 1) == 0)
 	{
 		free (*line);
 		*line = get_next_line(fd);
 		if (*line == NULL)
-			return (print_error_msg_free(map_info, *line, "Invalid map\n"),FALSE);
+			return (print_error_msg_free(map_info, *line, "Invalid map\n"), FALSE);
 	}
-    return (TRUE);
+	return (TRUE);
 }

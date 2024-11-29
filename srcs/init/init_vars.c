@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int window_init(t_vars *vars)
+int	window_init(t_vars *vars)
 {
 	vars->window_width = WINDOW_WIDTH;
 	vars->window_height = WINDOW_HEIGHT;
@@ -21,11 +21,11 @@ int window_init(t_vars *vars)
 	return (SUCCESS);
 }
 
-int image_init(t_vars *vars)
+int	image_init(t_vars *vars)
 {
-	t_image *image;
+	t_image	*image;
 
-	vars->image = 	(t_image *) malloc(sizeof(t_image));
+	vars->image = (t_image *) malloc(sizeof(t_image));
 	if (vars->image == NULL)
 		return (FAILURE);
 	image = vars->image;
@@ -48,21 +48,21 @@ int	set_vars(t_vars	*vars, t_input *map_info)
 	return (SUCCESS);
 }
 
-t_vars *vars_init(char **argv, t_input	*map_info)
+t_vars	*vars_init(char **argv, t_input	*map_info)
 {
 	t_vars	*vars;
 
 	vars = (t_vars *) malloc(sizeof(t_vars));
 	if (vars == NULL)
 		return (NULL);
-    vars->filename = ft_strdup(argv[1]);
+	vars->filename = ft_strdup(argv[1]);
 	vars->input = map_info;
-    vars->mlx = mlx_init();
+	vars->mlx = mlx_init();
 	if (window_init(vars) == FAILURE)
 		return (NULL);
 	if (image_init(vars) == FAILURE)
 		return (NULL);
-    vars->map = (t_map *) map_init(vars);
+	vars->map = (t_map *) map_init(vars);
 	if (vars->map == NULL)
 		return (NULL);
 	if (texture_init(vars) == FAILURE)
@@ -70,8 +70,5 @@ t_vars *vars_init(char **argv, t_input	*map_info)
 	if (player_init(vars) == FAILURE)
 		return (NULL);
 	free_map_info_after_init(map_info);
-	//free_map_info(map_info);
-	// if (set_vars(vars, map_info) == FAILURE)
-	// 	return (NULL);
-    return (vars);
+	return (vars);
 }

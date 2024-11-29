@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-void    draw_screen(t_vars *vars)
+void	draw_screen(t_vars *vars)
 {
-    draw_background(vars);
-    draw_wall(vars);
-    mlx_put_image_to_window(vars->mlx, vars->window, vars->image->img, 0, 0);
+	draw_background(vars);
+	draw_wall(vars);
+	mlx_put_image_to_window(vars->mlx, vars->window, vars->image->img, 0, 0);
 }
