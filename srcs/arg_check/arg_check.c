@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 22:28:56 by hakobori         ###   ########.fr       */
+/*   Created: 2024/11/16 15:43:06 by hakobori          #+#    #+#             */
+/*   Updated: 2024/11/26 21:06:37 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int	arg_check(int argc, char **argv)
 {
-	t_vars	*vars;
-	t_input	map_info;
-	t_input	*map_info_ptr;
+	int	arg_len;
 
-	map_info_ptr = &map_info;
-	ft_bzero(map_info_ptr, sizeof(t_input));
-	if(arg_check(argc, argv) == FALSE)
-		return (FAILURE);
-	if(parser(argv[1], map_info_ptr) == FALSE)
-		return (FAILURE);
-	vars = vars_init(argv, map_info_ptr);
-	if (vars == NULL)
+	arg_len = ft_strlen_null_gard(argv[1]);
+	if (argc != 2)
 	{
-		printf("Error\n");
-		return (FAILURE);
+		ft_putstr_fd("Error\nInvalid number of arguments\n", 2);
+		return (FALSE);
 	}
-	exec_game(vars);
-	return (SUCCESS);
+	if (arg_len < 5)
+	{
+		ft_putstr_fd("Error\nInvalid file extension\n", 2);
+		return (FALSE);
+	}
+	if (ft_strncmp(argv[1] + arg_len - 4, ".cub", 4) != 0)
+	{
+		ft_putstr_fd("Error\nInvalid file extension\n", 2);
+		return (FALSE);
+	}
+	return (TRUE);
 }

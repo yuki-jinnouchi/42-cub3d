@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 03:12:59 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/28 21:07:35 by hakobori         ###   ########.fr       */
+/*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
+/*   Updated: 2024/11/28 22:54:51 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void free_array(char **array)
+int skip_newline(char **line, int fd, t_input *map_info)
 {
-    int i;
-
-    i = 0;
-    while (array[i])
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
-    return ;
+	*line = get_next_line(fd);
+	while(*line != NULL && ft_strncmp(*line,"\n", 1) == 0)
+	{
+		free (*line);
+		*line = get_next_line(fd);
+		if (*line == NULL)
+			return (print_error_msg_free(map_info, *line, "Invalid map\n"),FALSE);
+	}
+    return (TRUE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:16:41 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 11:16:42 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:18:14 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,19 @@ int image_init(t_vars *vars)
 	return (SUCCESS);
 }
 
-t_vars *vars_init(char **argv)
+int	set_vars(t_vars	*vars, t_input *map_info)
+{
+	vars->texture->n.addr = map_info->no;
+	vars->texture->s.addr = map_info->so;
+	vars->texture->e.addr = map_info->ea;
+	vars->texture->w.addr = map_info->we;
+	vars->map->height = map_info->height;
+	vars->map->width = map_info->width;
+	vars->map->structure = map_info->structure;
+	return (SUCCESS);
+}
+
+t_vars *vars_init(char **argv, t_input	*map_info)
 {
 	t_vars	*vars;
 
@@ -44,6 +56,7 @@ t_vars *vars_init(char **argv)
 	if (vars == NULL)
 		return (NULL);
     vars->filename = ft_strdup(argv[1]);
+	vars->input = map_info;
     vars->mlx = mlx_init();
 	if (window_init(vars) == FAILURE)
 		return (NULL);
@@ -56,5 +69,9 @@ t_vars *vars_init(char **argv)
 		return (NULL);
 	if (player_init(vars) == FAILURE)
 		return (NULL);
+	free_map_info_after_init(map_info);
+	//free_map_info(map_info);
+	// if (set_vars(vars, map_info) == FAILURE)
+	// 	return (NULL);
     return (vars);
 }

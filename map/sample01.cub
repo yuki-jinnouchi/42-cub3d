@@ -1,7 +1,7 @@
-NO ./texture/North.png
-SO ./texture/South.png
-WE ./texture/West.png
-EA ./texture/East.png
+NO ./texture/ws_01.xpm
+SO ./texture/ws_02.xpm
+WE ./texture/ws_03.xpm
+EA ./texture/ws_04.xpm
 F 50,30,0
 C 220,220,220
 111111
