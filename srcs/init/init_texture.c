@@ -43,8 +43,8 @@ int texture_init(t_vars *vars)
     if (load_texture(&texture->e, vars->input->ea, vars) == FAILURE)
         return (FAILURE);
     color = vars->input->f_detail;
-    texture->floor_argb = rgb_to_16argb(color.r, color.g, color.b);
+    texture->floor_argb = to_uint_rgb(color.r, color.g, color.b);
     color = vars->input->c_detail;
-    texture->ceil_argb = rgb_to_16argb(color.r, color.g, color.b);
+    texture->ceil_argb = to_uint_rgb(color.r, color.g, color.b);
 	return (SUCCESS);
 }

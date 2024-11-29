@@ -15,7 +15,7 @@
 int window_init(t_vars *vars)
 {
 	vars->window_width = WINDOW_WIDTH;
-	vars->window_height = WIN	DOW_HEIGHT;
+	vars->window_height = WINDOW_HEIGHT;
 	vars->window = mlx_new_window(vars->mlx, vars->window_width, \
 		vars->window_height, WINDOW_TITLE);
 	return (SUCCESS);
@@ -45,6 +45,7 @@ int	set_vars(t_vars	*vars, t_input *map_info)
 	vars->map->height = map_info->height;
 	vars->map->width = map_info->width;
 	vars->map->structure = map_info->structure;
+	return (SUCCESS);
 }
 
 t_vars *vars_init(char **argv, t_input	*map_info)
