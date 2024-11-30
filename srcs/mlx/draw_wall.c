@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-unsigned int	get_texture_color( \
+uint32_t	get_texture_color( \
 	t_wall wall, double y_window_ratio, t_vars vars)
 {
-	unsigned int	color;
+	uint32_t	color;
 
 	if (wall.direction == NORTH)
 		color = get_image_color_by_ratio(vars.texture->n, \
@@ -37,7 +37,7 @@ void	draw_wall_line3(t_wall wall, int x_window, t_vars *vars)
 	int				i;
 	int				start;
 	int				end;
-	unsigned int	color;
+	uint32_t	color;
 
 	start = (vars->window_height / 2) - (wall.length / 2);
 	end = (vars->window_height / 2) + (wall.length / 2);

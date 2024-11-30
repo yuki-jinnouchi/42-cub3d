@@ -12,27 +12,27 @@
 
 #include "cub3d.h"
 
-unsigned int	to_uint_rgb(int r, int g, int b)
+uint32_t	to_uint_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
-unsigned int	get_image_color(t_image image, int x, int y)
+uint32_t	get_image_color(t_image image, int x, int y)
 {
-	unsigned int	*color;
+	uint32_t	*color;
 
-	color = (unsigned int *)(image.addr + \
+	color = (uint32_t *)(image.addr + \
 		(y * image.line_length) + \
 		(x * image.bits_per_pixel / 8));
 	return (*color);
 }
 
-unsigned int	get_image_color_by_ratio(\
+uint32_t	get_image_color_by_ratio(\
 	t_image image, double x_ratio, double y_ratio)
 {
-	unsigned int	color;
-	int				x;
-	int				y;
+	uint32_t	color;
+	int			x;
+	int			y;
 
 	x = (int)(image.width * x_ratio);
 	y = (int)(image.height * y_ratio);
