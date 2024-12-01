@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 23:59:24 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/01 21:41:08 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	check_img_path_and_color(t_input *map_info)
 	return (TRUE);
 }
 
-int	set_path_color_info(\
-	int type, t_input *map_info, char *line, int *count_info)
+int	set_path_color_info(int type, t_input *map_info, char *line,
+		int *count_info)
 {
 	char	*trimed_line;
 
@@ -84,46 +84,44 @@ int	set_path_color_info(\
 	return (TRUE);
 }
 
+int	is_type_valid(char *line, int len, t_input *map_info, int *count_info,
+		int type)
+{
+	char	*types[6];
+
+	types[NO] = "NO\n";
+	types[SO] = "SO\n";
+	types[WE] = "WE\n";
+	types[EA] = "EA\n";
+	types[F] = "F\n";
+	types[C] = "C\n";
+	if (type < F && ft_strncmp(line, types[type], 2) == 0 && len > 2)
+	{
+		if (set_path_color_info(type, map_info, (line + 2),
+				count_info) == FALSE)
+			return (FALSE);
+		else
+			return (TRUE);
+	}
+	if (type > EA && ft_strncmp(line, types[type], 1) == 0 && len > 1)
+	{
+		if (set_path_color_info(type, map_info, (line + 1),
+				count_info) == FALSE)
+			return (FALSE);
+		else
+			return (TRUE);
+	}
+	return (TRUE);
+}
+
 int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 {
-	if (ft_strncmp(line, "NO", 2) == 0 && len > 2)
+	int	i;
+
+	i = 0;
+	while (i < 6)
 	{
-		if (set_path_color_info(NO, map_info, (line + 2), count_info) == FALSE)
-			return (FALSE);
-		else
-			return (TRUE);
-	}
-	if (ft_strncmp(line, "SO", 2) == 0 && len > 2)
-	{
-		if (set_path_color_info(SO, map_info, (line + 2), count_info) == FALSE)
-			return (FALSE);
-		else
-			return (TRUE);
-	}
-	if (ft_strncmp(line, "WE", 2) == 0 && len > 2)
-	{
-		if (set_path_color_info(WE, map_info, (line + 2), count_info) == FALSE)
-			return (FALSE);
-		else
-			return (TRUE);
-	}
-	if (ft_strncmp(line, "EA", 2) == 0 && len > 1)
-	{
-		if (set_path_color_info(EA, map_info, (line + 2), count_info) == FALSE)
-			return (FALSE);
-		else
-			return (TRUE);
-	}
-	if (ft_strncmp(line, "F", 1) == 0 && len > 1)
-	{
-		if (set_path_color_info(F, map_info, (line + 1), count_info) == FALSE)
-			return (FALSE);
-		else
-			return (TRUE);
-	}
-	if (ft_strncmp(line, "C", 1) == 0 && len > 1)
-	{
-		if (set_path_color_info(C, map_info, (line + 1), count_info) == FALSE)
+		if (is_type_valid(line, len, map_info, count_info, i++) == FALSE)
 			return (FALSE);
 		else
 			return (TRUE);
@@ -132,3 +130,52 @@ int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 		return (ft_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
 	return (TRUE);
 }
+
+// int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
+// {
+// 	if (ft_strncmp(line, "NO", 2) == 0 && len > 2)
+// 	{
+// 		if (set_path_color_info(NO, map_info, (line + 2), count_info) == FALSE)
+// 			return (FALSE);
+// 		else
+// 			return (TRUE);
+// 	}
+// 	if (ft_strncmp(line, "SO", 2) == 0 && len > 2)
+// 	{
+// 		if (set_path_color_info(SO, map_info, (line + 2), count_info) == FALSE)
+// 			return (FALSE);
+// 		else
+// 			return (TRUE);
+// 	}
+// 	if (ft_strncmp(line, "WE", 2) == 0 && len > 2)
+// 	{
+// 		if (set_path_color_info(WE, map_info, (line + 2), count_info) == FALSE)
+// 			return (FALSE);
+// 		else
+// 			return (TRUE);
+// 	}
+// 	if (ft_strncmp(line, "EA", 2) == 0 && len > 1)
+// 	{
+// 		if (set_path_color_info(EA, map_info, (line + 2), count_info) == FALSE)
+// 			return (FALSE);
+// 		else
+// 			return (TRUE);
+// 	}
+// 	if (ft_strncmp(line, "F", 1) == 0 && len > 1)
+// 	{
+// 		if (set_path_color_info(F, map_info, (line + 1), count_info) == FALSE)
+// 			return (FALSE);
+// 		else
+// 			return (TRUE);
+// 	}
+// 	if (ft_strncmp(line, "C", 1) == 0 && len > 1)
+// 	{
+// 		if (set_path_color_info(C, map_info, (line + 1), count_info) == FALSE)
+// 			return (FALSE);
+// 		else
+// 			return (TRUE);
+// 	}
+// 	if (ft_strncmp(line, "\n", 1) != 0)
+// 		return (ft_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
+// 	return (TRUE);
+// }

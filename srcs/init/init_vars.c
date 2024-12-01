@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:16:41 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/28 22:18:14 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/01 21:15:05 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	window_init(t_vars *vars)
 {
 	vars->window_width = WINDOW_WIDTH;
 	vars->window_height = WINDOW_HEIGHT;
-	vars->window = mlx_new_window(vars->mlx, vars->window_width, \
-		vars->window_height, WINDOW_TITLE);
+	vars->window = mlx_new_window(vars->mlx, vars->window_width,
+			vars->window_height, WINDOW_TITLE);
 	return (SUCCESS);
 }
 
@@ -25,18 +25,18 @@ int	image_init(t_vars *vars)
 {
 	t_image	*image;
 
-	vars->image = (t_image *) malloc(sizeof(t_image));
+	vars->image = (t_image *)malloc(sizeof(t_image));
 	if (vars->image == NULL)
 		return (FAILURE);
 	image = vars->image;
-	image->img = mlx_new_image(vars->mlx, vars->window_width, \
-		vars->window_height);
-	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, \
-		&image->line_length, &image->endian);
+	image->img = mlx_new_image(vars->mlx, vars->window_width,
+			vars->window_height);
+	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel,
+			&image->line_length, &image->endian);
 	return (SUCCESS);
 }
 
-int	set_vars(t_vars	*vars, t_input *map_info)
+int	set_vars(t_vars *vars, t_input *map_info)
 {
 	vars->texture->n.addr = map_info->no;
 	vars->texture->s.addr = map_info->so;
@@ -48,11 +48,11 @@ int	set_vars(t_vars	*vars, t_input *map_info)
 	return (SUCCESS);
 }
 
-t_vars	*vars_init(char **argv, t_input	*map_info)
+t_vars	*vars_init(char **argv, t_input *map_info)
 {
 	t_vars	*vars;
 
-	vars = (t_vars *) malloc(sizeof(t_vars));
+	vars = (t_vars *)malloc(sizeof(t_vars));
 	if (vars == NULL)
 		return (NULL);
 	vars->filename = ft_strdup(argv[1]);
@@ -62,7 +62,7 @@ t_vars	*vars_init(char **argv, t_input	*map_info)
 		return (NULL);
 	if (image_init(vars) == FAILURE)
 		return (NULL);
-	vars->map = (t_map *) map_init(vars);
+	vars->map = (t_map *)map_init(vars);
 	if (vars->map == NULL)
 		return (NULL);
 	if (texture_init(vars) == FAILURE)

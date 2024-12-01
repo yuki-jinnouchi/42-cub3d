@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 22:54:51 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/01 21:41:47 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int	skip_newline(char **line, int fd, t_input *map_info)
 	*line = get_next_line(fd);
 	while (*line != NULL && ft_strncmp(*line, "\n", 1) == 0)
 	{
-		free (*line);
+		free(*line);
 		*line = get_next_line(fd);
 		if (*line == NULL)
-			return (print_error_msg_free(map_info, *line, "Invalid map\n"), FALSE);
+			return (print_error_msg_free(map_info, *line, "Invalid map\n"),
+				FALSE);
 	}
 	return (TRUE);
 }
