@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 22:52:12 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:16:38 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,26 @@ int	open_file(char *file, int *fd)
 
 int	set_textures_and_colors(char *line, int fd, t_input *map_info)
 {
-	int		count_info;
-	int		len;
+	int	count_info;
+	int	len;
 
 	count_info = 0;
 	len = ft_strlen(line);
 	while (line != NULL)
 	{
-		if (count_info != 6 && type_identifier(line, len, map_info, &count_info) == FALSE)
-			return (free_map_info_line(map_info, line), FALSE);
+		if (count_info != 6 && type_identifier(line, len, map_info,
+				&count_info) == FALSE)
+			return (free_map_info(map_info), free(line), FALSE);
 		free(line);
 		if (count_info == 6)
 			break ;
 		line = get_next_line(fd);
 	}
 	if (check_img_path_and_color(map_info) == FALSE)
-		return (free_map_info_line(map_info, line), FALSE);
+		return (free_map_info(map_info), FALSE);
 	if (count_info != 6)
-		return (print_error_msg_free(map_info, line, "Invalid types count\n"), FALSE);
+		return (print_error_msg_free(map_info, line, "Invalid types count\n"),
+			FALSE);
 	return (TRUE);
 }
 

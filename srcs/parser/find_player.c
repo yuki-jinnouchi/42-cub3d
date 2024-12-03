@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   find_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 21:33:24 by hakobori         ###   ########.fr       */
+/*   Created: 2024/12/03 22:50:01 by hakobori          #+#    #+#             */
+/*   Updated: 2024/12/03 22:50:13 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	find_player(t_input *map_info, int *player, int i, int j)
 {
-	t_vars	*vars;
-	t_input	map_info;
-	t_input	*map_info_ptr;
-
-	map_info_ptr = &map_info;
-	ft_bzero(map_info_ptr, sizeof(t_input));
-	if (arg_check(argc, argv) == FALSE)
-		return (FAILURE);
-	if (parser(argv[1], map_info_ptr) == FALSE)
-		return (FAILURE);
-	vars = vars_init(argv, map_info_ptr);
-	if (vars == NULL)
+	if (ft_strchr("NSEW", map_info->structure[i][j]))
 	{
-		printf("Error\n");
-		return (FAILURE);
+		map_info->dir = map_info->structure[i][j];
+		map_info->position.x = (double)j + 0.5;
+		map_info->position.y = (double)i + 0.5;
+		(*player)++;
 	}
-	exec_game(vars);
-	return (SUCCESS);
+	if (*player > 1)
+		return (FALSE);
+	return (TRUE);
 }

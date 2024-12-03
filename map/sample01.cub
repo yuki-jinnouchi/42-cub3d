@@ -1,9 +1,14 @@
 NO ./texture/ws_01.xpm
-SO ./texture/ws_02.xpm
-WE ./texture/ws_03.xpm
 EA ./texture/ws_04.xpm
+
+SO ./texture/ws_02.xpm
 F 50,30,0
+WE ./texture/ws_03.xpm
+
 C 220,220,220
+
+
+
 111111
 100101
 101001

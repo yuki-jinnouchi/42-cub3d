@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/11/28 23:36:41 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:50:38 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // # include <X11/X.h> // X11 keymap
 # include "libft.h" // libft
 # include "mlx.h" // mlx
+# include "get_next_line.h" 
 
 # define WINDOW_TITLE "cub3D"
 # define WINDOW_WIDTH 1920
@@ -37,6 +38,7 @@
 
 # define PI 3.141592654
 
+# define NEXT 2
 # define TRUE 1
 # define FALSE 0
 
@@ -95,6 +97,15 @@ typedef struct s_color {
 	int	g;
 	int	b;
 }	t_color;
+
+typedef struct s_check_map{
+	int	i;
+	int	j;
+	int	player;
+	int	len;
+	int	up_len;
+	int	down_len;
+} t_check_map;
 
 typedef struct s_input {
 	char	*no;
@@ -207,9 +218,12 @@ int		check_img_path_exist(char *img_path, void *mlx);
 //check_map_utils.c
 int		skip_newline(char **line, int fd, t_input *map_info);
 //check_map.c
-int		get_map(t_input *map_info, int fd, char *line);
 int		find_player(t_input *map_info, int *player, int i, int j);
 int		check_map(t_input *map_info);
+//get_map.c
+int		get_map(t_input *map_info, int fd, char *line);
+//find_player.c
+int	find_player(t_input *map_info, int *player, int i, int j);
 
 //control
 // exec_game.c
@@ -268,7 +282,6 @@ double	jump_next_pos(double pos, double ray);
 // free.c
 void	free_color(t_color *color);
 void	free_map_info(t_input *map_info);
-void	free_map_info_line(t_input *map_info, char *line);
 size_t	ft_strlen_null_gard(const char *s);
 void	free_map_info_after_init(t_input *map_info);
 // util_time.c

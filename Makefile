@@ -28,7 +28,7 @@ OBJECTS =		$(patsubst $(SOURCES_ROOT_DIR)/%.c,$(OBJECTS_ROOT_DIR)/%.o,$(SOURCES)
 
 #libraries
 LIBFT_DIR =				libs/libft
-LIBFT_INCLUDES_DIR =	$(LIBFT_DIR)/incl
+LIBFT_INCLUDES_DIR =	$(LIBFT_DIR)
 LIBFT =					$(LIBFT_DIR)/libft.a
 
 OS = $(shell uname)

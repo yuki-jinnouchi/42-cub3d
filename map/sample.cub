@@ -1,9 +1,9 @@
-WE /home/hakobori/Desktop/42cursus/yj_tmp/texture/West.xpm
-NO /home/hakobori/Desktop/42cursus/yj_tmp/texture/North.xpm
-SO /home/hakobori/Desktop/42cursus/yj_tmp/texture/South.xpm
-EA /home/hakobori/Desktop/42cursus/yj_tmp/texture/East.xpm
+WE ./texture/West.xpm
+NO ./texture/North.xpm
+SO ./texture/South.xpm
+EA ./texture/East.xpm
 
-F 50,30,-1
+F 50,30,20
 
 C 220,220,220
 

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_img_path.c                                   :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 21:46:42 by hakobori         ###   ########.fr       */
+/*   Created: 2024/04/26 18:42:46 by hakobori          #+#    #+#             */
+/*   Updated: 2024/12/03 21:44:33 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	check_img_path_exist(char *img_path, void *mlx)
-{
-	void	*img;
-	int		width;
-	int		height;
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+#include "libft.h"
 
-	if (!mlx)
-		return (FALSE);
-	img = NULL;
-	img = mlx_xpm_file_to_image(mlx, img_path, &width, &height);
-	if (!img)
-		return (mlx_destroy_display(mlx), free(mlx), FALSE);
-	return (mlx_destroy_image(mlx, img), TRUE);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+# define READ_ERROR -2
+
+char	*get_next_line(int fd);
+
+#endif
