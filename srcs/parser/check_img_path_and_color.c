@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 22:14:08 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:59:24 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	check_img_path_and_color(t_input *map_info)
 	if (check_img_path_exist(map_info->ea, mlx) == FALSE)
 		return (print_error_msg("EA invalid path\n"), FALSE);
 	if (check_color_valid(map_info->f, map_info, F) == FALSE)
-		return (mlx_destroy_display(mlx), free(mlx),
-			print_error_msg("F invalid color info\n"), FALSE);
+		return (print_error_msg("F invalid color info\n"), FALSE);
 	if (check_color_valid(map_info->c, map_info, C) == FALSE)
-		return (mlx_destroy_display(mlx), free(mlx),
-			print_error_msg("C invalid color info\n"), FALSE);
+	{
+		return (print_error_msg("C invalid color info\n"), FALSE);
+	}
 	if (mlx)
 	{
 		mlx_destroy_display(mlx);
@@ -58,8 +58,8 @@ int	check_img_path_and_color(t_input *map_info)
 	return (TRUE);
 }
 
-int	set_path_color_info(int type, t_input *map_info, char *line,
-		int *count_info)
+int	set_path_color_info(\
+	int type, t_input *map_info, char *line, int *count_info)
 {
 	char	*trimed_line;
 
@@ -84,53 +84,51 @@ int	set_path_color_info(int type, t_input *map_info, char *line,
 	return (TRUE);
 }
 
-int	texture_identifier(char *line, int len, t_input *map_info, int *count_info)
+int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 {
 	if (ft_strncmp(line, "NO", 2) == 0 && len > 2)
 	{
 		if (set_path_color_info(NO, map_info, (line + 2), count_info) == FALSE)
 			return (FALSE);
+		else
+			return (TRUE);
 	}
-	else if (ft_strncmp(line, "SO", 2) == 0 && len > 2)
+	if (ft_strncmp(line, "SO", 2) == 0 && len > 2)
 	{
 		if (set_path_color_info(SO, map_info, (line + 2), count_info) == FALSE)
 			return (FALSE);
+		else
+			return (TRUE);
 	}
-	else if (ft_strncmp(line, "WE", 2) == 0 && len > 2)
+	if (ft_strncmp(line, "WE", 2) == 0 && len > 2)
 	{
 		if (set_path_color_info(WE, map_info, (line + 2), count_info) == FALSE)
 			return (FALSE);
+		else
+			return (TRUE);
 	}
-	else if (ft_strncmp(line, "EA", 2) == 0 && len > 1)
+	if (ft_strncmp(line, "EA", 2) == 0 && len > 1)
 	{
 		if (set_path_color_info(EA, map_info, (line + 2), count_info) == FALSE)
 			return (FALSE);
+		else
+			return (TRUE);
 	}
-	else
-		return (NEXT);
-	return (TRUE);
-}
-
-int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
-{
-	if (texture_identifier(line, len, map_info, count_info) == TRUE)
-		return (TRUE);
-	if (texture_identifier(line, len, map_info, count_info) == FALSE)
-		return (FALSE);
 	if (ft_strncmp(line, "F", 1) == 0 && len > 1)
 	{
 		if (set_path_color_info(F, map_info, (line + 1), count_info) == FALSE)
 			return (FALSE);
+		else
+			return (TRUE);
 	}
-	else if (ft_strncmp(line, "C", 1) == 0 && len > 1)
+	if (ft_strncmp(line, "C", 1) == 0 && len > 1)
 	{
 		if (set_path_color_info(C, map_info, (line + 1), count_info) == FALSE)
 			return (FALSE);
+		else
+			return (TRUE);
 	}
-	else if (ft_strncmp(line, "\n", 1) != 0)
-	{
-		printf("line = [%s]\n", line);
+	if (ft_strncmp(line, "\n", 1) != 0)
 		return (ft_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
-	}
 	return (TRUE);
 }

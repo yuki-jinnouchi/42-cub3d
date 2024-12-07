@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 21:45:43 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:39:54 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	check_color_valid(char *color_info, t_input *map_info, int type)
 	split_color_info = ft_split(color_info, ',');
 	if (!split_color_info)
 		return (FALSE);
+	// if (set_color_detail(split_color_info, &color_detail) == FALSE)
+	//     return (FALSE);
 	if (type == F)
 	{
 		if (set_color_detail(split_color_info, &map_info->f_detail) == FALSE)
