@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 22:50:38 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/09 00:56:20 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 // # include <X11/X.h> // X11 keymap
 # include "libft.h" // libft
 # include "mlx.h" // mlx
-# include "get_next_line.h" 
 
 # define WINDOW_TITLE "cub3D"
 # define WINDOW_WIDTH 1920
