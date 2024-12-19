@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   background.c                                       :+:      :+:    :+:   */
+/*   draw_bg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 05:43:55 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/20 02:28:42 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:52:44 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@ void	draw_background(t_vars *vars)
 	while (x < vars->window_width)
 	{
 		y = 0;
+		while (y < vars->window_height / 2)
+		{
+			my_mlx_pixel_put(vars->image, x, y, vars->texture->ceil_argb);
+			y++;
+		}
+		x++;
+	}
+	x = 0;
+	while (x < vars->window_width)
+	{
+		y = vars->window_height / 2;
 		while (y < vars->window_height)
 		{
-			if (y < vars->window_height / 2)
-				my_mlx_pixel_put(vars->image, x, y, vars->texture->ceil_argb);
-			else
-				my_mlx_pixel_put(vars->image, x, y, vars->texture->floor_argb);
+			my_mlx_pixel_put(vars->image, x, y, vars->texture->floor_argb);
 			y++;
 		}
 		x++;
