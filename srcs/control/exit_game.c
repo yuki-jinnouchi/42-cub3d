@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 08:13:53 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/26 06:24:26 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:54:39 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	free_texture(t_texture *texture, t_vars *vars)
 int	exit_game(t_vars *vars)
 {
 	free(vars->filename);
-	free(vars->player);
 	free_array(vars->map->structure);
 	if (vars->map)
 		free(vars->map);
@@ -40,8 +39,6 @@ int	exit_game(t_vars *vars)
 	free(vars->image);
 	mlx_destroy_window(vars->mlx, vars->window);
 	free(vars->mlx);
-	if (vars)
-		free(vars);
 	exit(SUCCESS);
 	return (SUCCESS);
 }

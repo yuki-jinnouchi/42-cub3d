@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 04:51:21 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 12:12:27 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/19 02:02:21 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ uint32_t	get_texture_color( \
 {
 	uint32_t	color;
 
+	color = 0;
 	if (wall.direction == NORTH)
 		color = get_image_color_by_ratio(vars.texture->n, \
 			fmod(wall.pos.x, 1.0), y_window_ratio);
@@ -56,14 +57,11 @@ void	draw_wall_line3(t_wall wall, int x_window, t_vars *vars)
 
 void	draw_wall_line2(int x_window, t_vars *vars)
 {
-	t_wall	wall;
-	t_vec	ray;
-
-	ray = calc_ray(vars->player, vars->window_width, x_window);
-	wall = calc_wall_pos(&ray, vars->player, vars);
-	wall.distance = calc_plane_distance(wall.pos, vars->player);
-	wall.length = (vars->window_height / wall.distance);
-	draw_wall_line3(wall, x_window, vars);
+	vars->ray = calc_ray(&vars->player, vars->window_width, x_window);
+	vars->wall = calc_wall_pos(&(vars->ray), &vars->player, vars);
+	vars->wall.distance = calc_plane_distance(vars->wall.pos, &vars->player);
+	vars->wall.length = (vars->window_height / vars->wall.distance);
+	draw_wall_line3(vars->wall, x_window, vars);
 }
 
 void	draw_wall(t_vars *vars)

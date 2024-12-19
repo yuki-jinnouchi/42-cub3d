@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:27:27 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 21:33:24 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:37:25 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_vars	*vars;
+	t_vars	vars;
 	t_input	map_info;
 	t_input	*map_info_ptr;
 
@@ -24,12 +24,11 @@ int	main(int argc, char **argv)
 		return (FAILURE);
 	if (parser(argv[1], map_info_ptr) == FALSE)
 		return (FAILURE);
-	vars = vars_init(argv, map_info_ptr);
-	if (vars == NULL)
+	if (vars_init(argv, map_info_ptr, &vars) == FAILURE)
 	{
 		printf("Error\n");
 		return (FAILURE);
 	}
-	exec_game(vars);
+	exec_game(&vars);
 	return (SUCCESS);
 }

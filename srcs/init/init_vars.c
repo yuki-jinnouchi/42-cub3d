@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:16:41 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/03 21:29:57 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:53:41 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,21 @@ int	set_vars(t_vars	*vars, t_input *map_info)
 	return (SUCCESS);
 }
 
-t_vars	*vars_init(char **argv, t_input	*map_info)
+int	vars_init(char **argv, t_input	*map_info, t_vars *vars)
 {
-	t_vars	*vars;
-
-	vars = (t_vars *) malloc(sizeof(t_vars));
-	if (vars == NULL)
-		return (NULL);
 	vars->filename = ft_strdup(argv[1]);
 	vars->input = map_info;
 	vars->mlx = mlx_init();
 	if (window_init(vars) == FAILURE)
-		return (NULL);
+		return (FAILURE);
 	if (image_init(vars) == FAILURE)
-		return (NULL);
+		return (FAILURE);
 	vars->map = (t_map *) map_init(vars);
 	if (vars->map == NULL)
-		return (NULL);
+		return (FAILURE);
 	if (texture_init(vars) == FAILURE)
-		return (NULL);
-	if (player_init(vars) == FAILURE)
-		return (NULL);
+		return (FAILURE);
+	player_init(vars);
 	free_map_info_after_init(map_info);
-	return (vars);
+	return (SUCCESS);
 }

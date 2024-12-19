@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:34:19 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 11:31:28 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:54:56 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	if (vars->player->move_num == 0)
+	if (vars->player.move_num == 0)
 	{
 		if (keycode == KEY_ESC || keycode == KEY_Q)
 			exit_game(vars);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/09 00:56:20 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/19 02:01:47 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,9 @@ typedef struct s_vars
 	t_image		*image;
 	t_map		*map;
 	t_texture	*texture;
-	t_player	*player;
+	t_player	player;
+	t_vec		ray;
+	t_wall		wall;
 }	t_vars;
 
 //init
@@ -176,7 +178,7 @@ typedef struct s_vars
 int		window_init(t_vars *vars);
 int		image_init(t_vars *vars);
 int		set_vars(t_vars	*vars, t_input *map_info);
-t_vars	*vars_init(char **argv, t_input	*map_info);
+int		vars_init(char **argv, t_input	*map_info, t_vars *vars);
 // init_map.c
 t_map	*map_init(t_vars *vars);
 // init_texture.c
@@ -184,7 +186,7 @@ int		load_texture(t_image *image, char *filepath, t_vars *vars);
 int		texture_init(t_vars *vars);
 // init_player.c
 double	get_dir(t_vars *vars);
-int		player_init(t_vars *vars);
+void	player_init(t_vars *vars);
 int		map_read_file(t_map *map, t_vars *vars);
 int		map_convert(t_map *map, t_vars *vars);
 
