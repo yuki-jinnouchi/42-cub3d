@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 22:14:08 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/25 20:44:51 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,13 @@ int	texture_identifier(char *line, int len, t_input *map_info, int *count_info)
 
 int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 {
-	if (texture_identifier(line, len, map_info, count_info) == TRUE)
+	int true_false;
+
+	true_false = 0;
+	true_false = texture_identifier(line, len, map_info, count_info);
+	if(true_false == TRUE)
 		return (TRUE);
-	if (texture_identifier(line, len, map_info, count_info) == FALSE)
+	else if(true_false == FALSE)
 		return (FALSE);
 	if (ft_strncmp(line, "F", 1) == 0 && len > 1)
 	{
@@ -128,9 +132,6 @@ int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 			return (FALSE);
 	}
 	else if (ft_strncmp(line, "\n", 1) != 0)
-	{
-		printf("line = [%s]\n", line);
 		return (ft_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
-	}
 	return (TRUE);
 }

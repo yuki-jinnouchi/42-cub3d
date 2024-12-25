@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 22:16:38 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/25 20:43:52 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	set_textures_and_colors(char *line, int fd, t_input *map_info)
 	int	len;
 
 	count_info = 0;
-	len = ft_strlen(line);
 	while (line != NULL)
 	{
+		len = ft_strlen(line);
 		if (count_info != 6 && type_identifier(line, len, map_info,
 				&count_info) == FALSE)
 			return (free_map_info(map_info), free(line), FALSE);

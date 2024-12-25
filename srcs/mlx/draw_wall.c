@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 04:51:21 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 12:12:27 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/25 19:53:42 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ uint32_t	get_texture_color( \
 {
 	uint32_t	color;
 
+	color = 0;
 	if (wall.direction == NORTH)
 		color = get_image_color_by_ratio(vars.texture->n, \
 			fmod(wall.pos.x, 1.0), y_window_ratio);
