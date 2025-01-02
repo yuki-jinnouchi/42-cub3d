@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 11:00:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 11:18:30 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:04:35 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define KEY_Q 12
 # define KEY_W 13
+# define KEY_E 14
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2

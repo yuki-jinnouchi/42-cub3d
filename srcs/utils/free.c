@@ -12,11 +12,6 @@
 
 #include "cub3d.h"
 
-void	free_color(t_color *color)
-{
-	free(color);
-}
-
 void	free_map_info(t_input *map_info)
 {
 	free(map_info->no);
@@ -39,22 +34,21 @@ void	free_map_info_after_init(t_input *map_info)
 	free(map_info->c);
 }
 
-// void	free_map_info_line(t_input *map_info, char *line)
-// {
-// 	free_map_info(map_info);
-// 	(void)line;
-// }
-
-size_t	ft_strlen_null_gard(const char *s)
+void	free_texture(t_image *texture, t_vars *vars)
 {
-	int	count;
-
-	count = 0;
-	if (!s)
-		return (0);
-	while (s[count] != '\0')
+	if (texture->img)
 	{
-		count++;
+		mlx_destroy_image(vars->mlx, texture->img);
+		if (texture)
+			free(texture);
 	}
-	return (count);
+}
+
+void	free_all_texture(t_texture *texture, t_vars *vars)
+{
+	free_texture(texture->n, vars);
+	free_texture(texture->s, vars);
+	free_texture(texture->w, vars);
+	free_texture(texture->e, vars);
+	free(texture);
 }

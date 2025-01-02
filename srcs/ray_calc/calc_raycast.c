@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_screen.c                                      :+:      :+:    :+:   */
+/*   calc_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 08:22:47 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 10:07:41 by yjinnouc         ###   ########.fr       */
+/*   Created: 2024/11/20 17:29:33 by yjinnouc          #+#    #+#             */
+/*   Updated: 2024/12/18 15:56:35 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_screen(t_vars *vars)
+t_dvec	calc_raycast(t_player *player, int window_width, int i)
 {
-	draw_background(vars);
-	draw_wall(vars);
-	mlx_put_image_to_window(vars->mlx, vars->window, vars->image->img, 0, 0);
+	t_dvec	ray;
+	double	camera_x;
+
+	camera_x = (2 * i / (double) window_width) - 1;
+	ray.x = player->dir_vec.x + player->plane.x * camera_x;
+	ray.y = player->dir_vec.y + player->plane.y * camera_x;
+	return (ray);
 }

@@ -58,7 +58,7 @@ LIBX_LINUX_URL = 			https://github.com/42Paris/minilibx-linux.git
 #-----------------------------------------------
 # Compiler & Flags
 CC = 		cc
-W3_FLAGS =	-Wall -Wextra -Werror
+CCFLAGS =	-Wall -Wextra -Werror
 UI_FLAGS =	-I$(INCLUDES_DIR) -I$(LIBFT_INCLUDES_DIR) -I$(LIBMLX_INCLUDES_DIR) -D$(OS)
 UL_FLAGS =	-L$(LIBFT_DIR) -L$(LIBMLX_DIR)
 LL_FLAGS =	$(LIBMLX_LL_FLAGS)
@@ -99,7 +99,7 @@ $(NAME): $(OBJECTS)
 $(OBJECTS_ROOT_DIR)/%.o: $(SOURCES_ROOT_DIR)/%.c | $(OBJECTS_DIR) libmlx libft
 	@printf "\r$(GREEN)[%2d/%2d]$(DEF_COLOR) Compiling objects: $(CYAN)%s$(DEF_COLOR)\033[K" \
 		"$$(find $(OBJECTS_ROOT_DIR) -type f | wc -l)" "$$(find $(SOURCES_ROOT_DIR) -type f | wc -l)" "$<"
-	@$(CC) $(W3_FLAGS) $(UI_FLAGS) -c $< -o $@ $(VG_FLAGS)
+	@$(CC) $(CCFLAGS) $(UI_FLAGS) -c $< -o $@ $(VG_FLAGS)
 
 $(OBJECTS_DIR):
 	@mkdir -p $(OBJECTS_DIR)
@@ -131,7 +131,7 @@ $(LIBFT):
 libmlx: $(LIBMLX)
 $(LIBMLX): $(LIBMLX_DIR)
 	@make -sC $(LIBMLX_DIR) > /dev/null || make
-	@echo "$(CYAN)<-------- make minilibx done ----------------------->$(DEF_COLOR)"
+	@echo "$(CYAN)<-------- make minilibx done. ---------------------->$(DEF_COLOR)"
 $(LIBMLX_DIR):
 	@echo "Cloning Minilibx Linux repository..."
 	@git clone $(LIBX_LINUX_URL) $(LIBMLX_DIR)
@@ -181,4 +181,3 @@ colors:
 	@echo "$(MAGENTA)MAGENTA$(DEF_COLOR)"
 	@echo "$(CYAN)CYAN$(DEF_COLOR)"
 	@echo "$(WHITE)WHITE$(DEF_COLOR)"
-

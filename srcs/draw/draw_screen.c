@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_mlx.c                                         :+:      :+:    :+:   */
+/*   draw_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 07:08:27 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 10:10:38 by yjinnouc         ###   ########.fr       */
+/*   Created: 2024/11/23 08:22:47 by yjinnouc          #+#    #+#             */
+/*   Updated: 2024/12/25 05:42:32 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
+/*
+void	draw_refresh_img(t_vars *vars)
 {
-	char	*dst;
-
-	dst = img->addr + \
-		(y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(uint32_t *)dst = color;
+	draw_refresh_img(vars);
+	// mlx_put_image_to_window(vars->mlx, vars->window, \
+	vars->image->img, 0, 0);
 }
+*/
