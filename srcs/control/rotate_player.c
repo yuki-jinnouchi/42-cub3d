@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keymap_mac.h                                       :+:      :+:    :+:   */
+/*   rotate_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/10 11:00:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/18 16:42:20 by yjinnouc         ###   ########.fr       */
+/*   Created: 2025/01/18 23:14:30 by yjinnouc          #+#    #+#             */
+/*   Updated: 2025/01/18 23:19:52 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYMAP_MAC_H
-# define KEYMAP_MAC_H
+#include "cub3d.h"
 
-// Define key macros for macOS
-# define KEY_ESC 53
+void	rotate_player(t_vars *vars, double abs_dir)
+{
+	t_player	*player;
 
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_Q 12
-# define KEY_E 14
-
-# define KEY_UP 126
-# define KEY_LEFT 123
-# define KEY_DOWN 125
-# define KEY_RIGHT 124
-
-# define M_UP 4
-# define M_LEFT 1
-# define M_DOWN 5
-# define M_RIGHT 3
-
-#endif // KEYMAP_MAC_H
+	player = vars->player;
+	player->dir = add_rad(player->dir, abs_dir * ROTATE_SPEED * PI / 180);
+	player->dir_vec = dir_to_vec(player->dir);
+	update_plane(player);
+	draw_screen(vars);
+}

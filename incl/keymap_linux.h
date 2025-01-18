@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 11:00:20 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 11:18:38 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:42:29 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 // Define key macros for Linux
 # define KEY_ESC 65307
 
-# define KEY_Q 113
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_Q 113
+# define KEY_E 101
 
 # define KEY_UP 65362
 # define KEY_LEFT 65361

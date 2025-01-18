@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/09 00:56:20 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:39:19 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,15 +230,16 @@ void	exec_game(t_vars *vars);
 // key_hooks.c
 int		key_hook(int keycode, t_vars *vars);
 // move_player.c
-void	rotate_player(t_vars *vars, double dir);
-void	move_player(t_vars *vars, double dir);
+void	move_player(t_vars *vars, double dir_degree);
+// rotate_player.c
+void	rotate_player(t_vars *vars, double abs_dir);
 // exit_game.c
 int		exit_game(t_vars *vars);
 // util_degrees.c
 double	deg_to_rad(double deg);
 double	round_rad(double rad);
 double	add_rad(double rad1, double rad2);
-t_vec	dir_to_vec(double dir);
+t_vec	dir_to_vec(double rad_dir);
 
 //mlx
 // draw_bg.c
