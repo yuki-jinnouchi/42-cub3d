@@ -25,6 +25,7 @@ double	get_dir(t_vars *vars)
 	return (FAILURE);
 }
 
+//時計回りに北から360度 0, 90, 180, 270
 int	player_init(t_vars *vars)
 {
 	t_player	*player;
@@ -35,7 +36,7 @@ int	player_init(t_vars *vars)
 	vars->player = player;
 	player->pos.x = vars->input->position.x;
 	player->pos.y = vars->input->position.y;
-	player->dir = get_dir(vars); //時計回りに北から360度 0, 90, 180, 270
+	player->dir = get_dir(vars);
 	player->dir_vec = dir_to_vec(player->dir);
 	player->fov_rad = deg_to_rad(FOV);
 	update_plane(player);

@@ -34,12 +34,6 @@ void	free_map_info_after_init(t_input *map_info)
 	free(map_info->c);
 }
 
-// void	free_map_info_line(t_input *map_info, char *line)
-// {
-// 	free_map_info(map_info);
-// 	(void)line;
-// }
-
 size_t	ft_strlen_null_gard(const char *s)
 {
 	int	count;
