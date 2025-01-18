@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:55:14 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 10:30:47 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:10:01 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ double	next_grid_v(double v_pos, double v_ray)
 */
 int	check_wall_num(t_dvec pos, t_dvec ray, char **structure)
 {
-	printf("pos.x: %f, pos.y: %f, ray.x: %f, ray.y: %f\n", pos.x, pos.y, ray.x, ray.y);
+	// printf("pos.x: %f, pos.y: %f, ray.x: %f, ray.y: %f\n", pos.x, pos.y, ray.x, ray.y);
 	if (ray.y < 0 && fmod(pos.y, 1.0) == 0.0 && \
 		structure[(int) pos.y - 1][(int) pos.x] == '1')
 		return (NORTH);

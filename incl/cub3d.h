@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/25 10:20:49 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:08:00 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,5 +318,6 @@ void	free_array(char **array);
 size_t	ft_strlen_null_gard(const char *s);
 // util.c
 int		abs_int(int num);
+double	abs_double(double num);
 
 #endif

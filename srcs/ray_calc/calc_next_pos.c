@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:12:23 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 10:19:35 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:07:39 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_dvec	next_pos_steep(t_dvec pos, t_dvec ray)
 
 t_dvec	next_pos(t_dvec pos, t_dvec ray)
 {
-	if (abs_int(ray.y) > abs_int(ray.x))
+	if (abs_double(ray.y) > abs_double(ray.x))
 		return (next_pos_steep(pos, ray));
 	else
 		return (next_pos_flat(pos, ray));

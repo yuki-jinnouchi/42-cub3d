@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:09:12 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 07:00:11 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:10:33 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	refresh_screen(t_vars *vars)
 		draw_refresh_img(vars);
 		if (t_current.tv_sec - vars->last_refresh.tv_sec > 0)
 		{
-			printf("FPS: %d\n", vars->refresh_rate);
+			// printf("FPS: %d\n", vars->refresh_rate);
 			vars->refresh_rate = 1;
 		}
 		else
