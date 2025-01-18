@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 04:51:21 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 19:53:42 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:01:59 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-uint32_t	get_texture_color( \
+int	get_texture_color( \
 	t_wall wall, double y_window_ratio, t_vars vars)
 {
-	uint32_t	color;
+	int	color;
 
 	color = 0;
 	if (wall.direction == NORTH)
@@ -35,10 +35,10 @@ uint32_t	get_texture_color( \
 
 void	draw_wall_line3(t_wall wall, int x_window, t_vars *vars)
 {
-	int				i;
-	int				start;
-	int				end;
-	uint32_t	color;
+	int	i;
+	int	start;
+	int	end;
+	int	color;
 
 	start = (vars->window_height / 2) - (wall.length / 2);
 	end = (vars->window_height / 2) + (wall.length / 2);

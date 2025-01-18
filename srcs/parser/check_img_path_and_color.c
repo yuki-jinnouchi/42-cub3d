@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_img_path_and_color.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/25 20:44:51 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:02:40 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,13 @@ int	texture_identifier(char *line, int len, t_input *map_info, int *count_info)
 
 int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 {
-	int true_false;
+	int	true_false;
 
 	true_false = 0;
 	true_false = texture_identifier(line, len, map_info, count_info);
-	if(true_false == TRUE)
+	if (true_false == TRUE)
 		return (TRUE);
-	else if(true_false == FALSE)
+	else if (true_false == FALSE)
 		return (FALSE);
 	if (ft_strncmp(line, "F", 1) == 0 && len > 1)
 	{

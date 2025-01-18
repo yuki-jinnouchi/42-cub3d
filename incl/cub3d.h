@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/18 17:52:25 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:01:21 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_check_map{
 	int	len;
 	int	up_len;
 	int	down_len;
-} t_check_map;
+}	t_check_map;
 
 typedef struct s_input {
 	char	*no;
@@ -219,7 +219,7 @@ int		check_map(t_input *map_info);
 //get_map.c
 int		get_map(t_input *map_info, int fd, char *line);
 //find_player.c
-int	find_player(t_input *map_info, int *player, int i, int j);
+int		find_player(t_input *map_info, int *player, int i, int j);
 
 //control
 // exec_game.c
@@ -242,7 +242,7 @@ t_vec	dir_to_vec(double rad_dir);
 // draw_bg.c
 void	draw_background(t_vars *vars);
 // draw_wall.c
-uint32_t	get_texture_color( \
+int		get_texture_color( \
 	t_wall wall, double y_window_ratio, t_vars vars);
 void	draw_wall_line3(t_wall wall, int x_window, t_vars *vars);
 void	draw_wall_line2(int x_window, t_vars *vars);
@@ -250,9 +250,9 @@ void	draw_wall(t_vars *vars);
 // draw_screen.c
 void	draw_screen(t_vars *vars);
 // util_color.c
-uint32_t	to_uint_rgb(int r, int g, int b);
-uint32_t	get_image_color(t_image image, int x, int y);
-uint32_t	get_image_color_by_ratio( \
+int		to_uint_rgb(int r, int g, int b);
+int		get_image_color(t_image image, int x, int y);
+int		get_image_color_by_ratio( \
 	t_image image, double x_ratio, double y_ratio);
 // util_mlx.c
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);

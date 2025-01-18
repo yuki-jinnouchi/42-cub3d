@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 02:42:37 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/18 17:51:33 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:03:47 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ t_wall	calc_wall_flat(t_vec *ray, t_player *player, t_vars *vars)
 	{
 		wall.direction = check_wall_num(\
 			current_pos, *ray, vars->map->structure);
-		if (wall.direction != 0) // if ray hits top wall
+		if (wall.direction != 0)
 		{
 			wall.pos = current_pos;
-			return (wall); // flag = TRUE; and save vector and wall name;
+			return (wall);
 		}
 		last_pos = current_pos;
 		current_pos = get_next_pos_flat(last_pos, *ray, slope_y);
@@ -67,10 +67,10 @@ t_wall	calc_wall_steep(t_vec *ray, t_player *player, t_vars *vars)
 	{
 		wall.direction = check_wall_num(\
 			current_pos, *ray, vars->map->structure);
-		if (wall.direction != 0) // if ray hits left wall
+		if (wall.direction != 0)
 		{
 			wall.pos = current_pos;
-			return (wall); // flag = TRUE; and save vector and wall name;
+			return (wall);
 		}
 		last_pos = current_pos;
 		current_pos = get_next_pos_steep(last_pos, *ray, slope_x);

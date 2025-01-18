@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 08:16:28 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/18 16:35:54 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:01:42 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	move_player(t_vars *vars, double dir_degree)
 {
 	t_player	*player;
-	double      dir_rad;
+	double		dir_rad;
 	double		screen_dir;
 
 	player = vars->player;

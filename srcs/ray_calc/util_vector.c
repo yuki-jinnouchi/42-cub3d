@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:55:14 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 10:18:11 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:04:05 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_cross_line(double current, double last)
 	}
 	else
 	{
-		if (fmod(last, 1.0) != 0.0 && floor(last) != floor(current)) // ayashii
+		if (fmod(last, 1.0) != 0.0 && floor(last) != floor(current))
 			return (TRUE);
 		else
 			return (FALSE);
