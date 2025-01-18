@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 02:42:37 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 10:58:49 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:51:33 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_wall	calc_wall_pos(t_vec *ray, t_player *player, t_vars *vars)
 {
 	t_wall	wall;
 
-	if (ABS(ray->x) >= ABS(ray->y))
+	if (abs_double(ray->x) >= abs_double(ray->y))
 		wall = calc_wall_flat(ray, player, vars);
 	else
 		wall = calc_wall_steep(ray, player, vars);

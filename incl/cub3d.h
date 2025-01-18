@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/18 17:41:50 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:52:25 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@
 # define R 0
 # define G 1
 # define B 2
-
-# define ABS(x) ((x) < 0 ? -(x) : (x))
-// # define SIGN(x) ((x) < 0 ? -1 : 1)
 
 # ifdef __linux__
 #  include "keymap_linux.h"
@@ -283,6 +280,9 @@ double	jump_next_pos(double pos, double ray);
 void	free_if_exist(void *ptr);
 void	free_array(char **array);
 size_t	ft_strlen_null_gard(const char *s);
+// util_abs.c
+double	abs_double(double num);
+int		abs_int(int num);
 // free.c
 void	free_map_info(t_input *map_info);
 void	free_map_info_after_init(t_input *map_info);
