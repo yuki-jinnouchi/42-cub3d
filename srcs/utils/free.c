@@ -12,11 +12,6 @@
 
 #include "cub3d.h"
 
-void	free_color(t_color *color)
-{
-	free(color);
-}
-
 void	free_map_info(t_input *map_info)
 {
 	free(map_info->no);

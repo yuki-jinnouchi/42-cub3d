@@ -279,7 +279,6 @@ double	jump_next_pos(double pos, double ray);
 
 //utils
 // free.c
-void	free_color(t_color *color);
 void	free_map_info(t_input *map_info);
 size_t	ft_strlen_null_gard(const char *s);
 void	free_map_info_after_init(t_input *map_info);
