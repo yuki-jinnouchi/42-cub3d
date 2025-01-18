@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/18 16:39:19 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:41:50 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,13 +279,14 @@ int		check_cross_line(double current, double last);
 double	jump_next_pos(double pos, double ray);
 
 //utils
+// util_free.c
+void	free_if_exist(void *ptr);
+void	free_array(char **array);
+size_t	ft_strlen_null_gard(const char *s);
 // free.c
 void	free_map_info(t_input *map_info);
-size_t	ft_strlen_null_gard(const char *s);
 void	free_map_info_after_init(t_input *map_info);
 // util_time.c
 int		is_screen_renew(t_timeval current, t_timeval last);
-// util.c
-void	free_array(char **array);
 
 #endif

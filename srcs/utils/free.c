@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:41:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 21:43:10 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:37:57 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,4 @@ void	free_map_info_after_init(t_input *map_info)
 	free(map_info->ea);
 	free(map_info->f);
 	free(map_info->c);
-}
-
-size_t	ft_strlen_null_gard(const char *s)
-{
-	int	count;
-
-	count = 0;
-	if (!s)
-		return (0);
-	while (s[count] != '\0')
-	{
-		count++;
-	}
-	return (count);
 }
