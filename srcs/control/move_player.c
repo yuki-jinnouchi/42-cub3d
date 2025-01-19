@@ -6,21 +6,11 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 08:16:28 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 05:44:00 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:24:25 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	rotate_player(t_vars *vars, double rotate_dir)
-{
-	t_player	*player;
-
-	player = vars->player;
-	player->dir = add_rad(player->dir, rotate_dir * ROTATE_SPEED * PI / 180);
-	player->dir_vec = dir_to_vec(player->dir);
-	update_plane(player);
-}
 
 int	check_player_move(t_dvec *t_pos, double move_dir, int i, t_vars *vars)
 {
