@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/18 18:08:00 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:32:49 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,8 +249,11 @@ void	exec_game(t_vars *vars);
 // key_hooks.c
 int		key_hook(int keycode, t_vars *vars);
 // move_player.c
-void	rotate_player(t_vars *vars, double dir);
 void	move_player(t_vars *vars, double dir);
+int		check_player_move(t_dvec *t_pos, double move_dir, int i, t_vars *vars);
+t_dvec	get_next_move_pos(t_player player, double move_dir, t_vars *vars);
+// rotate_player.c
+void	rotate_player(t_vars *vars, double dir);
 // exit_game.c
 int		exit_game(t_vars *vars);
 // util_degrees.c
@@ -317,7 +320,6 @@ void	free_if_exist(void *ptr);
 void	free_array(char **array);
 size_t	ft_strlen_null_gard(const char *s);
 // util.c
-int		abs_int(int num);
 double	abs_double(double num);
 
 #endif

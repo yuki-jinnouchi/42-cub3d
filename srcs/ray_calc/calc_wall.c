@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 02:42:37 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/19 00:26:42 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:28:26 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ t_wall	calc_wall(t_player *player, int window_x, t_vars *vars)
 	t_dvec	ray;
 
 	ray = calc_raycast(player, vars->window_width, window_x);
-	// printf("ray.x: %f, ray.y: %f, ", ray.x, ray.y);
 	wall = calc_wall_position(ray, player->pos, vars);
-	// printf("wall.pos.x: %f, wall.pos.y: %f\n", wall.pos.x, wall.pos.y);
 	wall.plane_distance = calc_plane_distance(wall.pos, player);
 	wall.ray_distance = calc_ray_distance(wall.pos, player->pos);
 	wall.wall_height = (vars->window_height / wall.plane_distance);

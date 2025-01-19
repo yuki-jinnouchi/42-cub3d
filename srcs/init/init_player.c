@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 02:40:45 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 11:03:25 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:28:18 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ int	player_init(t_vars *vars)
 	player->pos.x = vars->input->position.x;
 	player->pos.y = vars->input->position.y;
 	player->dir = deg_to_rad(get_dir(vars));
-	// printf("dir: %f\n", player->dir);
 	player->dir_vec = dir_to_vec(player->dir);
-	// printf("dir_vec.x: %f, dir_vec.y: %f\n", player->dir_vec.x, player->dir_vec.y);
 	player->fov_rad = deg_to_rad(FOV);
 	update_plane(player);
 	player->vel.x = 0;

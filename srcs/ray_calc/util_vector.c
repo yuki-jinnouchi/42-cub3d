@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:55:14 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/18 18:10:01 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:30:13 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	update_plane(t_player *player)
 }
 
 /*
-check if vector change makes cross line or not.
-v_last and v_current can be on the grid.
+	check if vector change makes cross line or not.
+	note that v_last and v_current can be on the grid.
 */
 int	is_cross_line(double v_current, double v_last)
 {
@@ -61,12 +61,10 @@ double	next_grid_v(double v_pos, double v_ray)
 }
 
 /*
-	Wall number seems to be able to be calculated with position and structure.
-	but it could not be calculated without ray.
+	check wall number from position and ray information.
 */
 int	check_wall_num(t_dvec pos, t_dvec ray, char **structure)
 {
-	// printf("pos.x: %f, pos.y: %f, ray.x: %f, ray.y: %f\n", pos.x, pos.y, ray.x, ray.y);
 	if (ray.y < 0 && fmod(pos.y, 1.0) == 0.0 && \
 		structure[(int) pos.y - 1][(int) pos.x] == '1')
 		return (NORTH);
