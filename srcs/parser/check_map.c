@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 22:50:52 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:45:38 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,19 @@ int	check_map_details(t_check_map *cmap, t_input *map_info)
 	if (cmap->i == 0 || cmap->i == map_info->height - 1)
 	{
 		if (!ft_strchr(" 1\n", map_info->structure[cmap->i][cmap->j]))
-			return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
+			return (print_error_msg_free_map_info_2d(map_info, "Invalid map\n"),
 				FALSE);
 	}
 	else if (cmap->j == 0 || cmap->j == cmap->len - 2)
 	{
 		if (!ft_strchr(" 1", map_info->structure[cmap->i][cmap->j]))
-			return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
+			return (print_error_msg_free_map_info_2d(map_info, "Invalid map\n"),
 				FALSE);
 	}
 	else
 	{
 		if (!ft_strchr(" 01NSEW\n", map_info->structure[cmap->i][cmap->j]))
-			return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
+			return (print_error_msg_free_map_info_2d(map_info, "Invalid map\n"),
 				FALSE);
 		if (ft_strchr("0NSEW", map_info->structure[cmap->i][cmap->j]))
 			if (is_not_space_or_next_line(map_info, cmap) == FALSE)

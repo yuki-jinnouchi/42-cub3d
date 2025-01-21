@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 21:45:43 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:42:47 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,24 @@ int	check_color_valid(char *color_info, t_input *map_info, int type)
 	}
 	else
 		return (FALSE);
+	return (TRUE);
+}
+
+int	check_color_valid_fc(t_input *map_info, void *mlx)
+{
+	if (check_color_valid(map_info->f, map_info, F) == FALSE)
+	{
+		mlx_destroy_display(mlx);
+		free(mlx);
+		print_error_msg("F invalid color info\n");
+		return (FALSE);
+	}
+	if (check_color_valid(map_info->c, map_info, C) == FALSE)
+	{
+		mlx_destroy_display(mlx);
+		free(mlx);
+		print_error_msg("C invalid color info\n");
+		return (FALSE);
+	}
 	return (TRUE);
 }
