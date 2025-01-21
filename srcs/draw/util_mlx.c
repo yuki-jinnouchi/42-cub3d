@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_time.c                                        :+:      :+:    :+:   */
+/*   util_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 11:14:23 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/21 19:00:01 by yjinnouc         ###   ########.fr       */
+/*   Created: 2024/11/19 07:08:27 by yjinnouc          #+#    #+#             */
+/*   Updated: 2024/12/20 16:51:05 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Check if the diff of screen time is over 1/FRAME_RATE sec
-int	is_screen_renew(t_timeval *current, t_timeval *last)
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
-	long	sec_diff;
-	long	usec_diff;
+	void	*dst;
 
-	sec_diff = current->tv_sec - last->tv_sec;
-	usec_diff = current->tv_usec - last->tv_usec;
-	if (sec_diff > 1)
-		return (TRUE);
-	if ((sec_diff * 1000000 + usec_diff) >= (1000000 / FRAME_RATE))
-		return (TRUE);
-	return (FALSE);
+	dst = img->addr + \
+		(y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(int *) dst = color;
 }

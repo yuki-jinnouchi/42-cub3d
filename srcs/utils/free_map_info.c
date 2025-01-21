@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   background.c                                       :+:      :+:    :+:   */
+/*   free_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 05:43:55 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/20 02:28:42 by yjinnouc         ###   ########.fr       */
+/*   Created: 2025/01/21 18:05:08 by yjinnouc          #+#    #+#             */
+/*   Updated: 2025/01/21 18:05:35 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_background(t_vars *vars)
+void	free_map_info(t_input *map_info)
 {
-	int	x;
-	int	y;
+	free(map_info->no);
+	free(map_info->so);
+	free(map_info->we);
+	free(map_info->ea);
+	free(map_info->f);
+	free(map_info->c);
+	free_if_exist(map_info->structure);
+}
 
-	x = 0;
-	while (x < vars->window_width)
-	{
-		y = 0;
-		while (y < vars->window_height)
-		{
-			if (y < vars->window_height / 2)
-				my_mlx_pixel_put(vars->image, x, y, vars->texture->ceil_argb);
-			else
-				my_mlx_pixel_put(vars->image, x, y, vars->texture->floor_argb);
-			y++;
-		}
-		x++;
-	}
+void	free_map_info_after_init(t_input *map_info)
+{
+	free(map_info->no);
+	free(map_info->so);
+	free(map_info->we);
+	free(map_info->ea);
+	free(map_info->f);
+	free(map_info->c);
 }

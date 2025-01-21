@@ -6,13 +6,14 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 02:40:17 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/28 02:41:21 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:20:03 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	calc_player_distance(t_vec wall_pos, t_vec player_pos)
+// calculate distance between player and touched point of wall
+double	calc_ray_distance(t_dvec wall_pos, t_dvec player_pos)
 {
 	double	distance;
 
@@ -21,11 +22,12 @@ double	calc_player_distance(t_vec wall_pos, t_vec player_pos)
 	return (distance);
 }
 
-double	calc_plane_distance(t_vec wall_pos, t_player *player)
+// calculate distance between touched point of wall and the plane
+double	calc_plane_distance(t_dvec wall_pos, t_player *player)
 {
 	double	distance;
 
-	distance = calc_player_distance(wall_pos, player->pos) * \
+	distance = calc_ray_distance(wall_pos, player->pos) * \
 		cos(atan2(wall_pos.y - player->pos.y, wall_pos.x - player->pos.x) - \
 		atan2(player->dir_vec.y, player->dir_vec.x));
 	return (distance);

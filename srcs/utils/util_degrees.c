@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 04:27:18 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/29 11:48:58 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:38:05 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ double	add_rad(double rad1, double rad2)
 	return (new_rad);
 }
 
-t_vec	dir_to_vec(double dir)
+t_dvec	dir_to_vec(double dir_rad)
 {
-	t_vec	new_vec;
+	t_dvec	new_vec;
 
-	new_vec.x = cos(dir - (PI / 2));
-	new_vec.y = sin(dir - (PI / 2));
+	new_vec.x = cos(dir_rad - (PI / 2));
+	new_vec.y = sin(dir_rad - (PI / 2));
 	return (new_vec);
 }

@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:35:09 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/28 23:45:33 by hakobori         ###   ########.fr       */
+/*   Updated: 2024/12/25 07:09:35 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	load_texture(t_image *image, char *filepath, t_vars *vars)
+int	load_texture(t_image **image, char *filepath, t_vars *vars)
 {
-	image->img = mlx_xpm_file_to_image(vars->mlx, filepath, \
-		&image->width, &image->height);
-	if (image->img == NULL)
+	t_image	*ptr;
+
+	(*image) = malloc(sizeof(t_image));
+	ptr = (*image);
+	if (*image == NULL)
 		return (FAILURE);
-	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, \
-		&image->line_length, &image->endian);
-	if (image->addr == NULL)
+	ptr->img = mlx_xpm_file_to_image(vars->mlx, filepath, \
+		&ptr->width, &ptr->height);
+	if (ptr->img == NULL)
+		return (FAILURE);
+	ptr->addr = mlx_get_data_addr(ptr->img, &ptr->bits_per_pixel, \
+		&ptr->line_length, &ptr->endian);
+	if (ptr->addr == NULL)
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   rotate_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 03:12:59 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/11/28 21:07:35 by hakobori         ###   ########.fr       */
+/*   Created: 2025/01/19 02:24:08 by yjinnouc          #+#    #+#             */
+/*   Updated: 2025/01/19 02:24:16 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_array(char **array)
+void	rotate_player(t_vars *vars, double rotate_dir)
 {
-	int	i;
+	t_player	*player;
 
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-	return ;
+	player = vars->player;
+	player->dir = add_rad(player->dir, rotate_dir * ROTATE_SPEED * PI / 180);
+	player->dir_vec = dir_to_vec(player->dir);
+	update_plane(player);
 }
