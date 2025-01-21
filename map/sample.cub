@@ -1,8 +1,9 @@
 WE ./texture/West.xpm
 NO ./texture/North.xpm
+
+C 220,220,220
 SO ./texture/South.xpm
 EA ./texture/East.xpm
-
 F 50,30,20
 
 C 220,220,220

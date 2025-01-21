@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 21:43:20 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:57:50 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	check_img_path_exist(char *img_path, void *mlx)
 	img = NULL;
 	img = mlx_xpm_file_to_image(mlx, img_path, &width, &height);
 	if (!img)
-		return (mlx_destroy_display(mlx), free(mlx), FALSE);
+	{
+		mlx_destroy_display(mlx);
+		free(mlx);
+		return (FALSE);
+	}
 	return (mlx_destroy_image(mlx, img), TRUE);
 }
 

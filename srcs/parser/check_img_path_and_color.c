@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 23:57:40 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 21:44:38 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:58:21 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ int	type_identifier(char *line, int len, t_input *map_info, int *count_info)
 	}
 	else if (ft_strncmp(line, "\n", 1) != 0)
 	{
-		return (ft_putstr_fd("Error\nInvalid type name\n", 2), FALSE);
+		ft_putstr_fd("Error\nInvalid type name\n", 2);
+		return (FALSE);
 	}
 	return (TRUE);
 }

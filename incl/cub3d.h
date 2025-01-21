@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 21:47:06 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/21 22:56:47 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct s_color {
 }	t_color;
 
 typedef struct s_check_map{
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	player;
 	int	len;
 	int	up_len;
@@ -237,6 +237,9 @@ int		skip_newline(char **line, int fd, t_input *map_info);
 //check_map.c
 int		find_player(t_input *map_info, int *player, int i, int j);
 int		check_map(t_input *map_info);
+//check_map_is_space.c
+int		ft_isspace(int c);
+int		relative_position_is_space(t_input *map_info, t_check_map *cmap);
 //get_map.c
 int		get_map(t_input *map_info, int fd, char *line);
 //find_player.c
