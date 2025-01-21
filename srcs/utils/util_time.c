@@ -6,13 +6,13 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:23 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 06:51:32 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:00:01 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// screen time diff is over 1/FRAME_RATE sec
+// Check if the diff of screen time is over 1/FRAME_RATE sec
 int	is_screen_renew(t_timeval *current, t_timeval *last)
 {
 	long	sec_diff;

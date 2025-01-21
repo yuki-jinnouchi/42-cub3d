@@ -6,11 +6,17 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 05:43:55 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 05:40:41 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:56:12 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+	Draw backgrounds of the window.
+	Ceil and floor colors are set in the texture struct.
+	Not to draw same color twice past_height and new height are used.
+*/
 
 void	draw_ceil(int window_x, int new_height, int past_height, t_vars *vars)
 {

@@ -6,12 +6,13 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:29:33 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/18 15:56:35 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:47:33 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// Calculate each raycast vector from left to right of the screen
 t_dvec	calc_raycast(t_player *player, int window_width, int i)
 {
 	t_dvec	ray;

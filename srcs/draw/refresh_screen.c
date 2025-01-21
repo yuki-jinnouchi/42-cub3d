@@ -6,12 +6,13 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:09:12 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/19 02:28:08 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:57:59 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// Refresh the screen if the refresh rate is over 1/FRAME_RATE sec.
 int	refresh_screen(t_vars *vars)
 {
 	t_timeval	t_current;

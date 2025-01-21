@@ -6,16 +6,18 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 02:42:37 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/21 18:10:54 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:53:27 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 /*
-	check the ray beam to hit the wall and return the t_wall struct it contains
-	- wall.pos: the position of the hit wall
-	- wall.direction: the structure of the hit wall
+	Calculate the wall hit by the ray and return its details in a t_wall struct:
+	- wall.pos: position of the hit wall
+	- wall.direction: direction of the hit wall
 */
+
 t_wall	calc_wall_position(t_dvec ray, t_dvec pos, t_vars *vars)
 {
 	t_wall	wall;

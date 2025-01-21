@@ -6,12 +6,17 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:12:23 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/18 18:07:39 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:48:52 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+	Calculate the next grid position in the direction of the ray.
+	Separate functions handle flat and steep rays to avoid division by zero.
+	Each function checks if the next grid position is a wall (or not).
+*/
 t_dvec	next_pos_flat(t_dvec pos, t_dvec ray)
 {
 	double	slope_y;

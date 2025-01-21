@@ -6,11 +6,13 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:55:14 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/21 18:10:41 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:52:57 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// In these functions, v represents either x or y coordinate
 
 int	update_plane(t_player *player)
 {
@@ -19,8 +21,8 @@ int	update_plane(t_player *player)
 	return (SUCCESS);
 }
 
-// check if vector change makes cross line or not.
-// note that v_last and v_current can be on the grid.
+// Check if vector change (current and last) makes cross line or not.
+// Note that v_last and v_current can be on the grid.
 int	is_cross_line(double v_current, double v_last)
 {
 	int	curr_on_grid;
@@ -40,6 +42,7 @@ int	is_cross_line(double v_current, double v_last)
 		return (FALSE);
 }
 
+// Calculate next v (x/y) grid position.
 double	next_grid_v(double v_pos, double v_ray)
 {
 	if (fmod(v_pos, 1.0) == 0.0)
@@ -58,7 +61,7 @@ double	next_grid_v(double v_pos, double v_ray)
 	}
 }
 
-// check wall number from position and ray information.
+// Check wall number (to get texture) from position and ray information.
 int	check_wall_num(t_dvec pos, t_dvec ray, char **structure)
 {
 	if (ray.y < 0 && fmod(pos.y, 1.0) == 0.0 && \
