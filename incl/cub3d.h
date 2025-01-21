@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 18:20:08 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:04:39 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,6 @@ typedef struct s_vars
 // ----------------init----------------
 // init_vars.c
 int		window_init(t_vars *vars);
-int		set_vars(t_vars	*vars, t_input *map_info);
 t_vars	*vars_init(char **argv, t_input	*map_info);
 // init_map.c
 t_map	*map_init(t_vars *vars);
@@ -201,11 +200,8 @@ int		texture_init(t_vars *vars);
 // init_player.c
 double	get_dir(t_vars *vars);
 int		player_init(t_vars *vars);
-int		map_read_file(t_map *map, t_vars *vars);
-int		map_convert(t_map *map, t_vars *vars);
 // init_image.c
 int		image_init(t_vars *vars);
-int		bg_image_init(t_vars *vars);
 
 // ----------------arg_check----------------
 // arg_check.c
