@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/19 02:32:49 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:20:08 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,11 +256,6 @@ t_dvec	get_next_move_pos(t_player player, double move_dir, t_vars *vars);
 void	rotate_player(t_vars *vars, double dir);
 // exit_game.c
 int		exit_game(t_vars *vars);
-// util_degrees.c
-double	deg_to_rad(double deg);
-double	round_rad(double rad);
-double	add_rad(double rad1, double rad2);
-t_dvec	dir_to_vec(double dir);
 
 // ----------------draw----------------
 // draw_bg.c
@@ -297,8 +292,6 @@ t_dvec	next_pos(t_dvec pos, t_dvec ray);
 t_wall	calc_wall_position(t_dvec ray, t_dvec position, t_vars *vars);
 t_wall	calc_wall(t_player *player, int window_x, t_vars *vars);
 // calc_distance.c
-double	calc_dir_wall_distance(t_dvec pos, int dir, t_vars *vars);
-double	calc_wall_distance(t_dvec pos, t_vars *vars);
 double	calc_ray_distance(t_dvec wall_pos, t_dvec player_pos);
 double	calc_plane_distance(t_dvec wall_pos, t_player *player);
 // util_vector.c
@@ -308,18 +301,24 @@ double	next_grid_v(double v_pos, double v_ray);
 int		check_wall_num(t_dvec current_pos, t_dvec ray, char **structure);
 
 // ----------------utils----------------
-// free.c
-void	free_map_info(t_input *map_info);
-void	free_map_info_after_init(t_input *map_info);
-void	free_texture(t_image *texture, t_vars *vars);
-void	free_all_texture(t_texture *texture, t_vars *vars);
+// util_abs.c
+double	abs_double(double num);
+// util_degrees.c
+double	deg_to_rad(double deg);
+double	round_rad(double rad);
+double	add_rad(double rad1, double rad2);
+t_dvec	dir_to_vec(double dir);
 // util_time.c
 int		is_screen_renew(t_timeval *current, t_timeval *last);
 // util_free.c
 void	free_if_exist(void *ptr);
 void	free_array(char **array);
 size_t	ft_strlen_null_gard(const char *s);
-// util.c
-double	abs_double(double num);
+// free_map_info.c
+void	free_map_info(t_input *map_info);
+void	free_map_info_after_init(t_input *map_info);
+// free_texture.c
+void	free_texture(t_image *texture, t_vars *vars);
+void	free_all_texture(t_texture *texture, t_vars *vars);
 
 #endif

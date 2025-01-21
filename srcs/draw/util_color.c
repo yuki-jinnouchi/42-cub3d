@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:57:14 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/12/25 07:04:58 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:23:49 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,6 @@ int	get_image_color_by_ratio(\
 	color = get_image_color(image, x, y);
 	vars->last_color = color;
 	return (color);
-}
-
-t_image	*get_texture(int direction, t_vars *vars)
-{
-	if (direction == NORTH)
-		return (vars->texture->n);
-	else if (direction == EAST)
-		return (vars->texture->e);
-	else if (direction == SOUTH)
-		return (vars->texture->s);
-	else if (direction == WEST)
-		return (vars->texture->w);
-	else
-		return (NULL);
 }
 
 int	get_texture_color( \
