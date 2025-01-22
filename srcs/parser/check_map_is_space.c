@@ -6,31 +6,70 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 22:56:06 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:00:36 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_isspace(int c)
+int	right_position_is_space(t_input *map_info, t_check_map *cmap)
 {
-	if (ft_strchr(" \n", c))
-		return (TRUE);
+	if (cmap->x < cmap->len - 1)
+	{
+		if (ft_isspace(map_info->structure[cmap->y][cmap->x + 1]))
+			return (TRUE);
+	}
 	return (FALSE);
 }
 
+int	left_position_is_space(t_input *map_info, t_check_map *cmap)
+{
+	if (cmap->x > 0)
+	{
+		if (ft_isspace(map_info->structure[cmap->y][cmap->x - 1]))
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+int	up_position_is_space(t_input *map_info, t_check_map *cmap)
+{
+	if (cmap->y <= 0)
+		return (FALSE);
+	if (cmap->x >= cmap->up_len)
+		return (TRUE);
+	if (cmap->x < cmap->up_len)
+	{
+		if (ft_isspace(map_info->structure[cmap->y - 1][cmap->x]))
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+int	down_position_is_space(t_input *map_info, t_check_map *cmap)
+{
+	if (cmap->y >= map_info->height - 1)
+		return (FALSE);
+	if (cmap->x >= cmap->down_len)
+		return (TRUE);
+	if (cmap->x < cmap->down_len)
+	{
+		if (ft_isspace(map_info->structure[cmap->y + 1][cmap->x]))
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+// checking right, left, up, down
 int	relative_position_is_space(t_input *map_info, t_check_map *cmap)
 {
-	if (cmap->x < cmap->len - 1
-		&& ft_isspace(map_info->structure[cmap->y][cmap->x + 1]))
+	if (right_position_is_space(map_info, cmap) == TRUE)
 		return (TRUE);
-	if (cmap->x > 0 && ft_isspace(map_info->structure[cmap->y][cmap->x - 1]))
+	if (left_position_is_space(map_info, cmap) == TRUE)
 		return (TRUE);
-	if (cmap->y > 0 && cmap->x < cmap->up_len
-		&& ft_isspace(map_info->structure[cmap->y - 1][cmap->x]))
+	if (up_position_is_space(map_info, cmap) == TRUE)
 		return (TRUE);
-	if (cmap->y < map_info->height - 1 && cmap->x < cmap->down_len
-		&& ft_isspace(map_info->structure[cmap->y + 1][cmap->x]))
+	if (down_position_is_space(map_info, cmap) == TRUE)
 		return (TRUE);
 	return (FALSE);
 }

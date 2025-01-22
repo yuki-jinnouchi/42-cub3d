@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 22:56:01 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:37:27 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_map_details(t_check_map *cmap, t_input *map_info)
 		{
 			if (relative_position_is_space(map_info, cmap) == TRUE)
 			{
-				print_error_msg_free_map_info(map_info, "Invalid map\n");
+				print_error_msg_free_map_info_2d(map_info, "Invalid map\n");
 				return (FALSE);
 			}
 		}

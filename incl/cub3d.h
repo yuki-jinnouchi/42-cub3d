@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 22:56:47 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:01:19 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,5 +323,6 @@ void	free_map_info_map_structure(t_input *map_info);
 // free_texture.c
 void	free_texture(t_image *texture, t_vars *vars);
 void	free_all_texture(t_texture *texture, t_vars *vars);
-
+//is_space.c
+int		ft_isspace(int c);
 #endif
