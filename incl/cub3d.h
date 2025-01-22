@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/22 21:01:19 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:53:03 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,9 +209,7 @@ int		arg_check(int argc, char **argv);
 // error.c
 void	print_error_msg_free(t_input *map_info, char *line, char *error_msg);
 void	print_error_msg(char *error_msg);
-void	print_error_msg_free_map_info(t_input *map_info, char *error_msg);
-void	print_error_msg_free_map_info_2d(t_input *map_info,char *error_msg);
-
+void	perror_free_map_info(t_input *map_info, char *error_msg);
 // ----------------parser----------------
 // parser.c
 int		parser(char *file, t_input *map_info);

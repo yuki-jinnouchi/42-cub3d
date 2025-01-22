@@ -6,7 +6,7 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/22 20:37:27 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:54:54 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_map_details(t_check_map *cmap, t_input *map_info)
 	{
 		if (!ft_strchr(" 1\n", map_info->structure[cmap->y][cmap->x]))
 		{
-			print_error_msg_free_map_info_2d(map_info, "Invalid map\n");
+			perror_free_map_info(map_info, "Invalid map\n");
 			return (FALSE);
 		}
 	}
@@ -59,14 +59,14 @@ int	check_map_details(t_check_map *cmap, t_input *map_info)
 	{
 		if (!ft_strchr(" 01NSEW\n", map_info->structure[cmap->y][cmap->x]))
 		{
-			print_error_msg_free_map_info_2d(map_info, "Invalid map\n");
+			perror_free_map_info(map_info, "Invalid map\n");
 			return (FALSE);
 		}
 		if (ft_strchr("0NSEW", map_info->structure[cmap->y][cmap->x]))
 		{
 			if (relative_position_is_space(map_info, cmap) == TRUE)
 			{
-				print_error_msg_free_map_info_2d(map_info, "Invalid map\n");
+				perror_free_map_info(map_info, "Invalid map\n");
 				return (FALSE);
 			}
 		}
@@ -78,6 +78,8 @@ int	check_map(t_input *map_info)
 {
 	t_check_map	cmap;
 
+	if (!map_info->structure)
+		return (perror_free_map_info(map_info, "Empty map\n"), FALSE);
 	check_map_init(&cmap);
 	while (map_info->structure[++cmap.y])
 	{
@@ -86,7 +88,7 @@ int	check_map(t_input *map_info)
 		{
 			if (find_player(map_info, &cmap.player, cmap.y, cmap.x) == FALSE)
 			{
-				print_error_msg_free_map_info(map_info, "Too many player\n");
+				perror_free_map_info(map_info, "Too many player\n");
 				return (FALSE);
 			}
 			if (check_map_details(&cmap, map_info) == FALSE)
@@ -95,7 +97,7 @@ int	check_map(t_input *map_info)
 	}
 	if (cmap.player == 0)
 	{
-		print_error_msg_free_map_info(map_info, "no player\n");
+		perror_free_map_info(map_info, "No player\n");
 		return (FALSE);
 	}
 	return (TRUE);
