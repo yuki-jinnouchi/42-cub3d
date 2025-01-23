@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/23 13:33:13 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:54:03 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,6 @@ typedef struct s_check_map{
 	int	down_len;
 }	t_check_map;
 
-typedef struct s_texture
-{
-	t_image	*n;
-	t_image	*s;
-	t_image	*w;
-	t_image	*e;
-	int		floor_argb;
-	int		ceil_argb;
-}	t_texture;
-
 typedef struct s_image
 {
 	void	*img;
@@ -144,6 +134,16 @@ typedef struct s_image
 	int		width;
 	int		height;
 }	t_image;
+
+typedef struct s_texture
+{
+	t_image	*n;
+	t_image	*s;
+	t_image	*w;
+	t_image	*e;
+	int		floor_argb;
+	int		ceil_argb;
+}	t_texture;
 
 typedef struct s_player
 {
