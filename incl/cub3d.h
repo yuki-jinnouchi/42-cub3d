@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/22 21:53:03 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:33:13 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,44 +26,7 @@
 # include "mlx.h" // mlx
 # include "mlx_int.h" // mlx
 
-// window settings
-# define WINDOW_TITLE "cub3D"
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
-# define FOV 66
-# define FRAME_RATE 30
-
-// move settings
-# define MOVE_DISTANCE 0.3
-# define WALL_DISTANCE 0.2
-# define ROTATE_SPEED 10
-
-# define PI 3.141592654
-
-# define NEXT 2
-# define TRUE 1
-# define FALSE 0
-
-# define SUCCESS 0
-# define FAILURE -1
-
-# define NORTH 1
-# define EAST 2
-# define SOUTH 3
-# define WEST 4
-
-# define NO 0
-# define SO 1
-# define WE 2
-# define EA 3
-# define F 4
-# define C 5
-
-//color
-# define R 0
-# define G 1
-# define B 2
-
+// Keymap
 # ifdef __linux__
 #  include "keymap_linux.h"
 # elif __APPLE__
@@ -71,6 +34,46 @@
 # else
 #  error "Unsupported operating system"
 # endif
+
+// User Settings
+// Window settings
+# define WINDOW_TITLE "cub3D"
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
+# define FOV 66
+# define FRAME_RATE 30
+// Move settings
+# define MOVE_DISTANCE 0.3
+# define ROTATE_SPEED 10
+
+// Common constants
+# define PI 3.141592654
+
+# define TRUE 1
+# define FALSE 0
+# define NEXT 2
+
+# define SUCCESS 0
+# define FAILURE -1
+
+// For input
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+# define F 4
+# define C 5
+
+// For texture
+# define NORTH 1
+# define EAST 2
+# define SOUTH 3
+# define WEST 4
+
+// Color
+# define R 0
+# define G 1
+# define B 2
 
 typedef struct s_dvec
 {
@@ -84,33 +87,11 @@ typedef struct s_ivec
 	int	y;
 }	t_ivec;
 
-typedef struct timeval	t_timeval;
-
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}	t_image;
-
 typedef struct s_color {
 	int	r;
 	int	g;
 	int	b;
 }	t_color;
-
-typedef struct s_check_map{
-	int	x;
-	int	y;
-	int	player;
-	int	len;
-	int	up_len;
-	int	down_len;
-}	t_check_map;
 
 typedef struct s_input {
 	char	*no;
@@ -134,6 +115,45 @@ typedef struct s_map {
 	char	**structure;
 }	t_map;
 
+typedef struct s_check_map{
+	int	x;
+	int	y;
+	int	player;
+	int	len;
+	int	up_len;
+	int	down_len;
+}	t_check_map;
+
+typedef struct s_texture
+{
+	t_image	*n;
+	t_image	*s;
+	t_image	*w;
+	t_image	*e;
+	int		floor_argb;
+	int		ceil_argb;
+}	t_texture;
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_image;
+
+typedef struct s_player
+{
+	t_dvec	pos;
+	double	dir;
+	t_dvec	dir_vec;
+	double	fov_rad;
+	t_dvec	plane;
+}	t_player;
+
 typedef struct s_wall
 {
 	t_dvec	pos;
@@ -146,51 +166,32 @@ typedef struct s_wall
 	int		window_end;
 }	t_wall;
 
-typedef struct s_texture
-{
-	t_image	*n;
-	t_image	*s;
-	t_image	*w;
-	t_image	*e;
-	int		floor_argb;
-	int		ceil_argb;
-}	t_texture;
-
-typedef struct s_player
-{
-	t_dvec	pos;
-	double	dir;
-	t_dvec	dir_vec;
-	double	fov_rad;
-	t_dvec	plane;
-	t_dvec	vel;
-	int		move_num;
-	int		rotate_num;
-}	t_player;
+typedef struct timeval	t_timeval;
 
 typedef struct s_vars
 {
 	char		*filename;
 	t_input		*input;
 	void		*mlx;
+	void		*window;
 	int			window_width;
 	int			window_height;
-	void		*window;
 	t_image		*image;
+	int			refresh_rate;
+	t_timeval	last_refresh;
+	t_texture	*texture;
+	t_map		*map;
+	t_player	*player;
 	int			*wall_heights;
 	int			last_wall_x;
 	int			last_wall_y;
 	int			last_color;
-	t_timeval	last_refresh;
-	int			refresh_rate;
-	t_map		*map;
-	t_texture	*texture;
-	t_player	*player;
 }	t_vars;
 
 // ----------------init----------------
 // init_vars.c
 int		window_init(t_vars *vars);
+int		set_vars(t_vars	*vars, t_input *map_info);
 t_vars	*vars_init(char **argv, t_input	*map_info);
 // init_map.c
 t_map	*map_init(t_vars *vars);
@@ -210,11 +211,12 @@ int		arg_check(int argc, char **argv);
 void	print_error_msg_free(t_input *map_info, char *line, char *error_msg);
 void	print_error_msg(char *error_msg);
 void	perror_free_map_info(t_input *map_info, char *error_msg);
+
 // ----------------parser----------------
 // parser.c
-int		parser(char *file, t_input *map_info);
-int		set_textures_and_colors(char *line, int fd, t_input *map_info);
 int		open_file(char *file, int *fd);
+int		set_textures_and_colors(char *line, int fd, t_input *map_info);
+int		parser(char *file, t_input *map_info);
 // check_color.c
 int		set_int_color(int type, char *color, t_color *color_detail);
 int		set_color_detail(char **split_color_info, t_color *color_detail);
@@ -225,6 +227,8 @@ int		count_values(int type);
 int		check_img_path_and_color(t_input *map_info);
 int		set_path_color_info( \
 	int type, t_input *map_info, char *line, int *count_info);
+int		texture_identifier( \
+	char *line, int len, t_input *map_info, int *count_info);
 int		type_identifier( \
 	char *line, int len, t_input *map_info, int *count_info);
 //check_img_path.c
@@ -233,12 +237,20 @@ int		check_img_path_exist_all(t_input *map_info, void *mlx);
 //check_map_utils.c
 int		skip_newline(char **line, int fd, t_input *map_info);
 //check_map.c
-int		find_player(t_input *map_info, int *player, int i, int j);
+void	check_map_init(t_check_map *cmap);
+void	check_map_set_x_lens(t_check_map *cmap, t_input *map_info);
+int		is_edge(t_check_map *cmap, t_input *map_info);
+int		check_map_details(t_check_map *cmap, t_input *map_info);
 int		check_map(t_input *map_info);
 //check_map_is_space.c
-int		ft_isspace(int c);
+int		right_position_is_space(t_input *map_info, t_check_map *cmap);
+int		left_position_is_space(t_input *map_info, t_check_map *cmap);
+int		up_position_is_space(t_input *map_info, t_check_map *cmap);
+int		down_position_is_space(t_input *map_info, t_check_map *cmap);
 int		relative_position_is_space(t_input *map_info, t_check_map *cmap);
 //get_map.c
+void	get_map_init( \
+	t_input *map_info, char ***map_tmp_pre, int *map_line_count);
 int		get_map(t_input *map_info, int fd, char *line);
 //find_player.c
 int		find_player(t_input *map_info, int *player, int i, int j);
@@ -259,15 +271,12 @@ int		exit_game(t_vars *vars);
 
 // ----------------draw----------------
 // draw_bg.c
-void	draw_floor(int window_x, int new_height, int past_height, t_vars *vars);
 void	draw_ceil(int window_x, int new_height, int past_height, t_vars *vars);
+void	draw_floor(int window_x, int new_height, int past_height, t_vars *vars);
 void	draw_init_background(t_vars *vars);
-void	memcpy_bg_image(t_vars *vars);
-// draw_refresh_img.c
+// draw_wall.c
+void	put_wall_pixel(t_ivec *window_t, t_wall *wall, t_vars *vars);
 void	draw_wall(t_wall *wall, int window_x, t_vars *vars);
-void	draw_line_wrapper(int window_x, t_vars *vars);
-void	draw_refresh_img(t_vars *vars);
-// draw_refresh_img.c
 void	draw_refresh_img(t_vars *vars);
 // refresh_screen.c
 int		refresh_screen(t_vars *vars);
@@ -323,4 +332,5 @@ void	free_texture(t_image *texture, t_vars *vars);
 void	free_all_texture(t_texture *texture, t_vars *vars);
 //is_space.c
 int		ft_isspace(int c);
+
 #endif

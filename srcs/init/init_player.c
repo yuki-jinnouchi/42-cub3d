@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 02:40:45 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/19 02:28:18 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:55:54 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,5 @@ int	player_init(t_vars *vars)
 	player->dir_vec = dir_to_vec(player->dir);
 	player->fov_rad = deg_to_rad(FOV);
 	update_plane(player);
-	player->vel.x = 0;
-	player->vel.y = 0;
-	player->move_num = 0;
-	player->rotate_num = 0;
 	return (SUCCESS);
 }
