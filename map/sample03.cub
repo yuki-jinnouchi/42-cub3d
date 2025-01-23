@@ -1,9 +1,11 @@
-WE ./texture/West.xpm
-NO ./texture/North.xpm
+NO ./texture/ws_01.xpm
+SO ./texture/ws_02.xpm
+WE ./texture/ws_03.xpm
+EA ./texture/ws_04.xpm
+
 C 220,220,220
-SO ./texture/South.xpm
-EA ./texture/East.xpm
 F 50,30,20
+
         111111111111111111111
         10000000011000000010111111111111
         10110000011100000000000000000000111111
