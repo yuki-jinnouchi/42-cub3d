@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:35:44 by hakobori          #+#    #+#             */
-/*   Updated: 2025/01/21 19:04:39 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:53:03 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct s_color {
 }	t_color;
 
 typedef struct s_check_map{
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	player;
 	int	len;
 	int	up_len;
@@ -209,8 +209,7 @@ int		arg_check(int argc, char **argv);
 // error.c
 void	print_error_msg_free(t_input *map_info, char *line, char *error_msg);
 void	print_error_msg(char *error_msg);
-void	print_error_msg_free_map_info(t_input *map_info, char *error_msg);
-
+void	perror_free_map_info(t_input *map_info, char *error_msg);
 // ----------------parser----------------
 // parser.c
 int		parser(char *file, t_input *map_info);
@@ -220,6 +219,7 @@ int		open_file(char *file, int *fd);
 int		set_int_color(int type, char *color, t_color *color_detail);
 int		set_color_detail(char **split_color_info, t_color *color_detail);
 int		check_color_valid(char *color_info, t_input *map_info, int type);
+int		check_color_valid_fc(t_input *map_info, void *mlx);
 // check_img_path_and_color.c
 int		count_values(int type);
 int		check_img_path_and_color(t_input *map_info);
@@ -229,11 +229,15 @@ int		type_identifier( \
 	char *line, int len, t_input *map_info, int *count_info);
 //check_img_path.c
 int		check_img_path_exist(char *img_path, void *mlx);
+int		check_img_path_exist_all(t_input *map_info, void *mlx);
 //check_map_utils.c
 int		skip_newline(char **line, int fd, t_input *map_info);
 //check_map.c
 int		find_player(t_input *map_info, int *player, int i, int j);
 int		check_map(t_input *map_info);
+//check_map_is_space.c
+int		ft_isspace(int c);
+int		relative_position_is_space(t_input *map_info, t_check_map *cmap);
 //get_map.c
 int		get_map(t_input *map_info, int fd, char *line);
 //find_player.c
@@ -313,8 +317,10 @@ size_t	ft_strlen_null_gard(const char *s);
 // free_map_info.c
 void	free_map_info(t_input *map_info);
 void	free_map_info_after_init(t_input *map_info);
+void	free_map_info_map_structure(t_input *map_info);
 // free_texture.c
 void	free_texture(t_image *texture, t_vars *vars);
 void	free_all_texture(t_texture *texture, t_vars *vars);
-
+//is_space.c
+int		ft_isspace(int c);
 #endif

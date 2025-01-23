@@ -6,73 +6,70 @@
 /*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/03 22:50:52 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:54:54 by hakobori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_not_space_or_next_line(t_input *map_info, t_check_map *cmap)
-{
-	if (cmap->j < cmap->len - 1 && ft_strchr(" \n",
-			map_info->structure[cmap->i][cmap->j + 1]))
-		return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-			FALSE);
-	if (cmap->j > 0 && ft_strchr(" \n", map_info->structure[cmap->i][cmap->j
-			- 1]))
-		return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-			FALSE);
-	if (cmap->i > 0 && cmap->j < cmap->up_len && ft_strchr(" \n",
-			map_info->structure[cmap->i - 1][cmap->j]))
-		return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-			FALSE);
-	if (cmap->i < map_info->height - 1 && cmap->j < cmap->down_len
-		&& ft_strchr(" \n", map_info->structure[cmap->i + 1][cmap->j]))
-		return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-			FALSE);
-	return (TRUE);
-}
-
 void	check_map_init(t_check_map *cmap)
 {
-	cmap->i = -1;
+	cmap->y = -1;
+	cmap->x = -1;
+	cmap->player = 0;
+	cmap->len = 0;
 	cmap->up_len = 0;
 	cmap->down_len = 0;
-	cmap->player = 0;
 }
 
-void	check_map_set_j_lens(t_check_map *cmap, t_input *map_info)
+void	check_map_set_x_lens(t_check_map *cmap, t_input *map_info)
 {
-	cmap->j = -1;
-	cmap->len = ft_strlen(map_info->structure[cmap->i]);
-	if (cmap->i > 0)
-		cmap->up_len = ft_strlen(map_info->structure[cmap->i - 1]);
-	if (cmap->i < map_info->height - 1)
-		cmap->down_len = ft_strlen(map_info->structure[cmap->i + 1]);
+	cmap->x = -1;
+	cmap->len = ft_strlen(map_info->structure[cmap->y]);
+	if (cmap->y > 0)
+		cmap->up_len = ft_strlen(map_info->structure[cmap->y - 1]);
+	if (cmap->y < map_info->height - 1)
+		cmap->down_len = ft_strlen(map_info->structure[cmap->y + 1]);
+}
+
+int	is_edge(t_check_map *cmap, t_input *map_info)
+{
+	if (cmap->y == 0)
+		return (TRUE);
+	else if (cmap->y == map_info->height - 1)
+		return (TRUE);
+	else if (cmap->x == 0)
+		return (TRUE);
+	else if (cmap->x == cmap->len - 2)
+		return (TRUE);
+	return (FALSE);
 }
 
 int	check_map_details(t_check_map *cmap, t_input *map_info)
 {
-	if (cmap->i == 0 || cmap->i == map_info->height - 1)
+	if (is_edge(cmap, map_info) == TRUE)
 	{
-		if (!ft_strchr(" 1\n", map_info->structure[cmap->i][cmap->j]))
-			return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-				FALSE);
-	}
-	else if (cmap->j == 0 || cmap->j == cmap->len - 2)
-	{
-		if (!ft_strchr(" 1", map_info->structure[cmap->i][cmap->j]))
-			return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-				FALSE);
+		if (!ft_strchr(" 1\n", map_info->structure[cmap->y][cmap->x]))
+		{
+			perror_free_map_info(map_info, "Invalid map\n");
+			return (FALSE);
+		}
 	}
 	else
 	{
-		if (!ft_strchr(" 01NSEW\n", map_info->structure[cmap->i][cmap->j]))
-			return (print_error_msg_free_map_info(map_info, "Invalid map\n"),
-				FALSE);
-		if (ft_strchr("0NSEW", map_info->structure[cmap->i][cmap->j]))
-			if (is_not_space_or_next_line(map_info, cmap) == FALSE)
+		if (!ft_strchr(" 01NSEW\n", map_info->structure[cmap->y][cmap->x]))
+		{
+			perror_free_map_info(map_info, "Invalid map\n");
+			return (FALSE);
+		}
+		if (ft_strchr("0NSEW", map_info->structure[cmap->y][cmap->x]))
+		{
+			if (relative_position_is_space(map_info, cmap) == TRUE)
+			{
+				perror_free_map_info(map_info, "Invalid map\n");
 				return (FALSE);
+			}
+		}
 	}
 	return (TRUE);
 }
@@ -81,20 +78,27 @@ int	check_map(t_input *map_info)
 {
 	t_check_map	cmap;
 
+	if (!map_info->structure)
+		return (perror_free_map_info(map_info, "Empty map\n"), FALSE);
 	check_map_init(&cmap);
-	while (map_info->structure[++cmap.i])
+	while (map_info->structure[++cmap.y])
 	{
-		check_map_set_j_lens(&cmap, map_info);
-		while (map_info->structure[cmap.i][++cmap.j])
+		check_map_set_x_lens(&cmap, map_info);
+		while (map_info->structure[cmap.y][++cmap.x])
 		{
-			if (find_player(map_info, &cmap.player, cmap.i, cmap.j) == FALSE)
-				return (print_error_msg_free_map_info(map_info,
-						"Too many player\n"), FALSE);
+			if (find_player(map_info, &cmap.player, cmap.y, cmap.x) == FALSE)
+			{
+				perror_free_map_info(map_info, "Too many player\n");
+				return (FALSE);
+			}
 			if (check_map_details(&cmap, map_info) == FALSE)
 				return (FALSE);
 		}
 	}
 	if (cmap.player == 0)
-		return (print_error_msg_free_map_info(map_info, "no player\n"), FALSE);
+	{
+		perror_free_map_info(map_info, "No player\n");
+		return (FALSE);
+	}
 	return (TRUE);
 }
