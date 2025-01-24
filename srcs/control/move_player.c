@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 08:16:28 by yjinnouc          #+#    #+#             */
-/*   Updated: 2025/01/19 02:24:25 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:56:43 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_player_move(t_dvec *t_pos, double move_dir, int i, t_vars *vars)
 	wall.ray_distance = calc_ray_distance(wall.pos, *t_pos);
 	t_pos->x += move_ray.x * MOVE_DISTANCE;
 	t_pos->y += move_ray.y * MOVE_DISTANCE;
-	if (wall.ray_distance <= MOVE_DISTANCE)
+	if (wall.ray_distance <= MOVE_DISTANCE + 0.01)
 		return (FALSE);
 	else
 		return (TRUE);

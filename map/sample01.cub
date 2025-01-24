@@ -1,15 +1,10 @@
+NO ./texture/North.xpm
+SO ./texture/South.xpm
+WE ./texture/West.xpm
+EA ./texture/East.xpm
 
-
-
-NO      ./texture/ws_01.xpm     
-EA ./texture/ws_04.xpm
-SO ./texture/ws_02.xpm
 F 50,30,0
-WE ./texture/ws_03.xpm
-
 C 220,220,220
-
-
 
 111111
 100101

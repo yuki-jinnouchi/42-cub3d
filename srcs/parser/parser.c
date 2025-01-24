@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakobori <hakobori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:07:03 by hakobori          #+#    #+#             */
-/*   Updated: 2024/12/25 20:43:52 by hakobori         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:55:36 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	parser(char *file, t_input *map_info)
 		return (FALSE);
 	line = get_next_line(fd);
 	if (line == NULL)
+	{
+		printf("Error\nNo line\n");
 		return (FALSE);
+	}
 	if (set_textures_and_colors(line, fd, map_info) == FALSE)
 		return (FALSE);
 	if (skip_newline(&line, fd, map_info) == FALSE)
