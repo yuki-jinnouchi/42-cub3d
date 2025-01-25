@@ -62,7 +62,7 @@ CCFLAGS =	-Wall -Wextra -Werror
 UI_FLAGS =	-I$(INCLUDES_DIR) -I$(LIBFT_INCLUDES_DIR) -I$(LIBMLX_INCLUDES_DIR) -D$(OS)
 UL_FLAGS =	-L$(LIBFT_DIR) -L$(LIBMLX_DIR)
 LL_FLAGS =	$(LIBMLX_LL_FLAGS)
-VG_FLAGS =	-g -fsanitize=address -fsanitize=undefined
+# VG_FLAGS =	-g -fsanitize=address -fsanitize=undefined
 
 #===============================================
 # Colors
