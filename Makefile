@@ -22,8 +22,47 @@ OBJECTS_ROOT_DIR =	objs
 OBJECTS_DIR :=		$(patsubst $(SOURCES_ROOT_DIR)%,$(OBJECTS_ROOT_DIR)%,$(SOURCES_DIR))
 
 # Files
-HEADERS =		$(wildcard $(INCLUDES_DIR)/*.h)
-SOURCES =		$(shell find $(SOURCES_ROOT_DIR) -name "*.c")
+HEADERS =		incl/cub3d.h
+# SOURCES =		$(shell find $(SOURCES_ROOT_DIR) -name "*.c")
+SOURCES =		srcs/main.c \
+				srcs/arg_check/arg_check.c \
+				srcs/arg_check/print_error.c \
+				srcs/init/init_map.c \
+				srcs/init/init_image.c \
+				srcs/init/init_texture.c \
+				srcs/init/init_vars.c \
+				srcs/init/init_player.c \
+				srcs/parser/find_player.c \
+				srcs/parser/get_map.c \
+				srcs/parser/check_color.c \
+				srcs/parser/check_img_path.c \
+				srcs/parser/check_img_path_and_color.c \
+				srcs/parser/check_map.c \
+				srcs/parser/check_map_is_space.c \
+				srcs/parser/check_map_utils.c \
+				srcs/parser/parser.c \
+				srcs/control/exec_game.c \
+				srcs/control/exit_game.c \
+				srcs/control/key_hooks.c \
+				srcs/control/rotate_player.c \
+				srcs/control/move_player.c \
+				srcs/ray_calc/calc_distance.c \
+				srcs/ray_calc/calc_next_pos.c \
+				srcs/ray_calc/calc_raycast.c \
+				srcs/ray_calc/calc_wall.c \
+				srcs/ray_calc/util_vector.c \
+				srcs/draw/refresh_screen.c \
+				srcs/draw/draw_bg.c \
+				srcs/draw/draw_wall.c \
+				srcs/draw/util_color.c \
+				srcs/draw/util_mlx.c \
+				srcs/utils/free_texture.c \
+				srcs/utils/util_abs.c \
+				srcs/utils/util_degrees.c \
+				srcs/utils/util_time.c \
+				srcs/utils/free_map_info.c \
+				srcs/utils/is_space.c \
+				srcs/utils/util_free.c
 OBJECTS =		$(patsubst $(SOURCES_ROOT_DIR)/%.c,$(OBJECTS_ROOT_DIR)/%.o,$(SOURCES))
 
 #-----------------------------------------------
@@ -62,7 +101,7 @@ CCFLAGS =	-Wall -Wextra -Werror
 UI_FLAGS =	-I$(INCLUDES_DIR) -I$(LIBFT_INCLUDES_DIR) -I$(LIBMLX_INCLUDES_DIR) -D$(OS)
 UL_FLAGS =	-L$(LIBFT_DIR) -L$(LIBMLX_DIR)
 LL_FLAGS =	$(LIBMLX_LL_FLAGS)
-VG_FLAGS =	-g -fsanitize=address -fsanitize=undefined
+# VG_FLAGS =	-g -fsanitize=address -fsanitize=undefined
 
 #===============================================
 # Colors
