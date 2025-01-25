@@ -1,0 +1,14 @@
+# Object files
+*.o
+
+# Libraries
+*.a
+
+# Executables
+*.out
+
+# on mac
+.DS_Store
+.vscode
+.github
+.devcontainer
