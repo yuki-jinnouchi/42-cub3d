@@ -14,5 +14,9 @@ objs/
 .github
 .devcontainer
 
+# Documents
+docs/
+
 #project based
 cub3D
+profile_report*.txt
